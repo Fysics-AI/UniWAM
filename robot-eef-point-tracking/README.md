@@ -8,9 +8,9 @@ calibration are provided.
 
 This UniWAM directory includes a ready-to-run LeRobot adapter, a reusable
 visibility stage, preview rendering, and label validation. Datasets, videos,
-DINOv2 code, and model weights are not included. The output supplies the
-manipulation stream's image-plane auxiliary labels; see the
-[UniWAM training guide](../training/ROBOT.md#prepare-demonstrations).
+DINOv2 code, and model weights are not included. Its output supplies the
+manipulation stream's image-plane auxiliary targets. The standalone source is
+also available in [robot-eef-point-tracking](https://github.com/KeliangLiu-Lab/robot-eef-point-tracking).
 
 ## Install
 
@@ -115,6 +115,34 @@ with np.load("episode_000000.npz", allow_pickle=False) as labels:
 
 If you resize or crop the video, apply the same image transform to the pixel
 coordinates. Do not train directly on `track_xy` without masking its NaNs.
+
+### Use The Labels In UniWAM
+
+The NPZ coordinates above are in the **original main-camera image**, not the
+model input canvas. UniWAM's manipulation head reserves action slots 20–25
+for `[left_x, left_y, right_x, right_y, left_visible, right_visible]`; the
+first 20 slots remain robot-control actions. These six targets are training
+auxiliaries and are not sent to the robot controller.
+
+For the supplied `424x240` main-view data, map each pixel-center `(x, y)` to
+the final `384x320` manipulation canvas with
+`x' = (x + 0.5) * 384/424 - 0.5` and
+`y' = (y + 0.5) * 216/240 - 0.5 - 2`. Normalize the resulting coordinates
+to `[-1, 1]` with `2 * (x', y') / (383, 319) - 1`. If you use a different
+source resolution, replace `424` and `240` with its width and height while
+preserving the actual mosaic resize and crop. Mask a coordinate unless its
+`operation_track_geometric_in_fov` and `track_visible` values are true **and**
+the transformed point lies inside the cropped canvas. The visibility slots
+encode false/true as `-1/+1`; keep their feature masks separate from the
+coordinate masks. The included
+[sidecar builder](../training/real_robot/training/data_pipeline/build_eef_xy_sidecars.py)
+documents this flattening and mask contract. Check its input/provenance
+requirements before applying it to newly generated tracks.
+
+See the [real-robot data contract](../training/real_robot/README.md#data-contract)
+and [action-slot specification](../training/real_robot/docs/ACTION_SLOTS.md)
+before preparing manipulation training data. The tracking output is a label
+source; it is not itself a ready-to-train 26D action column.
 
 Render a review video in H.264/yuv420p:
 

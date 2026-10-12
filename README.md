@@ -1,4 +1,12 @@
-<h1 align="center">Unified Mobile Manipulation via Mixed-Stream World-Action Modeling and Manipulation Anchor Pose Supervision</h1>
+<h1 align="center">Unified Mobile Manipulation via Mixed-Stream<br />World-Action Modeling and Manipulation Anchor Pose Supervision</h1>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2609.39388"><img src="https://img.shields.io/badge/Paper-arXiv-b31b1b?logo=arxiv&logoColor=white" alt="Paper on arXiv" /></a>
+  <a href="https://fysics-ai.github.io/uniwam.github.io/"><img src="https://img.shields.io/badge/Project-Website-1f6feb?logo=googlechrome&logoColor=white" alt="Project website" /></a>
+  <a href="https://huggingface.co/Fysics-AI/UniWAM"><img src="https://img.shields.io/badge/Model-Hugging%20Face-FFD21E?logo=huggingface&logoColor=black" alt="UniWAM model on Hugging Face" /></a>
+  <a href="https://huggingface.co/datasets/Fysics-AI/MAP-Bench"><img src="https://img.shields.io/badge/MAP--Bench-Hugging%20Face-FFD21E?logo=huggingface&logoColor=black" alt="MAP-Bench dataset on Hugging Face" /></a>
+  <a href="https://huggingface.co/datasets/Fysics-AI/MAP-Data"><img src="https://img.shields.io/badge/MAP--Data-Hugging%20Face-FFD21E?logo=huggingface&logoColor=black" alt="MAP-Data dataset on Hugging Face" /></a>
+</p>
 
 <p align="center">
   Wei Xue<sup>*</sup>, Keliang Liu<sup>*</sup>, Mingzhang Cui, Jinhua Xie, Jinjie Wei, Jianan Hou, Jingcheng Lu,<br />

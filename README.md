@@ -168,7 +168,7 @@ Download [HM3D v0.2 scenes](https://aihabitat.org/datasets/hm3d/) separately and
 
 ### Unified UniWAM training and inference
 
-The camera-frame path independently samples navigation and manipulation streams with separate visual inputs and action heads over shared video/action DiTs. It uses a 20D bimanual state and a 26D manipulation action. Navigation actions use one of two explicit layouts: 3D `(dx, dy, dtheta)`, or 9D `(dx, dy, dtheta, xmin, ymin, xmax, ymax, op_x, op_y)`, where the final six values are the target-object bbox and operating point. The selected model, dataset, sidecar, normalization, and deployment contract must use the same layout. It trains on your own LeRobot demonstrations with external model initialization and calibration. Task-trained mobile-manipulation checkpoints are not released.
+The camera-frame path independently samples navigation and manipulation streams with separate visual inputs and action heads over shared video/action DiTs. Manipulation actions use one of two explicit layouts: 20D physical control, or 26D `(20D physical control + 6D point-tracking auxiliary values)`. Navigation actions use one of two explicit layouts: 3D `(dx, dy, dtheta)`, or 9D `(dx, dy, dtheta, xmin, ymin, xmax, ymax, op_x, op_y)`, where the final six values are the target-object bbox and operating point. The selected model, dataset, sidecar, normalization, and deployment contract must use the same layouts. It trains on your own LeRobot demonstrations with external model initialization and calibration.
 
 ```bash
 cd training/real_robot

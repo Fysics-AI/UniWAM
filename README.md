@@ -168,7 +168,7 @@ Download [HM3D v0.2 scenes](https://aihabitat.org/datasets/hm3d/) separately and
 
 ### Unified UniWAM training and inference
 
-The camera-frame path independently samples navigation and manipulation streams with separate visual inputs and action heads over shared video/action DiTs. It uses a 20D bimanual state and a 26D manipulation action; its included navigation configuration is 3D, distinct from the MAP-Bench 9D navigation checkpoint above. It trains on your own LeRobot demonstrations with external model initialization and calibration. Task-trained mobile-manipulation checkpoints are not released.
+The camera-frame path independently samples navigation and manipulation streams with separate visual inputs and action heads over shared video/action DiTs. It uses a 20D bimanual state and a 26D manipulation action. Navigation supports a base 3D action `(dx, dy, dtheta)` and a trained 9D action that appends target-object bbox `xyxy` and operating-point `xy`; the included fine-tuning example defaults to 3D, while 9D runs select the matching model/data/sidecar contract. It trains on your own LeRobot demonstrations with external model initialization and calibration. Task-trained mobile-manipulation checkpoints are not released.
 
 ```bash
 cd training/real_robot

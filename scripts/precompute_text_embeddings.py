@@ -58,7 +58,7 @@ def main() -> None:
         print(f"All {len(paths)} features already exist; use --check-only to validate or --overwrite to regenerate")
         return
     code_root = Path(__file__).resolve().parents[1]
-    sys.path.insert(0, str(code_root / "runtime/dwam_src"))
+    sys.path.insert(0, str(code_root / "runtime/uniwam_src"))
     from fastwam.models.wan22.helpers.loader import _load_registered_model
     from fastwam.models.wan22.wan_video_text_encoder import HuggingfaceTokenizer
     upstream = args.component_root

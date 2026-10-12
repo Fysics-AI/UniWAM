@@ -1,8 +1,7 @@
-"""Standard FastWAM with an auxiliary future-target bbox video loss.
+"""FastWAM video branch with optional future-target bbox supervision.
 
-The bbox is never model input.  It is used only as a spatial supervision mask
-for the generated future video, so the ActionDiT remains the normal 2D
-``[vx, vyaw]`` FastWAM ActionDiT.
+The bbox is never model input. It only masks the generated-video loss; the
+navigation subclass defines the 9D action target separately.
 """
 
 from __future__ import annotations

@@ -23,7 +23,7 @@ from omegaconf import OmegaConf
 
 SNAPSHOT_ROOT = Path(__file__).resolve().parent
 for path in (
-    SNAPSHOT_ROOT / "dwam_src",
+    SNAPSHOT_ROOT / "uniwam_src",
     SNAPSHOT_ROOT / "openpi_server_src",
     SNAPSHOT_ROOT / "openpi_client_src",
 ):

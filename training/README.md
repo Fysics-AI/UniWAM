@@ -5,7 +5,7 @@ the checkpoint and action contract you intend to use; they are not interchangeab
 
 | Path | Action and observation contract | Start here |
 | :--- | :--- | :--- |
-| Camera-frame navigation and dual-arm manipulation | Independent streams, 20D dual-arm state, 26D manipulation action, selectable 3D or trained 9D navigation action, H32 chunks and asynchronous prefix replanning | [Real-robot code and guide](real_robot/README.md) |
+| Camera-frame navigation and dual-arm manipulation | Independent streams, 20D dual-arm state, 26D manipulation action, 3D or 9D navigation layouts, H32 chunks and asynchronous prefix replanning | [Real-robot code and guide](real_robot/README.md) |
 | MAP-Bench navigation | One forward RGB view and a 9D navigation action with object-box and MAP-point targets | [Benchmark training and evaluation](NAVIGATION.md) |
 
 ## Camera-frame training and deployment

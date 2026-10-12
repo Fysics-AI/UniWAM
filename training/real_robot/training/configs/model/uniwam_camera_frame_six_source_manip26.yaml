@@ -40,8 +40,8 @@ video_dit_config:
 
 action_dit_config:
   manip_action_dim: 26
-  # Current public navigation head: (dx, dy, dtheta). The optional bbox/point
-  # suffix is documented in docs/ACTION_SLOTS.md and requires a 9D head.
+  # This example uses the base (dx, dy, dtheta) navigation head. Trained 9D
+  # variants use the matching bbox/point sidecar and nav_action_dim: 9.
   nav_action_dim: 3
   manip_horizon: 32
   nav_horizon: 32

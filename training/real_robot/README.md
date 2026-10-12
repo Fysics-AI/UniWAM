@@ -70,12 +70,14 @@ The model state contains 20 values:
 `left XYZ + left row-major Rot6D + left gripper + right XYZ + right row-major Rot6D + right gripper`.
 
 The manipulation action head contains 26 values: 20 robot-control values plus
-six optional image-plane tracking values. The navigation head in the supplied
-configuration is 3 values `(dx, dy, dtheta)`. An optional navigation extension
-uses 9 values, `3 + 4 + 2`, by appending target-object bbox `(xmin, ymin,
-xmax, ymax)` and operating-point `(x, y)`. See
+six optional image-plane tracking values. Navigation supports a base 3-value
+action `(dx, dy, dtheta)` and a trained 9-value action `3 + 4 + 2`, appending
+target-object bbox `(xmin, ymin, xmax, ymax)` and operating-point `(x, y)`. The
+included fine-tuning example defaults to 3D; select matching 9D model/data/
+sidecar settings for the extended contract. See
 [Action Slots and Feature Masks](docs/ACTION_SLOTS.md) before changing a
-dimension. A 3D checkpoint remains 3D; enabling 9D requires coordinated
+dimension. A 3D checkpoint and a 9D checkpoint are separate contracts; enabling
+the 9D variant requires coordinated
 changes to the sidecar, dataset, model head, normalization, decoder, and tests.
 
 ### Image sizes

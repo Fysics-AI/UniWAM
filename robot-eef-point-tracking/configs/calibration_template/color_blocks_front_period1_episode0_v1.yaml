@@ -1,0 +1,155 @@
+calibration_id: color_blocks_front_period1_episode0_v1
+status: CAMERA_CALIBRATION_UNIT_VALIDATED
+created_date: '2026-08-15'
+dataset:
+  source_root: '[external data path omitted]'
+  source_open_mode: read-only
+  source_episode_indices:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  - 32
+  - 33
+  - 35
+  - 36
+  - 37
+  - 38
+  - 39
+  - 40
+  - 41
+  - 42
+  - 43
+  - 44
+  - 45
+  - 46
+  - 47
+  - 48
+  - 49
+  - 50
+  - 51
+  - 52
+  - 53
+  - 54
+  - 55
+  - 56
+  - 57
+  - 58
+  - 59
+  - 60
+  - 61
+  - 62
+  - 63
+  - 64
+  - 66
+  - 67
+  - 68
+  - 69
+  - 70
+  - 71
+  - 72
+  - 73
+  - 74
+  - 75
+  - 76
+  - 77
+  - 78
+  - 79
+  - 80
+  - 81
+  - 82
+  - 83
+  - 84
+  - 85
+  source_episode_count: 83
+  timestamp_first_min: 1784212653.024802
+  timestamp_last_max: 1784282334.336386
+  camera_dataset: camera/color/front
+  image_size_wh:
+  - 424
+  - 240
+  reference_episode: 0
+robot:
+  type: mobile_aloha
+  reference_frame: official Mobile Aloha URDF footprint
+  joint_contract: left [j1..j6, gripper] + right [j1..j6, gripper]
+intrinsic:
+  source: raw camera/colorIntrinsic/front; exact across all 275 episodes
+  distortion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  matrix:
+  - - 303.76654052734375
+    - 0.0
+    - 216.0852813720703
+  - - 0.0
+    - 303.7197570800781
+    - 125.72407531738281
+  - - 0.0
+    - 0.0
+    - 1.0
+extrinsic:
+  direction: footprint_to_camera
+  notation: T_footprint_camera
+  source: action-map coarse then CalibAll differentiable rendering refinement
+  matrix:
+  - - -0.0018379688262939453
+    - -0.9978926777839661
+    - -0.06486159563064575
+    - 0.04957917332649231
+  - - -0.7316715121269226
+    - 0.045555174350738525
+    - -0.680133581161499
+    - 1.1086719036102295
+  - - 0.6816549897193909
+    - 0.04620733857154846
+    - -0.7302132844924927
+    - 0.8285288214683533
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  camera_origin_in_footprint_m:
+  - 0.24650387465953827
+  - -0.03931531310081482
+  - 1.3622633218765259
+qa:
+  reference_mask_iou_mean: 0.8377
+  held_out_source_episodes:
+  - 0
+  - 21
+  - 43
+  - 63
+  - 85
+  held_out_pose_diverse_frames: 25
+  mesh_j6_tcp_visual_gate: PASS

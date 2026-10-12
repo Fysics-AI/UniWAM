@@ -1,0 +1,273 @@
+calibration_id: color_blocks_front_period2_episode274_v1
+status: CAMERA_CALIBRATION_UNIT_VALIDATED
+created_date: '2026-08-15'
+dataset:
+  source_root: '[external data path omitted]'
+  source_open_mode: read-only
+  source_episode_indices:
+  - 10
+  - 34
+  - 65
+  - 86
+  - 87
+  - 88
+  - 89
+  - 90
+  - 91
+  - 92
+  - 93
+  - 94
+  - 95
+  - 96
+  - 97
+  - 98
+  - 99
+  - 100
+  - 101
+  - 102
+  - 103
+  - 104
+  - 105
+  - 106
+  - 107
+  - 108
+  - 109
+  - 110
+  - 111
+  - 112
+  - 113
+  - 114
+  - 115
+  - 116
+  - 117
+  - 118
+  - 119
+  - 120
+  - 121
+  - 122
+  - 123
+  - 124
+  - 125
+  - 126
+  - 127
+  - 128
+  - 129
+  - 130
+  - 131
+  - 132
+  - 133
+  - 134
+  - 135
+  - 136
+  - 137
+  - 138
+  - 139
+  - 140
+  - 141
+  - 142
+  - 143
+  - 144
+  - 145
+  - 146
+  - 147
+  - 148
+  - 149
+  - 150
+  - 151
+  - 152
+  - 153
+  - 154
+  - 155
+  - 156
+  - 157
+  - 158
+  - 159
+  - 160
+  - 161
+  - 162
+  - 163
+  - 164
+  - 165
+  - 166
+  - 167
+  - 168
+  - 169
+  - 170
+  - 171
+  - 172
+  - 173
+  - 174
+  - 175
+  - 176
+  - 177
+  - 178
+  - 179
+  - 180
+  - 181
+  - 182
+  - 183
+  - 184
+  - 185
+  - 186
+  - 187
+  - 188
+  - 189
+  - 190
+  - 191
+  - 192
+  - 193
+  - 194
+  - 195
+  - 196
+  - 197
+  - 198
+  - 199
+  - 200
+  - 201
+  - 202
+  - 203
+  - 204
+  - 205
+  - 206
+  - 207
+  - 208
+  - 209
+  - 210
+  - 211
+  - 212
+  - 213
+  - 214
+  - 215
+  - 216
+  - 217
+  - 218
+  - 219
+  - 220
+  - 221
+  - 222
+  - 223
+  - 224
+  - 225
+  - 226
+  - 227
+  - 228
+  - 229
+  - 230
+  - 231
+  - 232
+  - 233
+  - 234
+  - 235
+  - 236
+  - 237
+  - 238
+  - 239
+  - 240
+  - 241
+  - 242
+  - 243
+  - 244
+  - 245
+  - 246
+  - 247
+  - 248
+  - 249
+  - 250
+  - 251
+  - 252
+  - 253
+  - 254
+  - 255
+  - 256
+  - 257
+  - 258
+  - 259
+  - 260
+  - 261
+  - 262
+  - 263
+  - 264
+  - 265
+  - 266
+  - 267
+  - 268
+  - 269
+  - 270
+  - 271
+  - 272
+  - 273
+  - 274
+  source_episode_count: 192
+  timestamp_first_min: 1784772756.915904
+  timestamp_last_max: 1784800795.532215
+  camera_dataset: camera/color/front
+  image_size_wh:
+  - 424
+  - 240
+  reference_episode: 274
+robot:
+  type: mobile_aloha
+  reference_frame: official Mobile Aloha URDF footprint
+  joint_contract: left [j1..j6, gripper] + right [j1..j6, gripper]
+intrinsic:
+  source: raw camera/colorIntrinsic/front; exact across all 275 episodes
+  distortion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  matrix:
+  - - 303.76654052734375
+    - 0.0
+    - 216.0852813720703
+  - - 0.0
+    - 303.7197570800781
+    - 125.72407531738281
+  - - 0.0
+    - 0.0
+    - 1.0
+extrinsic:
+  direction: footprint_to_camera
+  notation: T_footprint_camera
+  source: action-map coarse then CalibAll differentiable rendering refinement
+  matrix:
+  - - -0.011835694313049316
+    - -0.9995954632759094
+    - 0.02586311101913452
+    - -0.019810855388641357
+  - - -0.7115679383277893
+    - -0.009752273559570312
+    - -0.7025496959686279
+    - 1.1279475688934326
+  - - 0.7025176286697388
+    - -0.026718467473983765
+    - -0.7111647129058838
+    - 0.8043888807296753
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  camera_origin_in_footprint_m:
+  - 0.2372794896364212
+  - 0.012689167633652687
+  - 1.365004301071167
+qa:
+  reference_mask_iou_mean: 0.8656740786946302
+  held_out_source_episodes:
+  - 10
+  - 130
+  - 178
+  - 226
+  - 274
+  held_out_pose_diverse_frames: 25
+  sam_auxiliary_mean_iou: 0.8337983029075131
+  mesh_j6_tcp_visual_gate: PASS
+  independent_episode130_agreement:
+    translation_delta_m: 0.042647961527109146
+    rotation_delta_deg: 1.8230601389390149
+  combined_episode130_274_diagnostic:
+    delta_from_selected_translation_m: 0.011269469745457172
+    delta_from_selected_rotation_deg: 0.7116191257741885
+    held_out_sam_mean_iou: 0.7950555837813852
+    selection: not selected; lower held-out SAM IoU than episode274 pose

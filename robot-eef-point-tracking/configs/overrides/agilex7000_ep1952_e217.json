@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "override_version": "agilex7000-ep1952-e217-v1",
+  "dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed",
+  "final_episode_index": 1952,
+  "source_episode_index": 216,
+  "field": "camera_front_in_arm_left_base",
+  "replacement_source_episode_index": 217,
+  "replacement_source_parquet": "External source calibration episode 217 (matrix embedded in this package)",
+  "replacement_source_parquet_sha256": "b6c351eec4ed630c43bf89cee9d3056d02d628ca7de0f0f731703ca773876dd9",
+  "target_source_parquet_sha256": "d05291be13cbfedaff34627a570e65ebcb94c2d46b2ee438b098dadcdf71e0b7",
+  "matrix_policy": "replace E only; retain target episode 216 K and B",
+  "target_matrix_sha256": {
+    "camera_intrinsics.camera_front": "dc797541aacb68810cbc556702388417f8e51280d1d2e9badc77a1c2d593a9d9",
+    "camera_front_in_arm_left_base": "fd4998b9464edaa2670956ba8cc381ca649c98d23fca8fa3b344259e96af7fb9",
+    "arm_right_base_in_arm_left_base": "5b03260ca18e6fb4ad556094aa05554d562c3476087789cd93a2ba4d3be34605"
+  },
+  "replacement_matrix_sha256": {
+    "camera_intrinsics.camera_front": "dc797541aacb68810cbc556702388417f8e51280d1d2e9badc77a1c2d593a9d9",
+    "camera_front_in_arm_left_base": "0a8dec8328816831dfd4f32bbd1dea7b268fb0a860a972522f92799dd9670509",
+    "arm_right_base_in_arm_left_base": "fa56e96a344cacbaaf19589cf6ceae53cc875767e73e2af1585b021413f56bee"
+  },
+  "expected_original_camera_to_left_base": [
+    [
+      -0.03115765191614628,
+      -0.7090485692024231,
+      0.7044709920883179,
+      -0.001173877390151552
+    ],
+    [
+      -0.9982209205627441,
+      -0.013772189617156982,
+      -0.058011434972286224,
+      -0.30291664600372314
+    ],
+    [
+      0.050835032016038895,
+      -0.7050251364707947,
+      -0.7073580026626587,
+      0.8060942888259888
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "camera_to_left_base": [
+    [
+      -0.006597425788640976,
+      -0.7046059966087341,
+      0.7095680832862854,
+      -0.002689134795218706
+    ],
+    [
+      -0.9991401433944702,
+      -0.024401003494858742,
+      -0.0335201732814312,
+      -0.30295252799987793
+    ],
+    [
+      0.04093268886208534,
+      -0.7091791033744812,
+      -0.703839123249054,
+      0.55607008934021
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "evidence": {
+    "decision": "single episode-level replacement; no temporal calibration switching",
+    "report_sha256": "b4dc2cafb557df7c59e42579eabc1658ad4b81a406469d2973349bd2eb05b678"
+  },
+  "reason": "source episode 216 has an isolated camera-height outlier (z about 0.806 m); E217 is the validated same-unit cluster and agrees with the robot mesh in both visible runs",
+  "portable_release_calibration": {
+    "intrinsic": [
+      [
+        911.7947998046875,
+        0,
+        660.689453125
+      ],
+      [
+        0,
+        911.5820922851562,
+        373.1520080566406
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "evidence_file": "assets/ep1952_calibration_score_evidence.json",
+    "evidence_sha256": "b4dc2cafb557df7c59e42579eabc1658ad4b81a406469d2973349bd2eb05b678"
+  }
+}

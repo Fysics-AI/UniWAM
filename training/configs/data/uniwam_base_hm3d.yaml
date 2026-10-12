@@ -1,0 +1,20 @@
+# The MAP-Bench training split provides these relative files.
+train:
+  _target_: fastwam.datasets.hm3d_navigation_dataset.HM3DNavigationDataset
+  index_dir: ${oc.env:UNIWAM_DATA_ROOT,./data}/index
+  episode_index_dir: ${oc.env:UNIWAM_DATA_ROOT,./data}/episode_index
+  normalization_path: ${oc.env:UNIWAM_DATA_ROOT,./data}/stats_train_q01q99.json
+  text_embedding_cache_dirs:
+    - ${oc.env:UNIWAM_TEXT_CACHE,./data/text_embeddings}
+  schedule_windows: 64000000
+  sampling_seed: 20260820
+  image_preprocess: resize_480x256_base
+  exclude_all_zero_starts: true
+  context_len: 128
+  video_backend: torchcodec
+  decode_retries: 8
+  episode_cache_size: 16
+  simple_text_only: false
+  instructions_only: true
+  validate_all_text_caches: true
+val: null

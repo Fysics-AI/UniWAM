@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "coordinate_note": "Coordinates are original-image pixel locations reviewed on the source videos. They identify the flange point, not arbitrary high-similarity image regions.",
+  "positive": [
+    {"dataset": "agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1", "episode": 0, "video_key": "observation.images.cam_manip_high", "frame": 375, "x": 212, "y": 123},
+    {"dataset": "agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1", "episode": 0, "video_key": "observation.images.cam_manip_high", "frame": 1000, "x": 109, "y": 150},
+    {"dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed", "episode": 1952, "video_key": "observation.images.camera_front", "frame": 800, "x": 278, "y": 571},
+    {"dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed", "episode": 1952, "video_key": "observation.images.camera_front", "frame": 800, "x": 1112, "y": 402},
+    {"dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed", "episode": 2829, "video_key": "observation.images.camera_front", "frame": 300, "x": 186, "y": 361},
+    {"dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed", "episode": 2829, "video_key": "observation.images.camera_front", "frame": 300, "x": 1139, "y": 377}
+  ],
+  "negative": [
+    {"dataset": "agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1", "episode": 0, "video_key": "observation.images.cam_manip_high", "frame": 0, "x": 212, "y": 123},
+    {"dataset": "agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1", "episode": 0, "video_key": "observation.images.cam_manip_high", "frame": 0, "x": 109, "y": 150},
+    {"dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed", "episode": 1952, "video_key": "observation.images.camera_front", "frame": 500, "x": 640, "y": 400},
+    {"dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed", "episode": 2829, "video_key": "observation.images.camera_front", "frame": 0, "x": 640, "y": 220}
+  ]
+}

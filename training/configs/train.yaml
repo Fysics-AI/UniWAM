@@ -1,0 +1,45 @@
+# Public training defaults for UniWAM-Base.
+defaults:
+  - _self_
+  - data: uniwam_base_hm3d
+  - model: uniwam_base
+
+output_dir: ./runs/uniwam_base/${now:%Y-%m-%d_%H-%M-%S}
+batch_size: 32
+num_workers: 4
+prefetch_factor: 2
+persistent_workers: true
+dataloader_multiprocessing_context: spawn
+sampler_mode: local_window
+sampler_local_window: 640
+lr_scheduler_type: cosine
+learning_rate: 1.0e-5
+num_epochs: 100
+max_steps: 40000
+log_every: 10
+save_every: 0
+save_steps: [20000, 40000]
+save_training_state: false
+eval_every: 0
+eval_num_inference_steps: 10
+gradient_accumulation_steps: 1
+mixed_precision: bf16
+seed: 42
+max_grad_norm: 1.0
+weight_decay: 1.0e-2
+resume: ${oc.env:UNIWAM_INIT_CHECKPOINT,null}
+
+wandb:
+  enabled: false
+  workspace: null
+  project: uniwam
+  name: uniwam_base
+  group: null
+  mode: offline
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null

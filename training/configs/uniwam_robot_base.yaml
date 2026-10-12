@@ -1,0 +1,27 @@
+# Paths are relative to this configuration file, independent of the working directory.
+model_config: model/uniwam_robot_base.yaml
+data_root: ../../../UniWAM-robot-data
+manifest: windows.jsonl
+normalization: normalization.json
+output_dir: ../../runs/uniwam_robot_base
+seed: 42
+batch_size_per_rank: 2
+num_workers: 2
+max_steps: 20000
+learning_rate: 1.0e-05
+weight_decay: 0.01
+max_grad_norm: 1.0
+save_every: 1000
+mixed_precision: bf16
+sampling:
+  source_weights: {}
+  idle_weights:
+    manip: 0.2
+    nav: 0.15
+  min_start_separation: 33
+observation:
+  window_frames: 33
+  frame_stride: 4
+  canvas_width: 384
+  canvas_height: 320
+inference_steps: 10

@@ -1,0 +1,108 @@
+calibration_id: mobile_aloha_front_episode2_canary
+status: CAMERA_CALIBRATION_CANARY_PASS
+created_date: '2026-08-14'
+dataset:
+  source: '[external path omitted]'
+  source_sha256: b03f8f3fe1267c4b8ed9298eacb975e9fe3c62dc9cdcedc22ab8ac2592f1584a
+  episode: 2
+  source_open_mode: read-only
+  camera_dataset: camera/color/front
+  source_channel_order: BGR
+  calibration_channel_order: RGB
+  image_size_wh:
+  - 424
+  - 240
+  clip_frames_inclusive:
+  - 510
+  - 630
+  clip_timestamps_s:
+  - 1783060466.749537
+  - 1783060470.752842
+  arm_used_for_pnp: left
+  arm_index: 0
+  tracking_point_uv_at_frame_510:
+  - 155.0
+  - 105.0
+  mask_frames:
+  - 510
+  - 570
+  - 630
+robot:
+  type: mobile_aloha
+  reference_frame: official Mobile Aloha URDF footprint
+  joint_contract: left [j1..j6, gripper] + right [j1..j6, gripper]
+  T_footprint_leftbase_translation_m:
+  - 0.23875
+  - 0.3
+  - 0.775
+  T_footprint_rightbase_translation_m:
+  - 0.23875
+  - -0.3
+  - 0.775
+  arm_mount_rotations: identity
+intrinsic:
+  source: CALIBALL_ESTIMATED
+  estimator: MoGe v2 local model.pt
+  factory_calibrated: false
+  distortion: unknown
+  solve_pnp_distortion_assumption: zero
+  matrix:
+  - - 319.7062134742737
+    - 0.0
+    - 212.0
+  - - 0.0
+    - 319.7062110900879
+    - 120.0
+  - - 0.0
+    - 0.0
+    - 1.0
+extrinsic:
+  direction: footprint_to_camera
+  notation: T_footprint_camera
+  source: temporal_pnp_then_caliball_differentiable_rendering_refinement
+  matrix:
+  - - -0.0006914138793945312
+    - -0.9997837543487549
+    - -0.020796000957489014
+    - 0.025464028120040894
+  - - -0.7126728296279907
+    - 0.015080630779266357
+    - -0.7013347148895264
+    - 1.1252421140670776
+  - - 0.7014964818954468
+    - 0.014335930347442627
+    - -0.7125290632247925
+    - 0.8304024338722229
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  camera_origin_in_footprint_m:
+  - 0.2194227
+  - -0.00341543
+  - 1.3813868
+qa:
+  tracking_visibility_fraction: 1.0
+  coarse_reprojection_error_px_median: 0.8039465704644263
+  coarse_reprojection_error_px_p95: 4.476571579015915
+  refinement_steps: 3000
+  mask_iou_initial_mean: 0.2571654756241068
+  mask_iou_best_mean: 0.8054140057558768
+  training_overlay_frames:
+  - 510
+  - 570
+  - 630
+  held_out_overlay_frames:
+  - 525
+  - 540
+  - 555
+  - 585
+  - 600
+  - 615
+  tcp_j6_projection: pass
+artifacts:
+  intrinsic_npy: intrinsic.npy
+  coarse_extrinsic_npy: ../coarse/extrinsic_coarse.npy
+  refined_extrinsic_npy: ../refinement/extrinsic_refined.npy
+  qa_contact_sheet: ../qa/qa_contact_sheet.png
+  report: ../report.md

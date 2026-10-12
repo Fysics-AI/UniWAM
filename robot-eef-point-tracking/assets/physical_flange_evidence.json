@@ -1,0 +1,3258 @@
+{
+  "status": "complete",
+  "method": "piper-link6-axial-topology-and-ep1952-projection-v1",
+  "scope": "isolated read-only audit; canonical trajectory outputs are untouched",
+  "urdf": {
+    "sha256": "d4a115493af6a67ef969cfb8686b54f2970225b617ec6dd99cf682c0c4c7b6e9",
+    "source": "externally supplied AGILEX Piper URDF; SHA-256 retained"
+  },
+  "meshes": {
+    "link6": {
+      "sha256": "227f63feb64d17c397c76ebb96a8720476345a3bba36e0d6d7c9d938db8ce677",
+      "faces": 20392,
+      "bounds_m": [
+        [
+          -0.07250000536441803,
+          -0.030500000342726707,
+          -9.641111242686407e-10
+        ],
+        [
+          0.07249999791383743,
+          0.08882783353328705,
+          0.06700000166893005
+        ]
+      ]
+    },
+    "link7": {
+      "sha256": "63d89c3e9d5aba6c230f21a1e8ad5724f3818a1dba7e3493c58de4bee8d44cac",
+      "faces": 1838,
+      "bounds_m": [
+        [
+          -0.028000006452202797,
+          -0.07153186202049255,
+          -0.02449999935925007
+        ],
+        [
+          0.02800000086426735,
+          0.004968148656189442,
+          -5.583456440250156e-12
+        ]
+      ]
+    },
+    "link8": {
+      "sha256": "8ff0fa31925c2339f8c64171e47c91410b671530d6613e33472b710cc4968ece",
+      "faces": 1836,
+      "bounds_m": [
+        [
+          -0.028000006452202797,
+          -0.004968148656189442,
+          -0.02449999935925007
+        ],
+        [
+          0.02800000086426735,
+          0.07153186202049255,
+          -2.5456768637521776e-11
+        ]
+      ]
+    }
+  },
+  "official_kinematic_reference": {
+    "name": "J6/link6 frame origin",
+    "offset_link6_m": [
+      0,
+      0,
+      0
+    ],
+    "status": "unambiguous URDF/FK frame; not inferred from a visual surface"
+  },
+  "candidate_assessment": {
+    "z53_inner_annular_shoulder": {
+      "offset_link6_m": [
+        0,
+        0,
+        0.053
+      ],
+      "surface": {
+        "z_m": 0.053,
+        "face_count": 513,
+        "surface_area_m2": 0.0030111997729374007,
+        "area_weighted_center_m": [
+          -2.5958746486576096e-06,
+          -1.7426254589639805e-06,
+          0.052999999937674035
+        ],
+        "xy_bounds_m": [
+          [
+            -0.06860000640153885,
+            -0.02850000187754631
+          ],
+          [
+            0.06859999895095825,
+            0.02850000001490116
+          ]
+        ],
+        "axis_to_surface_distance_m": 0.01764594655171894,
+        "axis_is_on_surface": false,
+        "normal_z_counts": {
+          "positive": 286,
+          "negative": 227
+        },
+        "connected_component_count": 18,
+        "largest_components": [
+          {
+            "face_count": 214,
+            "surface_area_m2": 0.0015156888761216215,
+            "area_weighted_center_m": [
+              7.500118409975947e-06,
+              -3.4165818795245805e-07,
+              0.052999999896001015
+            ],
+            "xy_bounds_m": [
+              [
+                -0.02850000001490116,
+                -0.02850000187754631
+              ],
+              [
+                0.02850000001490116,
+                0.02850000001490116
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.01764594655171894,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 214,
+              "negative": 0
+            }
+          },
+          {
+            "face_count": 171,
+            "surface_area_m2": 0.0012122469882486914,
+            "area_weighted_center_m": [
+              -1.598341581847358e-05,
+              -3.7972298904036024e-06,
+              0.052999999931285374
+            ],
+            "xy_bounds_m": [
+              [
+                -0.02850000001490116,
+                -0.02845177985727787
+              ],
+              [
+                0.02850000001490116,
+                0.02845178171992302
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.02001185328929966,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 171
+            }
+          },
+          {
+            "face_count": 11,
+            "surface_area_m2": 5.839852624142123e-05,
+            "area_weighted_center_m": [
+              0.03661191053606697,
+              -0.00945892509993993,
+              0.05299999936980235
+            ],
+            "xy_bounds_m": [
+              [
+                0.031166547909379005,
+                -0.014783895574510098
+              ],
+              [
+                0.04100000113248825,
+                -0.0054862890392541885
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.03443148425376649,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 11
+            }
+          },
+          {
+            "face_count": 11,
+            "surface_area_m2": 5.8391270913674595e-05,
+            "area_weighted_center_m": [
+              -0.036612179409774376,
+              0.0094584107231169,
+              0.05300000104834272
+            ],
+            "xy_bounds_m": [
+              [
+                -0.04100000113248825,
+                0.005486294627189636
+              ],
+              [
+                -0.031165536493062973,
+                0.014782784506678581
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.03443148398387476,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 11
+            }
+          },
+          {
+            "face_count": 7,
+            "surface_area_m2": 5.8351654495546475e-05,
+            "area_weighted_center_m": [
+              -0.0366131862664224,
+              -0.009457798562638137,
+              0.052999999952394634
+            ],
+            "xy_bounds_m": [
+              [
+                -0.04100000113248825,
+                -0.01478278823196888
+              ],
+              [
+                -0.031165534630417824,
+                -0.005500001832842827
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.034431484821950735,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 7
+            }
+          },
+          {
+            "face_count": 7,
+            "surface_area_m2": 5.8349635664333657e-05,
+            "area_weighted_center_m": [
+              0.03661336097424821,
+              0.00945764490299858,
+              0.05300000061546212
+            ],
+            "xy_bounds_m": [
+              [
+                0.031166547909379005,
+                0.005500000901520252
+              ],
+              [
+                0.04100000113248825,
+                0.014783897437155247
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.03443148492849703,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 7
+            }
+          },
+          {
+            "face_count": 4,
+            "surface_area_m2": 7.001677942556157e-06,
+            "area_weighted_center_m": [
+              0.05326135634029047,
+              -0.006187419327892506,
+              0.05299999950695736
+            ],
+            "xy_bounds_m": [
+              [
+                0.050999999046325684,
+                -0.007599740754812956
+              ],
+              [
+                0.05791149288415909,
+                -0.005497960839420557
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.05129571002083397,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 4
+            }
+          },
+          {
+            "face_count": 4,
+            "surface_area_m2": 7.001663748603533e-06,
+            "area_weighted_center_m": [
+              -0.053261360504782036,
+              0.006187420778939151,
+              0.05300000048186107
+            ],
+            "xy_bounds_m": [
+              [
+                -0.05791148915886879,
+                0.005497959908097982
+              ],
+              [
+                -0.050999999046325684,
+                0.007599739357829094
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.05129571066990931,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 4
+            }
+          },
+          {
+            "face_count": 3,
+            "surface_area_m2": 6.994716861554445e-06,
+            "area_weighted_center_m": [
+              0.0532590281553845,
+              0.006188105870230092,
+              0.05300000070342955
+            ],
+            "xy_bounds_m": [
+              [
+                0.050999999046325684,
+                0.005499979015439749
+              ],
+              [
+                0.05789414420723915,
+                0.007599737029522657
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.051295710420264866,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 3
+            }
+          },
+          {
+            "face_count": 3,
+            "surface_area_m2": 6.994634808517386e-06,
+            "area_weighted_center_m": [
+              -0.053258998812494004,
+              -0.0061881149636071305,
+              0.0529999994616526
+            ],
+            "xy_bounds_m": [
+              [
+                -0.057893961668014526,
+                -0.007599737960845232
+              ],
+              [
+                -0.050999999046325684,
+                -0.0055000013671815395
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.05129571052012263,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 0,
+              "negative": 3
+            }
+          },
+          {
+            "face_count": 12,
+            "surface_area_m2": 3.630004410412574e-06,
+            "area_weighted_center_m": [
+              -0.06750000144426643,
+              -4.562847578712274e-10,
+              0.05299999937415123
+            ],
+            "xy_bounds_m": [
+              [
+                -0.06860000640153885,
+                -0.0010999984806403518
+              ],
+              [
+                -0.06639999896287918,
+                0.0011000009253621101
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.0663999989628792,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 12,
+              "negative": 0
+            }
+          },
+          {
+            "face_count": 12,
+            "surface_area_m2": 3.630000324346795e-06,
+            "area_weighted_center_m": [
+              0.06749999984404302,
+              -1.2632830522786997e-09,
+              0.05299999937415123
+            ],
+            "xy_bounds_m": [
+              [
+                0.06639999896287918,
+                -0.0011000020895153284
+              ],
+              [
+                0.06859999895095825,
+                0.0010999973164871335
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.06639999896287918,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 12,
+              "negative": 0
+            }
+          }
+        ]
+      },
+      "assessment": "annular shoulder around the J6 axis, but the z group has overlapping +Z/-Z faces and many disconnected side features; it is recessed 3 mm behind the broader z=56 front face"
+    },
+    "z56_connected_annular_front_face": {
+      "offset_link6_m": [
+        0,
+        0,
+        0.056
+      ],
+      "surface": {
+        "z_m": 0.056,
+        "face_count": 194,
+        "surface_area_m2": 0.0026968216920921226,
+        "area_weighted_center_m": [
+          -8.888602488500712e-10,
+          -6.0146783987423735e-06,
+          0.056000000034149004
+        ],
+        "xy_bounds_m": [
+          [
+            -0.05766557157039642,
+            -0.028999999165534973
+          ],
+          [
+            0.05766557157039642,
+            0.02893010899424553
+          ]
+        ],
+        "axis_to_surface_distance_m": 0.020011853824833854,
+        "axis_is_on_surface": false,
+        "normal_z_counts": {
+          "positive": 194,
+          "negative": 0
+        },
+        "connected_component_count": 1,
+        "largest_components": [
+          {
+            "face_count": 194,
+            "surface_area_m2": 0.0026968216920921226,
+            "area_weighted_center_m": [
+              -8.88860248565431e-10,
+              -6.014678398743237e-06,
+              0.05600000003414903
+            ],
+            "xy_bounds_m": [
+              [
+                -0.05766557157039642,
+                -0.028999999165534973
+              ],
+              [
+                0.05766557157039642,
+                0.02893010899424553
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.020011853824833854,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 194,
+              "negative": 0
+            }
+          }
+        ]
+      },
+      "assessment": "best topology-backed visible flange/front-plate candidate: one connected +Z planar component surrounds the J6 axis, has a central bore and bolt holes, and is the distal face of the layered 53-56 mm flange-like stack",
+      "confidence": "medium; mesh topology supports the face, but URDF has no named mounting datum"
+    },
+    "z67_max_cap_rejected": {
+      "offset_link6_m": [
+        0,
+        0,
+        0.067
+      ],
+      "surface": {
+        "z_m": 0.067,
+        "face_count": 40,
+        "surface_area_m2": 0.000249596982160454,
+        "area_weighted_center_m": [
+          -1.965683957564048e-09,
+          -3.405483916156957e-10,
+          0.06700000166893005
+        ],
+        "xy_bounds_m": [
+          [
+            -0.07200000435113907,
+            -0.010000000707805157
+          ],
+          [
+            0.07200000435113907,
+            0.010000001639127731
+          ]
+        ],
+        "axis_to_surface_distance_m": 0.06225016372554686,
+        "axis_is_on_surface": false,
+        "normal_z_counts": {
+          "positive": 40,
+          "negative": 0
+        },
+        "connected_component_count": 4,
+        "largest_components": [
+          {
+            "face_count": 10,
+            "surface_area_m2": 6.246070264223809e-05,
+            "area_weighted_center_m": [
+              -0.06714017142926285,
+              0.006659214526974007,
+              0.06700000166893007
+            ],
+            "xy_bounds_m": [
+              [
+                -0.07200000435113907,
+                0.003499999875202775
+              ],
+              [
+                -0.06200000271201134,
+                0.010000001639127731
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.06225016762864768,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 10,
+              "negative": 0
+            }
+          },
+          {
+            "face_count": 10,
+            "surface_area_m2": 6.246070222781092e-05,
+            "area_weighted_center_m": [
+              0.06714016936149879,
+              -0.006659214787504947,
+              0.06700000166893004
+            ],
+            "xy_bounds_m": [
+              [
+                0.06199999898672104,
+                -0.010000000707805157
+              ],
+              [
+                0.07200000435113907,
+                -0.0034999989438802004
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.062250166433759156,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 10,
+              "negative": 0
+            }
+          },
+          {
+            "face_count": 10,
+            "surface_area_m2": 6.233779079239943e-05,
+            "area_weighted_center_m": [
+              -0.06715020008465077,
+              -0.006655013250515364,
+              0.06700000166893004
+            ],
+            "xy_bounds_m": [
+              [
+                -0.07200000435113907,
+                -0.009999999776482582
+              ],
+              [
+                -0.06199999526143074,
+                -0.0034999989438802004
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.06225016372554686,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 10,
+              "negative": 0
+            }
+          },
+          {
+            "face_count": 10,
+            "surface_area_m2": 6.23377864980056e-05,
+            "area_weighted_center_m": [
+              0.06715019935827474,
+              0.006655012562210255,
+              0.06700000166893004
+            ],
+            "xy_bounds_m": [
+              [
+                0.06199999898672104,
+                0.00349999638274312
+              ],
+              [
+                0.07200000435113907,
+                0.010000000707805157
+              ]
+            ],
+            "axis_to_surface_distance_m": 0.06225016601281632,
+            "axis_is_on_surface": false,
+            "normal_z_counts": {
+              "positive": 10,
+              "negative": 0
+            }
+          }
+        ]
+      },
+      "assessment": "rejected as a flange face: four disconnected lateral pads at |x|=62-72 mm; their area-weighted symmetry center lies in empty space on the J6 axis"
+    },
+    "distal_fingertip_end_face_midpoint": {
+      "offset_link6_m": [
+        0,
+        0,
+        0.067979425
+      ],
+      "assessment": "area-weighted midpoint of the two terminal finger end faces whose normals point along -link6 Z; a distal-tip tracking point, not the extended inner gripping/contact surface and not a flange datum"
+    },
+    "finger_joint_root_legacy": {
+      "offset_link6_m": [
+        0,
+        0,
+        0.13503
+      ],
+      "assessment": "URDF joint7/joint8 root plane; not the fingertip and not the mounting flange"
+    }
+  },
+  "finger_geometry_semantics": {
+    "link7": {
+      "joint_origin_link6_m": [
+        0,
+        0,
+        0.13503
+      ],
+      "closed_mesh_bounds_link6_m": [
+        [
+          -0.024499999359250065,
+          -0.028000006452202797,
+          0.06349813797950746
+        ],
+        [
+          -5.583455358536949e-12,
+          0.02800000086426735,
+          0.13999814865618945
+        ]
+      ],
+      "terminal_end_face": {
+        "face_count": 150,
+        "surface_area_m2": 0.0015025992324308617,
+        "area_weighted_center_link6_m": [
+          -0.012898772983681105,
+          -4.64292310567153e-09,
+          0.06797942501343565
+        ],
+        "area_weighted_normal_link6": [
+          1.4452384543866992e-08,
+          -1.3534219860903627e-08,
+          -0.9999999999999998
+        ]
+      },
+      "inner_gripping_surface": {
+        "face_count": 33,
+        "surface_area_m2": 0.0019363110942609784,
+        "area_weighted_center_link6_m": [
+          -0.0017647435866510667,
+          -0.00018334809761289987,
+          0.0905704545475034
+        ],
+        "area_weighted_normal_link6": [
+          0.9999999091362883,
+          -3.169610985119995e-11,
+          -0.0004262949858477723
+        ]
+      }
+    },
+    "link8": {
+      "joint_origin_link6_m": [
+        0,
+        0,
+        0.13503
+      ],
+      "closed_mesh_bounds_link6_m": [
+        [
+          2.545676755580817e-11,
+          -0.028000006452202797,
+          0.06349813797950746
+        ],
+        [
+          0.024499999359250065,
+          0.02800000086426735,
+          0.13999814865618945
+        ]
+      ],
+      "terminal_end_face": {
+        "face_count": 150,
+        "surface_area_m2": 0.0015025994805388267,
+        "area_weighted_center_link6_m": [
+          0.012898772359948546,
+          -7.915117888884987e-09,
+          0.06797942518441391
+        ],
+        "area_weighted_normal_link6": [
+          -5.559281397807861e-08,
+          -5.14177128422622e-08,
+          -0.9999999999999971
+        ]
+      },
+      "inner_gripping_surface": {
+        "face_count": 33,
+        "surface_area_m2": 0.0019344815505456942,
+        "area_weighted_center_link6_m": [
+          0.0017645592597164144,
+          0.0001835202361089617,
+          0.09055556281546229
+        ],
+        "area_weighted_normal_link6": [
+          -0.9999999210957448,
+          -1.3078745780005217e-11,
+          -0.0003972511855454361
+        ]
+      }
+    },
+    "terminal_end_face_midpoint_link6_m": [
+      -3.1186627932888733e-10,
+      -6.279020497278258e-09,
+      0.06797942509892478
+    ],
+    "terminal_midpoint_matches_tracking_offset": true,
+    "interpretation": "The terminal end faces point along -link6 Z and lie farthest from the z=135.03 mm finger-joint roots. The broad inner gripping surfaces point along +/-link6 X and do not define one unique axial TCP point. The mesh maximum-Z caps are near the roots, not the distal fingertip."
+  },
+  "uniqueness_conclusion": "The official flange/J6 kinematic origin is uniquely z=0. For a user-visible distal mounting/front plate, z=56 mm is the strongest mesh-topology candidate. It must remain a separately named visual_flange_face_candidate because the URDF does not label a CAD mating datum and a neighboring annular shoulder exists at z=53 mm. The earlier z=67 mm max-cap interpretation is invalid.",
+  "recommended_schema": {
+    "j6_origin_xy": "official logged/FK link6 origin at local [0,0,0]",
+    "visual_flange_face_candidate_xy": "separate local [0,0,0.056] projection; medium-confidence physical face center",
+    "distal_tip_xy": "link7/link8 terminal end-face midpoint at local [0,0,0.067979425]",
+    "tcp_xy": "may alias distal_tip_xy only when that tool-center policy is explicitly desired",
+    "legacy_finger_joint_root_xy": "historical local [0,0,0.13503] point",
+    "do_not_alias": [
+      "j6_origin_xy and visual_flange_face_candidate_xy",
+      "visual_flange_face_candidate_xy and tcp_xy"
+    ]
+  },
+  "planar_surface_groups": [
+    {
+      "z_m": 0,
+      "face_count": 191,
+      "surface_area_m2": 0.002914177499611332,
+      "area_weighted_center_m": [
+        -1.4623705201849371e-06,
+        0.003689112853106728,
+        3.907100105251669e-11
+      ],
+      "xy_bounds_m": [
+        [
+          -0.03245067223906517,
+          -0.028494220227003098
+        ],
+        [
+          0.03245067223906517,
+          0.038917649537324905
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 0,
+        "negative": 191
+      },
+      "connected_component_count": 2,
+      "largest_components": [
+        {
+          "face_count": 144,
+          "surface_area_m2": 0.0024889261075667756,
+          "area_weighted_center_m": [
+            -1.7123136354861892e-06,
+            1.7119282172710993e-06,
+            2.180197106171272e-11
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02844800241291523,
+              -0.028494220227003098
+            ],
+            [
+              0.028494220227003098,
+              0.02844800055027008
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 144
+          }
+        },
+        {
+          "face_count": 47,
+          "surface_area_m2": 0.00042525139204455597,
+          "area_weighted_center_m": [
+            5.052204540958702e-10,
+            0.025270860973667035,
+            1.4014377917986565e-10
+          ],
+          "xy_bounds_m": [
+            [
+              -0.03245067223906517,
+              0.013000000268220901
+            ],
+            [
+              0.03245067223906517,
+              0.038917649537324905
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.029468976783018526,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 47
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.002,
+      "face_count": 210,
+      "surface_area_m2": 0.0024524674822235934,
+      "area_weighted_center_m": [
+        3.2764306503255754e-10,
+        8.627335673666703e-10,
+        0.002000000043141998
+      ],
+      "xy_bounds_m": [
+        [
+          -0.022947899997234344,
+          -0.022994209080934525
+        ],
+        [
+          0.022994209080934525,
+          0.022947898134589195
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 151,
+        "negative": 59
+      },
+      "connected_component_count": 2,
+      "largest_components": [
+        {
+          "face_count": 151,
+          "surface_area_m2": 0.0014472586353016406,
+          "area_weighted_center_m": [
+            3.821828359094286e-10,
+            3.893152058831801e-10,
+            0.0020000000432123907
+          ],
+          "xy_bounds_m": [
+            [
+              -0.022947899997234344,
+              -0.022994209080934525
+            ],
+            [
+              0.022994209080934525,
+              0.022947898134589195
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 151,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 59,
+          "surface_area_m2": 0.0010052088469219528,
+          "area_weighted_center_m": [
+            2.4911893122688256e-10,
+            1.5443419865836781e-09,
+            0.0020000000430406483
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02242252416908741,
+              -0.02242252416908741
+            ],
+            [
+              0.02242252230644226,
+              0.02242252603173256
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.013408715403027047,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 59
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.008,
+      "face_count": 219,
+      "surface_area_m2": 0.0020822624012676997,
+      "area_weighted_center_m": [
+        -2.046568127922046e-06,
+        2.047039643039561e-06,
+        0.008000000005284965
+      ],
+      "xy_bounds_m": [
+        [
+          -0.028448006138205528,
+          -0.028494220227003098
+        ],
+        [
+          0.028494222089648247,
+          0.028448006138205528
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 75,
+        "negative": 144
+      },
+      "connected_component_count": 3,
+      "largest_components": [
+        {
+          "face_count": 75,
+          "surface_area_m2": 0.0008153054301664343,
+          "area_weighted_center_m": [
+            -5.227822213823464e-06,
+            5.22924786576393e-06,
+            0.007999999915661847
+          ],
+          "xy_bounds_m": [
+            [
+              -0.028448006138205528,
+              -0.028494220227003098
+            ],
+            [
+              0.028494222089648247,
+              0.028448006138205528
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.023405393555953845,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 75,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 118,
+          "surface_area_m2": 0.000741180457470908,
+          "area_weighted_center_m": [
+            6.100415277462232e-10,
+            -1.3231578907823711e-09,
+            0.00799999999053117
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02800000086426735,
+              -0.027904367074370384
+            ],
+            [
+              0.0279999990016222,
+              0.027904367074370384
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.021999998683084398,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 118
+          }
+        },
+        {
+          "face_count": 26,
+          "surface_area_m2": 0.0005257765136303576,
+          "area_weighted_center_m": [
+            6.235037138077577e-10,
+            3.8420760161082303e-11,
+            0.00800000016505901
+          ],
+          "xy_bounds_m": [
+            [
+              -0.012999998405575752,
+              -0.01290521677583456
+            ],
+            [
+              0.013000000268220901,
+              0.012905217707157135
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 26
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.009,
+      "face_count": 121,
+      "surface_area_m2": 0.001623838856466062,
+      "area_weighted_center_m": [
+        8.56162402463513e-11,
+        -0.001245959975075982,
+        0.009000000115456116
+      ],
+      "xy_bounds_m": [
+        [
+          -0.02850000187754631,
+          -0.026904786005616188
+        ],
+        [
+          0.02850000001490116,
+          0.026904789730906487
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.004778173752129097,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 121,
+        "negative": 0
+      },
+      "connected_component_count": 4,
+      "largest_components": [
+        {
+          "face_count": 38,
+          "surface_area_m2": 0.00045966991535899716,
+          "area_weighted_center_m": [
+            -0.01827100639374549,
+            1.401490972955134e-10,
+            0.009000000115450223
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02850000187754631,
+              -0.015864240005612373
+            ],
+            [
+              -0.00477817514911294,
+              0.015864240005612373
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.004778175149113357,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 38,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 38,
+          "surface_area_m2": 0.0004596699103649456,
+          "area_weighted_center_m": [
+            0.018271007314960192,
+            1.3600969876992655e-09,
+            0.009000000218556313
+          ],
+          "xy_bounds_m": [
+            [
+              0.004778173752129078,
+              -0.015864243730902672
+            ],
+            [
+              0.02850000001490116,
+              0.015864238142967224
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.004778173752129097,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 38,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 21,
+          "surface_area_m2": 0.00043480008302331283,
+          "area_weighted_center_m": [
+            -1.236652287382461e-10,
+            -0.01775721914553358,
+            0.008999999948463627
+          ],
+          "xy_bounds_m": [
+            [
+              -0.015864240005612373,
+              -0.026904786005616188
+            ],
+            [
+              0.015864241868257523,
+              -0.0047781760804355145
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.004778176080435582,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 21,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 0.0002696989477188064,
+          "area_weighted_center_m": [
+            -5.169159928494022e-10,
+            0.021125783011707363,
+            0.009000000208964066
+          ],
+          "xy_bounds_m": [
+            [
+              -0.015864241868257523,
+              0.01616685651242733
+            ],
+            [
+              0.015864241868257523,
+              0.026904789730906487
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.016500000841915493,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.01,
+      "face_count": 67,
+      "surface_area_m2": 0.0004126565967936412,
+      "area_weighted_center_m": [
+        -4.846415312271004e-10,
+        -0.0005969203395200173,
+        0.00999999994748391
+      ],
+      "xy_bounds_m": [
+        [
+          -0.01912797801196575,
+          -0.019127976149320602
+        ],
+        [
+          0.019127976149320602,
+          0.019127976149320602
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 67,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 67,
+          "surface_area_m2": 0.0004126565967936412,
+          "area_weighted_center_m": [
+            -4.846415306538061e-10,
+            -0.0005969203395200179,
+            0.00999999994748391
+          ],
+          "xy_bounds_m": [
+            [
+              -0.01912797801196575,
+              -0.019127976149320602
+            ],
+            [
+              0.019127976149320602,
+              0.019127976149320602
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 67,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0105,
+      "face_count": 19,
+      "surface_area_m2": 0.0008455604557168328,
+      "area_weighted_center_m": [
+        7.354489711625492e-06,
+        0.048231688890567836,
+        0.01050000005697778
+      ],
+      "xy_bounds_m": [
+        [
+          -0.017999999225139618,
+          0.03127523511648178
+        ],
+        [
+          0.018009888008236885,
+          0.060212794691324234
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.0360519600318778,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 0,
+        "negative": 19
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 19,
+          "surface_area_m2": 0.0008455604557168327,
+          "area_weighted_center_m": [
+            7.354489711625377e-06,
+            0.04823168889056785,
+            0.01050000005697778
+          ],
+          "xy_bounds_m": [
+            [
+              -0.017999999225139618,
+              0.03127523511648178
+            ],
+            [
+              0.018009888008236885,
+              0.060212794691324234
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.0360519600318778,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 19
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0125,
+      "face_count": 10,
+      "surface_area_m2": 0.00018448091242812817,
+      "area_weighted_center_m": [
+        -5.501540787228832e-10,
+        0.011582569227068988,
+        0.012500000186264513
+      ],
+      "xy_bounds_m": [
+        [
+          -0.009800000116229057,
+          0.006699999328702688
+        ],
+        [
+          0.009800000116229057,
+          0.016300000250339508
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.006700000958517066,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 10,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 10,
+          "surface_area_m2": 0.00018448091242812817,
+          "area_weighted_center_m": [
+            -5.50154078727367e-10,
+            0.011582569227068988,
+            0.012500000186264513
+          ],
+          "xy_bounds_m": [
+            [
+              -0.009800000116229057,
+              0.006699999328702688
+            ],
+            [
+              0.009800000116229057,
+              0.016300000250339508
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.006700000958517066,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 10,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.013,
+      "face_count": 40,
+      "surface_area_m2": 0.0014253524463718266,
+      "area_weighted_center_m": [
+        -6.935676652203531e-06,
+        0.04813721277541761,
+        0.013000000264877729
+      ],
+      "xy_bounds_m": [
+        [
+          -0.030515238642692566,
+          0.01900000125169754
+        ],
+        [
+          0.030515242367982864,
+          0.06470290571451187
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.03393576250397854,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 40,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 40,
+          "surface_area_m2": 0.0014253524463718266,
+          "area_weighted_center_m": [
+            -6.935676652203159e-06,
+            0.048137212775417604,
+            0.013000000264877734
+          ],
+          "xy_bounds_m": [
+            [
+              -0.030515238642692566,
+              0.01900000125169754
+            ],
+            [
+              0.030515242367982864,
+              0.06470290571451187
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03393576250397854,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 40,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0134,
+      "face_count": 96,
+      "surface_area_m2": 2.277001927254312e-05,
+      "area_weighted_center_m": [
+        -1.5258950626901343e-10,
+        1.297210260350628e-08,
+        0.013399999877704008
+      ],
+      "xy_bounds_m": [
+        [
+          -0.020031223073601723,
+          -0.020031223073601723
+        ],
+        [
+          0.020031223073601723,
+          0.020031223073601723
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.023568147585278455,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 96,
+        "negative": 0
+      },
+      "connected_component_count": 4,
+      "largest_components": [
+        {
+          "face_count": 24,
+          "surface_area_m2": 5.692508944313325e-06,
+          "area_weighted_center_m": [
+            -0.01803122261294042,
+            0.018031226718848662,
+            0.013399999862425196
+          ],
+          "xy_bounds_m": [
+            [
+              -0.020031223073601723,
+              0.01603122614324093
+            ],
+            [
+              -0.01603122428059578,
+              0.020031223073601723
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.02356814890229118,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 5.692507629682268e-06,
+          "area_weighted_center_m": [
+            0.018031223420574737,
+            0.018031223767286046,
+            0.01339999981331031
+          ],
+          "xy_bounds_m": [
+            [
+              0.01603122241795063,
+              0.01603122428059578
+            ],
+            [
+              0.020031223073601723,
+              0.020031223073601723
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.023568148902367473,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 5.692501583332361e-06,
+          "area_weighted_center_m": [
+            0.018031223982696767,
+            -0.018031221039479996,
+            0.013399999972654893
+          ],
+          "xy_bounds_m": [
+            [
+              0.01603122241795063,
+              -0.020031223073601723
+            ],
+            [
+              0.020031223073601723,
+              -0.01603122428059578
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.023568147585278455,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 5.692501115215166e-06,
+          "area_weighted_center_m": [
+            -0.01803122271932438,
+            -0.018031221509248633,
+            0.013399999862425705
+          ],
+          "xy_bounds_m": [
+            [
+              -0.020031221210956573,
+              -0.020031221210956573
+            ],
+            [
+              -0.01603122428059578,
+              -0.01603122241795063
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.023568147585278455,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0145,
+      "face_count": 222,
+      "surface_area_m2": 0.002729321353116451,
+      "area_weighted_center_m": [
+        -5.673800365487768e-10,
+        -3.167011288516094e-10,
+        0.01449999983696592
+      ],
+      "xy_bounds_m": [
+        [
+          -0.02850000374019146,
+          -0.028499998152256012
+        ],
+        [
+          0.02850000001490116,
+          0.02850000374019146
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 186,
+        "negative": 36
+      },
+      "connected_component_count": 3,
+      "largest_components": [
+        {
+          "face_count": 36,
+          "surface_area_m2": 0.0025388232362082595,
+          "area_weighted_center_m": [
+            -2.2655446653672008e-10,
+            1.1019451433415177e-10,
+            0.01449999982422148
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02850000374019146,
+              -0.028499998152256012
+            ],
+            [
+              0.02850000001490116,
+              0.02850000374019146
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 36
+          }
+        },
+        {
+          "face_count": 93,
+          "surface_area_m2": 9.52491022472641e-05,
+          "area_weighted_center_m": [
+            -6.283868118833408e-10,
+            -0.020262482845922854,
+            0.014499999999113236
+          ],
+          "xy_bounds_m": [
+            [
+              -0.027049459517002106,
+              -0.028299998492002487
+            ],
+            [
+              0.027049463242292404,
+              -0.008199997246265411
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.022699998897117005,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 93,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 93,
+          "surface_area_m2": 9.52490146609272e-05,
+          "area_weighted_center_m": [
+            -9.590938328389565e-09,
+            0.020262489466181376,
+            0.014500000014516888
+          ],
+          "xy_bounds_m": [
+            [
+              -0.027049461379647255,
+              0.008200001902878284
+            ],
+            [
+              0.027049463242292404,
+              0.028299998492002487
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.022700001531295037,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 93,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.038,
+      "face_count": 43,
+      "surface_area_m2": 0.0001492613306104297,
+      "area_weighted_center_m": [
+        6.543907687023375e-10,
+        0.036125731104032104,
+        0.03799999907657469
+      ],
+      "xy_bounds_m": [
+        [
+          -0.011000001803040504,
+          0.03111269697546959
+        ],
+        [
+          0.01100000087171793,
+          0.04000000283122063
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.032942214443481194,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 0,
+        "negative": 43
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 43,
+          "surface_area_m2": 0.0001492613306104297,
+          "area_weighted_center_m": [
+            6.543907682811586e-10,
+            0.036125731104032104,
+            0.03799999907657469
+          ],
+          "xy_bounds_m": [
+            [
+              -0.011000001803040504,
+              0.03111269697546959
+            ],
+            [
+              0.01100000087171793,
+              0.04000000283122063
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.032942214443481194,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 43
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.043,
+      "face_count": 51,
+      "surface_area_m2": 0.00014345078921698424,
+      "area_weighted_center_m": [
+        -0.00023703628649669384,
+        0.024196060028842586,
+        0.043000000612049435
+      ],
+      "xy_bounds_m": [
+        [
+          -0.030515242367982864,
+          -0.007970473729074001
+        ],
+        [
+          0.030515242367982864,
+          0.03565062955021858
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.023551110843696006,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 24,
+        "negative": 27
+      },
+      "connected_component_count": 4,
+      "largest_components": [
+        {
+          "face_count": 15,
+          "surface_area_m2": 6.659746576260264e-05,
+          "area_weighted_center_m": [
+            -0.020585266287253347,
+            0.026875850181200023,
+            0.04300000057524883
+          ],
+          "xy_bounds_m": [
+            [
+              -0.030515242367982864,
+              0.01899999938905239
+            ],
+            [
+              -0.010999998077750206,
+              0.03565062955021858
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03296255550515364,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 15
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 6.335331802278905e-05,
+          "area_weighted_center_m": [
+            0.02110265902945865,
+            0.02653500177543072,
+            0.04300000069048411
+          ],
+          "xy_bounds_m": [
+            [
+              0.011994589120149612,
+              0.018999995663762093
+            ],
+            [
+              0.030515242367982864,
+              0.033918578177690506
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03293862338238487,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 12
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 6.750003913088106e-06,
+          "area_weighted_center_m": [
+            0.02414814530944202,
+            -0.006470475985918909,
+            0.043000000425511165
+          ],
+          "xy_bounds_m": [
+            [
+              0.022648144513368607,
+              -0.007970473729074001
+            ],
+            [
+              0.025648145005106926,
+              -0.004970473237335682
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.023551110843696006,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 6.750001518504442e-06,
+          "area_weighted_center_m": [
+            -0.024148145611090775,
+            0.006470476589718967,
+            0.04300000042551061
+          ],
+          "xy_bounds_m": [
+            [
+              -0.025648145005106926,
+              0.004970474634319544
+            ],
+            [
+              -0.022648142650723457,
+              0.00797047559171915
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.023551112164413267,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.048,
+      "face_count": 471,
+      "surface_area_m2": 0.0021909229624022235,
+      "area_weighted_center_m": [
+        1.3253947045771008e-06,
+        0.010156250156375477,
+        0.04800000041723249
+      ],
+      "xy_bounds_m": [
+        [
+          -0.07180000096559525,
+          -0.030300000682473183
+        ],
+        [
+          0.07180000096559525,
+          0.03999999910593033
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.006413961145877026,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 156,
+        "negative": 315
+      },
+      "connected_component_count": 5,
+      "largest_components": [
+        {
+          "face_count": 315,
+          "surface_area_m2": 0.0013810683619780635,
+          "area_weighted_center_m": [
+            2.1033652402406863e-06,
+            0.004751803386634344,
+            0.0480000004172325
+          ],
+          "xy_bounds_m": [
+            [
+              -0.07180000096559525,
+              -0.030300000682473183
+            ],
+            [
+              0.07180000096559525,
+              0.039799999445676804
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.02851953850787844,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 315
+          }
+        },
+        {
+          "face_count": 75,
+          "surface_area_m2": 0.0005641129036709407,
+          "area_weighted_center_m": [
+            -1.803161866162367e-09,
+            0.027811801411151037,
+            0.048000000417232534
+          ],
+          "xy_bounds_m": [
+            [
+              -0.03245067596435547,
+              0.012999999336898327
+            ],
+            [
+              0.03245067223906517,
+              0.03999999910593033
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.029468976711603062,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 75,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 27,
+          "surface_area_m2": 8.191391102835925e-05,
+          "area_weighted_center_m": [
+            -0.005851795429728237,
+            0.010135607261721307,
+            0.048000000417232506
+          ],
+          "xy_bounds_m": [
+            [
+              -0.011676524765789509,
+              0.0045890118926763535
+            ],
+            [
+              -0.000999998184852302,
+              0.015759749338030815
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.006413961145877026,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 27,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 27,
+          "surface_area_m2": 8.191389594640005e-05,
+          "area_weighted_center_m": [
+            0.011703591261761237,
+            1.7746087662289037e-09,
+            0.04800000041723252
+          ],
+          "xy_bounds_m": [
+            [
+              0.006413961760699749,
+              -0.0049922047182917595
+            ],
+            [
+              0.016499999910593033,
+              0.004992207046598196
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.006413961993530531,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 27,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 27,
+          "surface_area_m2": 8.191388977846041e-05,
+          "area_weighted_center_m": [
+            -0.005851795638470734,
+            -0.01013560788709052,
+            0.048000000417232506
+          ],
+          "xy_bounds_m": [
+            [
+              -0.011676525697112083,
+              -0.015759754925966263
+            ],
+            [
+              -0.0010000005131587386,
+              -0.004589012823998928
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.00641396183600795,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 27,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.05,
+      "face_count": 36,
+      "surface_area_m2": 3.599998750823157e-05,
+      "area_weighted_center_m": [
+        1.4478910519181578e-09,
+        -4.0953655595371744e-09,
+        0.050000000745058074
+      ],
+      "xy_bounds_m": [
+        [
+          -0.014150000177323818,
+          -0.012522207573056221
+        ],
+        [
+          0.008075001649558544,
+          0.012522210367023945
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.010149998169403634,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 36,
+        "negative": 0
+      },
+      "connected_component_count": 3,
+      "largest_components": [
+        {
+          "face_count": 12,
+          "surface_area_m2": 1.2000004347103264e-05,
+          "area_weighted_center_m": [
+            0.006074999861003247,
+            -0.010522208825842216,
+            0.05000000074505806
+          ],
+          "xy_bounds_m": [
+            [
+              0.004074999131262302,
+              -0.012522207573056221
+            ],
+            [
+              0.008075001649558544,
+              -0.008522209711372852
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.010149998169403634,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 1.1999992579980864e-05,
+          "area_weighted_center_m": [
+            -0.012150000620107473,
+            -1.5285248886416454e-09,
+            0.05000000074505806
+          ],
+          "xy_bounds_m": [
+            [
+              -0.014150000177323818,
+              -0.002000001724809408
+            ],
+            [
+              -0.010150001384317875,
+              0.001999996602535248
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.010150001384317887,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 1.1999990581147441e-05,
+          "area_weighted_center_m": [
+            0.006075000157579375,
+            0.01052221013896326,
+            0.05000000074505805
+          ],
+          "xy_bounds_m": [
+            [
+              0.004075000528246164,
+              0.008522212505340576
+            ],
+            [
+              0.008074999786913395,
+              0.012522210367023945
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.010150002900640585,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0525,
+      "face_count": 58,
+      "surface_area_m2": 2.7469132586337072e-05,
+      "area_weighted_center_m": [
+        -1.145270320903353e-08,
+        -2.822653803719302e-08,
+        0.052499999517299736
+      ],
+      "xy_bounds_m": [
+        [
+          -0.017750000581145287,
+          -0.017723968252539635
+        ],
+        [
+          0.017645949497818947,
+          0.017723966389894485
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.01739741208300087,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 58,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 58,
+          "surface_area_m2": 2.7469132586337072e-05,
+          "area_weighted_center_m": [
+            -1.145270320903353e-08,
+            -2.822653803719302e-08,
+            0.052499999517299736
+          ],
+          "xy_bounds_m": [
+            [
+              -0.017750000581145287,
+              -0.017723968252539635
+            ],
+            [
+              0.017645949497818947,
+              0.017723966389894485
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.01739741208300087,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 58,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.053,
+      "face_count": 513,
+      "surface_area_m2": 0.0030111997729374007,
+      "area_weighted_center_m": [
+        -2.5958746486576096e-06,
+        -1.7426254589639805e-06,
+        0.052999999937674035
+      ],
+      "xy_bounds_m": [
+        [
+          -0.06860000640153885,
+          -0.02850000187754631
+        ],
+        [
+          0.06859999895095825,
+          0.02850000001490116
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.01764594655171894,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 286,
+        "negative": 227
+      },
+      "connected_component_count": 18,
+      "largest_components": [
+        {
+          "face_count": 214,
+          "surface_area_m2": 0.0015156888761216215,
+          "area_weighted_center_m": [
+            7.500118409975947e-06,
+            -3.4165818795245805e-07,
+            0.052999999896001015
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02850000001490116,
+              -0.02850000187754631
+            ],
+            [
+              0.02850000001490116,
+              0.02850000001490116
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.01764594655171894,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 214,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 171,
+          "surface_area_m2": 0.0012122469882486914,
+          "area_weighted_center_m": [
+            -1.598341581847358e-05,
+            -3.7972298904036024e-06,
+            0.052999999931285374
+          ],
+          "xy_bounds_m": [
+            [
+              -0.02850000001490116,
+              -0.02845177985727787
+            ],
+            [
+              0.02850000001490116,
+              0.02845178171992302
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.02001185328929966,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 171
+          }
+        },
+        {
+          "face_count": 11,
+          "surface_area_m2": 5.839852624142123e-05,
+          "area_weighted_center_m": [
+            0.03661191053606697,
+            -0.00945892509993993,
+            0.05299999936980235
+          ],
+          "xy_bounds_m": [
+            [
+              0.031166547909379005,
+              -0.014783895574510098
+            ],
+            [
+              0.04100000113248825,
+              -0.0054862890392541885
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03443148425376649,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 11
+          }
+        },
+        {
+          "face_count": 11,
+          "surface_area_m2": 5.8391270913674595e-05,
+          "area_weighted_center_m": [
+            -0.036612179409774376,
+            0.0094584107231169,
+            0.05300000104834272
+          ],
+          "xy_bounds_m": [
+            [
+              -0.04100000113248825,
+              0.005486294627189636
+            ],
+            [
+              -0.031165536493062973,
+              0.014782784506678581
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03443148398387476,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 11
+          }
+        },
+        {
+          "face_count": 7,
+          "surface_area_m2": 5.8351654495546475e-05,
+          "area_weighted_center_m": [
+            -0.0366131862664224,
+            -0.009457798562638137,
+            0.052999999952394634
+          ],
+          "xy_bounds_m": [
+            [
+              -0.04100000113248825,
+              -0.01478278823196888
+            ],
+            [
+              -0.031165534630417824,
+              -0.005500001832842827
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.034431484821950735,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 7
+          }
+        },
+        {
+          "face_count": 7,
+          "surface_area_m2": 5.8349635664333657e-05,
+          "area_weighted_center_m": [
+            0.03661336097424821,
+            0.00945764490299858,
+            0.05300000061546212
+          ],
+          "xy_bounds_m": [
+            [
+              0.031166547909379005,
+              0.005500000901520252
+            ],
+            [
+              0.04100000113248825,
+              0.014783897437155247
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03443148492849703,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 7
+          }
+        },
+        {
+          "face_count": 4,
+          "surface_area_m2": 7.001677942556157e-06,
+          "area_weighted_center_m": [
+            0.05326135634029047,
+            -0.006187419327892506,
+            0.05299999950695736
+          ],
+          "xy_bounds_m": [
+            [
+              0.050999999046325684,
+              -0.007599740754812956
+            ],
+            [
+              0.05791149288415909,
+              -0.005497960839420557
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.05129571002083397,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 4
+          }
+        },
+        {
+          "face_count": 4,
+          "surface_area_m2": 7.001663748603533e-06,
+          "area_weighted_center_m": [
+            -0.053261360504782036,
+            0.006187420778939151,
+            0.05300000048186107
+          ],
+          "xy_bounds_m": [
+            [
+              -0.05791148915886879,
+              0.005497959908097982
+            ],
+            [
+              -0.050999999046325684,
+              0.007599739357829094
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.05129571066990931,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 4
+          }
+        },
+        {
+          "face_count": 3,
+          "surface_area_m2": 6.994716861554445e-06,
+          "area_weighted_center_m": [
+            0.0532590281553845,
+            0.006188105870230092,
+            0.05300000070342955
+          ],
+          "xy_bounds_m": [
+            [
+              0.050999999046325684,
+              0.005499979015439749
+            ],
+            [
+              0.05789414420723915,
+              0.007599737029522657
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.051295710420264866,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 3
+          }
+        },
+        {
+          "face_count": 3,
+          "surface_area_m2": 6.994634808517386e-06,
+          "area_weighted_center_m": [
+            -0.053258998812494004,
+            -0.0061881149636071305,
+            0.0529999994616526
+          ],
+          "xy_bounds_m": [
+            [
+              -0.057893961668014526,
+              -0.007599737960845232
+            ],
+            [
+              -0.050999999046325684,
+              -0.0055000013671815395
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.05129571052012263,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 3
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 3.630004410412574e-06,
+          "area_weighted_center_m": [
+            -0.06750000144426643,
+            -4.562847578712274e-10,
+            0.05299999937415123
+          ],
+          "xy_bounds_m": [
+            [
+              -0.06860000640153885,
+              -0.0010999984806403518
+            ],
+            [
+              -0.06639999896287918,
+              0.0011000009253621101
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.0663999989628792,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 12,
+          "surface_area_m2": 3.630000324346795e-06,
+          "area_weighted_center_m": [
+            0.06749999984404302,
+            -1.2632830522786997e-09,
+            0.05299999937415123
+          ],
+          "xy_bounds_m": [
+            [
+              0.06639999896287918,
+              -0.0011000020895153284
+            ],
+            [
+              0.06859999895095825,
+              0.0010999973164871335
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.06639999896287918,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 12,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.054,
+      "face_count": 330,
+      "surface_area_m2": 0.0006453651960552687,
+      "area_weighted_center_m": [
+        -4.0755713647866584e-06,
+        3.6229736963487723e-06,
+        0.05400000000296012
+      ],
+      "xy_bounds_m": [
+        [
+          -0.017500000074505806,
+          -0.017474336549639702
+        ],
+        [
+          0.01739741489291191,
+          0.017474334686994553
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 330,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 330,
+          "surface_area_m2": 0.0006453651960552688,
+          "area_weighted_center_m": [
+            -4.0755713647854785e-06,
+            3.6229736963486567e-06,
+            0.05400000000296009
+          ],
+          "xy_bounds_m": [
+            [
+              -0.017500000074505806,
+              -0.017474336549639702
+            ],
+            [
+              0.01739741489291191,
+              0.017474334686994553
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 330,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0545,
+      "face_count": 42,
+      "surface_area_m2": 0.00013300808728583703,
+      "area_weighted_center_m": [
+        1.0995446086108355e-09,
+        0.03538883812905026,
+        0.05449999975258169
+      ],
+      "xy_bounds_m": [
+        [
+          -0.010070355609059334,
+          0.03074696473777294
+        ],
+        [
+          0.010070357471704483,
+          0.03949999809265137
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.03226597692274084,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 42,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 42,
+          "surface_area_m2": 0.00013300808728583703,
+          "area_weighted_center_m": [
+            1.0995446090403369e-09,
+            0.03538883812905026,
+            0.0544999997525817
+          ],
+          "xy_bounds_m": [
+            [
+              -0.010070355609059334,
+              0.03074696473777294
+            ],
+            [
+              0.010070357471704483,
+              0.03949999809265137
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03226597692274084,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 42,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.056,
+      "face_count": 194,
+      "surface_area_m2": 0.0026968216920921226,
+      "area_weighted_center_m": [
+        -8.888602488500712e-10,
+        -6.0146783987423735e-06,
+        0.056000000034149004
+      ],
+      "xy_bounds_m": [
+        [
+          -0.05766557157039642,
+          -0.028999999165534973
+        ],
+        [
+          0.05766557157039642,
+          0.02893010899424553
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.020011853824833854,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 194,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 194,
+          "surface_area_m2": 0.0026968216920921226,
+          "area_weighted_center_m": [
+            -8.88860248565431e-10,
+            -6.014678398743237e-06,
+            0.05600000003414903
+          ],
+          "xy_bounds_m": [
+            [
+              -0.05766557157039642,
+              -0.028999999165534973
+            ],
+            [
+              0.05766557157039642,
+              0.02893010899424553
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.020011853824833854,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 194,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.062,
+      "face_count": 295,
+      "surface_area_m2": 0.0013413153538173069,
+      "area_weighted_center_m": [
+        6.276605824551611e-06,
+        3.729022813528262e-07,
+        0.061999999999301364
+      ],
+      "xy_bounds_m": [
+        [
+          -0.07250000536441803,
+          -0.005624611396342516
+        ],
+        [
+          0.07249999791383743,
+          0.0056246137246489525
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 115,
+        "negative": 180
+      },
+      "connected_component_count": 3,
+      "largest_components": [
+        {
+          "face_count": 180,
+          "surface_area_m2": 0.0009137999450453259,
+          "area_weighted_center_m": [
+            3.7586347596397783e-10,
+            -4.803861350043812e-10,
+            0.062000000021870116
+          ],
+          "xy_bounds_m": [
+            [
+              -0.07250000536441803,
+              -0.003300003008916974
+            ],
+            [
+              0.07249999791383743,
+              0.0033000027760863304
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 0,
+            "negative": 180
+          }
+        },
+        {
+          "face_count": 57,
+          "surface_area_m2": 0.0002138268481114962,
+          "area_weighted_center_m": [
+            0.0535835388378834,
+            2.3402297346366297e-06,
+            0.062000000035367674
+          ],
+          "xy_bounds_m": [
+            [
+              0.03199999779462814,
+              -0.005624609533697367
+            ],
+            [
+              0.07199999690055847,
+              0.0056246137246489525
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03199999965726502,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 57,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 58,
+          "surface_area_m2": 0.0002136885606604847,
+          "area_weighted_center_m": [
+            -0.05357881872889343,
+            1.0041916179675587e-09,
+            0.06199999986670097
+          ],
+          "xy_bounds_m": [
+            [
+              -0.07200000435113907,
+              -0.005624611396342516
+            ],
+            [
+              -0.03200000151991844,
+              0.005624611862003803
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03200000338255584,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 58,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0644,
+      "face_count": 240,
+      "surface_area_m2": 0.000102000026982647,
+      "area_weighted_center_m": [
+        -1.3366930216108127e-08,
+        2.9079719256204834e-10,
+        0.0644000014570219
+      ],
+      "xy_bounds_m": [
+        [
+          -0.06970000267028809,
+          -0.0022000030148774385
+        ],
+        [
+          0.06970000267028809,
+          0.002200003247708082
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.005299998447299046,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 240,
+        "negative": 0
+      },
+      "connected_component_count": 10,
+      "largest_components": [
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.020002334151658e-05,
+          "area_weighted_center_m": [
+            -0.06749999802482251,
+            -2.0724136895056059e-10,
+            0.06440000089944668
+          ],
+          "xy_bounds_m": [
+            [
+              -0.06970000267028809,
+              -0.0022000030148774385
+            ],
+            [
+              -0.06529999524354935,
+              0.0022000030148774385
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.06529999524354937,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.020000885887732e-05,
+          "area_weighted_center_m": [
+            -0.02249999949394361,
+            2.792675557992523e-10,
+            0.0644000016785924
+          ],
+          "xy_bounds_m": [
+            [
+              -0.024700002744793892,
+              -0.00219999928958714
+            ],
+            [
+              -0.020299997180700302,
+              0.0021999995224177837
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.020299997180700392,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0200005926770275e-05,
+          "area_weighted_center_m": [
+            0.0075000020299823954,
+            -1.2997947955149378e-09,
+            0.06440000167859108
+          ],
+          "xy_bounds_m": [
+            [
+              0.0052999998442828655,
+              -0.0022000018507242203
+            ],
+            [
+              0.00970000121742487,
+              0.0021999969612807035
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.0052999998442837684,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0200005796253304e-05,
+          "area_weighted_center_m": [
+            0.03749999937944739,
+            1.7936469002174562e-09,
+            0.06440000201946817
+          ],
+          "xy_bounds_m": [
+            [
+              0.03530000150203705,
+              -0.0021999969612807035
+            ],
+            [
+              0.03970000147819519,
+              0.0022000018507242203
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.035300001502037055,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0200005136728286e-05,
+          "area_weighted_center_m": [
+            0.022499999313474774,
+            1.1804966239794826e-10,
+            0.06440000180033205
+          ],
+          "xy_bounds_m": [
+            [
+              0.02029999904334545,
+              -0.0022000030148774385
+            ],
+            [
+              0.024699999019503593,
+              0.002200003247708082
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.020299999043345535,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0200000069974497e-05,
+          "area_weighted_center_m": [
+            0.06750000161723012,
+            -8.99474430105939e-10,
+            0.06440000071683179
+          ],
+          "xy_bounds_m": [
+            [
+              0.06530000269412994,
+              -0.00219999928958714
+            ],
+            [
+              0.06970000267028809,
+              0.00219999928958714
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.06530000269412997,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0199996036733457e-05,
+          "area_weighted_center_m": [
+            -0.05250000060812406,
+            2.9886206088571304e-09,
+            0.06440000167859233
+          ],
+          "xy_bounds_m": [
+            [
+              -0.05469999834895134,
+              -0.0021999969612807035
+            ],
+            [
+              -0.050300002098083496,
+              0.0022000018507242203
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.050300002098083586,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.019999599295589e-05,
+          "area_weighted_center_m": [
+            -0.007499999517378447,
+            3.7629355725275667e-10,
+            0.0644000012403212
+          ],
+          "xy_bounds_m": [
+            [
+              -0.00969999935477972,
+              -0.002200000686571002
+            ],
+            [
+              -0.005299998447299004,
+              0.002199998125433922
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.005299998447299046,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0199994396532022e-05,
+          "area_weighted_center_m": [
+            -0.0375000008520506,
+            -3.6548964915539146e-10,
+            0.06440000236034395
+          ],
+          "xy_bounds_m": [
+            [
+              -0.03969999775290489,
+              -0.002199998125433922
+            ],
+            [
+              -0.03530000150203705,
+              0.002200000686571002
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.03530000150203719,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 24,
+          "surface_area_m2": 1.0199991426305378e-05,
+          "area_weighted_center_m": [
+            0.05249999921544465,
+            1.240957810657083e-10,
+            0.06440000049769924
+          ],
+          "xy_bounds_m": [
+            [
+              0.050300002098083496,
+              -0.002199998125433922
+            ],
+            [
+              0.05469999834895134,
+              0.002200000686571002
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.0503000020980835,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 24,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.0668,
+      "face_count": 180,
+      "surface_area_m2": 0.0008084810265299994,
+      "area_weighted_center_m": [
+        1.431088776377621e-09,
+        -4.2538688250030764e-10,
+        0.06679999828338626
+      ],
+      "xy_bounds_m": [
+        [
+          -0.07250000536441803,
+          -0.0033000025432556868
+        ],
+        [
+          0.07249999791383743,
+          0.003300003008916974
+        ]
+      ],
+      "axis_to_surface_distance_m": 0,
+      "axis_is_on_surface": true,
+      "normal_z_counts": {
+        "positive": 180,
+        "negative": 0
+      },
+      "connected_component_count": 1,
+      "largest_components": [
+        {
+          "face_count": 180,
+          "surface_area_m2": 0.0008084810265299994,
+          "area_weighted_center_m": [
+            1.431088777327085e-09,
+            -4.2538688262998925e-10,
+            0.06679999828338622
+          ],
+          "xy_bounds_m": [
+            [
+              -0.07250000536441803,
+              -0.0033000025432556868
+            ],
+            [
+              0.07249999791383743,
+              0.003300003008916974
+            ]
+          ],
+          "axis_to_surface_distance_m": 0,
+          "axis_is_on_surface": true,
+          "normal_z_counts": {
+            "positive": 180,
+            "negative": 0
+          }
+        }
+      ]
+    },
+    {
+      "z_m": 0.067,
+      "face_count": 40,
+      "surface_area_m2": 0.000249596982160454,
+      "area_weighted_center_m": [
+        -1.965683957564048e-09,
+        -3.405483916156957e-10,
+        0.06700000166893005
+      ],
+      "xy_bounds_m": [
+        [
+          -0.07200000435113907,
+          -0.010000000707805157
+        ],
+        [
+          0.07200000435113907,
+          0.010000001639127731
+        ]
+      ],
+      "axis_to_surface_distance_m": 0.06225016372554686,
+      "axis_is_on_surface": false,
+      "normal_z_counts": {
+        "positive": 40,
+        "negative": 0
+      },
+      "connected_component_count": 4,
+      "largest_components": [
+        {
+          "face_count": 10,
+          "surface_area_m2": 6.246070264223809e-05,
+          "area_weighted_center_m": [
+            -0.06714017142926285,
+            0.006659214526974007,
+            0.06700000166893007
+          ],
+          "xy_bounds_m": [
+            [
+              -0.07200000435113907,
+              0.003499999875202775
+            ],
+            [
+              -0.06200000271201134,
+              0.010000001639127731
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.06225016762864768,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 10,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 10,
+          "surface_area_m2": 6.246070222781092e-05,
+          "area_weighted_center_m": [
+            0.06714016936149879,
+            -0.006659214787504947,
+            0.06700000166893004
+          ],
+          "xy_bounds_m": [
+            [
+              0.06199999898672104,
+              -0.010000000707805157
+            ],
+            [
+              0.07200000435113907,
+              -0.0034999989438802004
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.062250166433759156,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 10,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 10,
+          "surface_area_m2": 6.233779079239943e-05,
+          "area_weighted_center_m": [
+            -0.06715020008465077,
+            -0.006655013250515364,
+            0.06700000166893004
+          ],
+          "xy_bounds_m": [
+            [
+              -0.07200000435113907,
+              -0.009999999776482582
+            ],
+            [
+              -0.06199999526143074,
+              -0.0034999989438802004
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.06225016372554686,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 10,
+            "negative": 0
+          }
+        },
+        {
+          "face_count": 10,
+          "surface_area_m2": 6.23377864980056e-05,
+          "area_weighted_center_m": [
+            0.06715019935827474,
+            0.006655012562210255,
+            0.06700000166893004
+          ],
+          "xy_bounds_m": [
+            [
+              0.06199999898672104,
+              0.00349999638274312
+            ],
+            [
+              0.07200000435113907,
+              0.010000000707805157
+            ]
+          ],
+          "axis_to_surface_distance_m": 0.06225016601281632,
+          "axis_is_on_surface": false,
+          "normal_z_counts": {
+            "positive": 10,
+            "negative": 0
+          }
+        }
+      ]
+    }
+  ],
+  "ep1952_projection": {
+    "video": "[external artifact path omitted]",
+    "final_parquet": "[external artifact path omitted]",
+    "intrinsic_and_right_base_source": "[external artifact path omitted]",
+    "camera_override_source": "[external artifact path omitted]",
+    "policy": "retain episode 216 K/B; replace only isolated camera extrinsic with E217",
+    "candidate_pixel_separations": {
+      "j6_origin_to_visual_flange_candidate_z56": {
+        "all_arms": {
+          "count": 476,
+          "median_px": 73.37830352783203,
+          "p95_px": 105.94250106811523,
+          "max_px": 166.48109436035156
+        },
+        "left": {
+          "count": 201,
+          "median_px": 72.54104614257812,
+          "p95_px": 109.64604949951172,
+          "max_px": 166.48109436035156
+        },
+        "right": {
+          "count": 275,
+          "median_px": 74.37116241455078,
+          "p95_px": 101.0153678894043,
+          "max_px": 142.3712615966797
+        }
+      },
+      "inner_shoulder_z53_to_visual_flange_candidate_z56": {
+        "all_arms": {
+          "count": 570,
+          "median_px": 3.680158853530884,
+          "p95_px": 6.359945011138915,
+          "max_px": 11.063064575195312
+        },
+        "left": {
+          "count": 261,
+          "median_px": 3.7288708686828613,
+          "p95_px": 6.779857635498047,
+          "max_px": 11.063064575195312
+        },
+        "right": {
+          "count": 309,
+          "median_px": 3.626710891723633,
+          "p95_px": 5.463629436492914,
+          "max_px": 9.756937026977539
+        }
+      },
+      "visual_flange_candidate_z56_to_distal_fingertip_end_face_midpoint": {
+        "all_arms": {
+          "count": 551,
+          "median_px": 14.456830024719238,
+          "p95_px": 24.653724670410156,
+          "max_px": 42.209564208984375
+        },
+        "left": {
+          "count": 243,
+          "median_px": 14.672557830810547,
+          "p95_px": 26.56690311431884,
+          "max_px": 42.209564208984375
+        },
+        "right": {
+          "count": 308,
+          "median_px": 14.142322540283203,
+          "p95_px": 21.17779731750487,
+          "max_px": 37.08500671386719
+        }
+      },
+      "rejected_disjoint_caps_z67_to_distal_fingertip_end_face_midpoint": {
+        "all_arms": {
+          "count": 689,
+          "median_px": 1.208846092224121,
+          "p95_px": 2.240882635116577,
+          "max_px": 3.8354241847991943
+        },
+        "left": {
+          "count": 358,
+          "median_px": 1.6173532009124756,
+          "p95_px": 2.2414581775665283,
+          "max_px": 3.8354241847991943
+        },
+        "right": {
+          "count": 331,
+          "median_px": 1.1188485622406006,
+          "p95_px": 1.7201789617538452,
+          "max_px": 2.9244909286499023
+        }
+      },
+      "distal_fingertip_end_face_midpoint_to_legacy_finger_joint_root": {
+        "all_arms": {
+          "count": 684,
+          "median_px": 74.92463684082031,
+          "p95_px": 128.67376708984375,
+          "max_px": 215.77044677734375
+        },
+        "left": {
+          "count": 354,
+          "median_px": 95.42762756347656,
+          "p95_px": 128.70921325683594,
+          "max_px": 215.77044677734375
+        },
+        "right": {
+          "count": 330,
+          "median_px": 69.3375015258789,
+          "p95_px": 104.70334701538086,
+          "max_px": 164.1958465576172
+        }
+      }
+    },
+    "artifacts": {
+      "npz": "[external artifact path omitted]",
+      "npz_sha256": "b1ec7575416b04a535094f52dba530c5aaebe96b6342104bbed975f1179ba2ba",
+      "video": "[external artifact path omitted]",
+      "contact_sheet": "[external artifact path omitted]",
+      "frames": 1152,
+      "fps": 30,
+      "codec": "h264/yuv420p",
+      "video_sha256": "986e0e7ac432dcf20c1e534a491e381dda9a29a992186608430c2521cbdc77f8",
+      "contact_sheet_sha256": "4df31ff092ddab93e883cb524f3c6bc79d4e17bd9c8dc87490683f02c0b7b3f2"
+    }
+  },
+  "visual_artifacts": {
+    "plane_atlas": "[external artifact path omitted]",
+    "plane_atlas_sha256": "48ddc8f6db90825d11a71a21e71e96de41c0b48d6b1e44a46c56a96c6ccdb4e5",
+    "three_dimensional_evidence": "[external artifact path omitted]",
+    "three_dimensional_evidence_sha256": "9de45b7131ad82a2a4b1146d8212a684f62d5b4830251fe3508bf188862177a8"
+  }
+}

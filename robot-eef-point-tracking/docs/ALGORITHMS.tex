@@ -1,0 +1,125 @@
+% Requires: \usepackage{algorithm,algpseudocode,amsmath,amssymb}
+% The notation is intentionally independent of filesystem paths and robot names.
+
+\begin{algorithm}[t]
+\caption{Calibrated Main-View End-Effector Geometry}
+\label{alg:calibrated-eef-geometry}
+\begin{algorithmic}[1]
+\Require Episode metadata $e$; state sequence $S_{0:T-1}$; main-view video
+$V$; camera intrinsic matrix $K$; reference-to-camera transform
+$E_{c\leftarrow\mathrm{ref}}$; per-arm native-base-to-reference transforms
+$\{M^i_{\mathrm{ref}\leftarrow b_i}\}_{i\in\mathcal{A}}$; operation mask
+$m^{\mathrm{op}}$; arm-local point offsets $\delta_{\mathrm{J6}}=\mathbf{0}$ and
+$\delta_{\mathrm{vis}}$; arm set $\mathcal{A}=\{\mathrm{left},\mathrm{right}\}$
+\Ensure Geometric coordinates $P^{\mathrm{J6}}_{0:T-1}$,
+$P^{\mathrm{vis}}_{0:T-1}$; operation-conditioned geometric-validity mask
+$g_{0:T-1}$; provenance record $\mathcal{R}$
+\Statex \textbf{Notation:} $h(y)=[y^\mathsf{T},1]^\mathsf{T}$, and
+$\operatorname{xyz}([X,Y,Z,w]^\mathsf{T})=[X,Y,Z]^\mathsf{T}$ for rigid transforms
+\State $\mathcal{R}\gets\textsc{InitializeProvenance}(e)$
+\State $\mathcal{R}\gets\mathcal{R}\cup
+\textsc{ValidateCalibration}(K,E_{c\leftarrow\mathrm{ref}},
+\{M^i_{\mathrm{ref}\leftarrow b_i}\})$
+\For{$t=0,\ldots,T-1$}
+    \For{$i\in\mathcal{A}$}
+        \State $(x^i_t,R^i_t)\gets\textsc{DecodeState}(S_t,i)$
+        \State $p^{i,\mathrm{J6}}_t\gets
+        M^i_{\mathrm{ref}\leftarrow b_i}\,h(x^i_t+R^i_t\delta_{\mathrm{J6}})$
+        \State $p^{i,\mathrm{vis}}_t\gets
+        M^i_{\mathrm{ref}\leftarrow b_i}\,h(x^i_t+R^i_t\delta_{\mathrm{vis}})$
+        \State $c^{i,\mathrm{J6}}_t\gets
+        \operatorname{xyz}(E_{c\leftarrow\mathrm{ref}}\,p^{i,\mathrm{J6}}_t)$
+        \State $c^{i,\mathrm{vis}}_t\gets
+        \operatorname{xyz}(E_{c\leftarrow\mathrm{ref}}\,p^{i,\mathrm{vis}}_t)$
+        \State $P^{i,\mathrm{J6}}_t\gets\pi_K(c^{i,\mathrm{J6}}_t)$ and
+        $P^{i,\mathrm{vis}}_t\gets\pi_K(c^{i,\mathrm{vis}}_t)$
+        \Statex \hspace{\algorithmicindent}where
+        $\pi_K([X,Y,Z]^\mathsf{T})=[f_xX/Z+c_x,\ f_yY/Z+c_y]^\mathsf{T}$
+        \State $g^i_t\gets\mathbb{1}[(c^{i,\mathrm{vis}}_t)_z>0]\cdot
+        \mathbb{1}[P^{i,\mathrm{vis}}_t\in[0,W)\times[0,H)]\cdot m^{\mathrm{op}}_t$
+    \EndFor
+\EndFor
+\State $\mathcal{R}\gets\mathcal{R}\cup
+\textsc{HashInputsAndMatrices}(S,V,K,E_{c\leftarrow\mathrm{ref}},
+\{M^i_{\mathrm{ref}\leftarrow b_i}\})$
+\State \Return $P^{\mathrm{J6}},P^{\mathrm{vis}},g,\mathcal{R}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{Appearance-Gated Visibility for the Geometric End-Effector Track}
+\label{alg:dino-eef-visibility}
+\begin{algorithmic}[1]
+\Require Main-view video $V$; geometric point sequence $P^{\mathrm{vis}}$;
+operation-conditioned geometric mask $g$; positive prototypes $\mathcal{Q}^{+}$; negative prototypes
+$\mathcal{Q}^{-}$; DINOv2 encoder $\Phi$; stride $s$; thresholds
+$\eta_{\mathrm{in}}>\eta_{\mathrm{out}}$; morphology parameters
+$(\gamma_{\mathrm{gap}},\gamma_{\mathrm{run}})$; arm set
+$\mathcal{A}=\{\mathrm{left},\mathrm{right}\}$
+\Ensure Visibility mask $z_{0:T-1}$; visible-only coordinates
+$\widetilde P_{0:T-1}$; quality mask $q_{0:T-1}$
+\State $U^{+}\gets\textsc{EncodePrototypeTokens}(\Phi,\mathcal{Q}^{+})$
+\State $U^{-}\gets\textsc{EncodePrototypeTokens}(\Phi,\mathcal{Q}^{-})$
+\State $\mathcal{I}\gets\{0,s,2s,\ldots\}\cap\{0,\ldots,T-1\}$
+\For{$t\in\mathcal{I}$}
+    \State $F_t\gets\Phi(V_t)$
+    \For{$i\in\mathcal{A}$}
+        \If{$g^i_t=1$}
+            \State $f^i_t\gets\textsc{ExactToken}(F_t,P^{i,\mathrm{vis}}_t)$
+            \State $\alpha^i_t\gets\max_{u\in U^{+}}\cos(f^i_t,u)$
+            \State $\beta^i_t\gets\max_{v\in U^{-}}\cos(f^i_t,v)$
+            \State $\mu^i_t\gets\alpha^i_t-\beta^i_t$
+        \Else
+            \State $\mu^i_t\gets\mathrm{NaN}$
+        \EndIf
+    \EndFor
+\EndFor
+\State $\bar\mu\gets\textsc{SegmentLocalInterpolation}(\mu,g)$
+\State $z\gets\textsc{Hysteresis}(\bar\mu,g,\eta_{\mathrm{in}},\eta_{\mathrm{out}})$
+\State $z\gets\textsc{Morphology}(z,g,\gamma_{\mathrm{gap}},\gamma_{\mathrm{run}})$
+\For{$t=0,\ldots,T-1$}
+    \For{$i\in\mathcal{A}$}
+        \State $\widetilde P^i_t\gets P^{i,\mathrm{vis}}_t$ if $z^i_t=1$, else $\mathrm{NaN}$
+        \State $q^i_t\gets
+        \begin{cases}
+        1,&z^i_t=1,\\
+        2,&g^i_t=1\land z^i_t=0,\\
+        0,&\text{otherwise}
+        \end{cases}$
+    \EndFor
+\EndFor
+\State \Return $z,\widetilde P,q$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{End-to-End Geometry-Guided Visibility-Aware Label Generation}
+\label{alg:eef-labeling}
+\begin{algorithmic}[1]
+\Require Dataset episodes $\mathcal{D}$; calibration registry $\mathcal{C}$;
+output root $\mathcal{O}$; arm set $\mathcal{A}=\{\mathrm{left},\mathrm{right}\}$
+\Require Point contract $\Delta$; visibility configuration
+$\Theta_{\mathrm{vis}}=(\Phi,\mathcal{Q}^{+},\mathcal{Q}^{-},s,
+\eta_{\mathrm{in}},\eta_{\mathrm{out}},\gamma_{\mathrm{gap}},
+\gamma_{\mathrm{run}})$
+\Ensure Atomic per-episode NPZ/report pairs and a validated manifest
+\ForAll{episode $e\in\mathcal{D}$ in parallel}
+    \State $S^e,V^e\gets\textsc{ReadEpisode}(e)$
+    \State $(K^e,E^e,\{M^{i,e}\},m^{\mathrm{op},e})\gets
+    \textsc{ResolveCalibration}(e,\mathcal{C})$
+    \State $(P^{\mathrm{J6},e},P^{\mathrm{vis},e},g^e,\mathcal{R}^e)\gets$
+    \textsc{CalibratedMainViewGeometry}$(e,S^e,V^e,K^e,E^e,
+    \{M^{i,e}\},m^{\mathrm{op},e},\Delta)$
+    \State $(z^e,\widetilde P^e,q^e)\gets$
+    \textsc{AppearanceGatedVisibility}$(V^e,P^{\mathrm{vis},e},g^e,
+    \Theta_{\mathrm{vis}})$
+    \State $A^e\gets\textsc{AssembleArrays}(P^{\mathrm{J6},e},P^{\mathrm{vis},e},
+    \widetilde P^e,g^e,z^e,q^e,\mathcal{R}^e)$
+    \State $\textsc{AtomicWrite}(\mathcal{O}/\mathrm{NPZ}_e,
+    \mathcal{O}/\mathrm{Report}_e,A^e)$
+\EndFor
+\State $\mathcal{M}\gets
+\textsc{ValidateAll}(\mathcal{D},\mathrm{NPZ},\mathrm{Reports})$
+\State \Return validated manifest $\mathcal{M}$
+\end{algorithmic}
+\end{algorithm}

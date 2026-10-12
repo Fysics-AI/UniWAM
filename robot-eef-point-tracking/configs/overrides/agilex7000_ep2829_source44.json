@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "override_version": "agilex7000-ep2829-source44-eb-v1",
+  "status": "validated",
+  "calibration_method": "episode_level_video_mesh_holdout_override",
+  "dataset": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed",
+  "final_episode_index": 2829,
+  "source_episode_index": 46,
+  "source_root": "External AGILEX7000 dataset source (path omitted)",
+  "fields": [
+    "camera_front_in_arm_left_base",
+    "arm_right_base_in_arm_left_base"
+  ],
+  "field": "camera_front_in_arm_left_base+arm_right_base_in_arm_left_base",
+  "matrix_policy": "replace E and B as a coupled tuple; retain target K after exact K equality check",
+  "replacement_source_episode_index": 44,
+  "target_source_parquet": "External source calibration episode 46; target matrices are verified against the input episode",
+  "target_source_parquet_sha256": "0d83e36ad85e61e2855eabd0d92cedcdb92e7f36feff5b1f58dc22f633f85605",
+  "replacement_source_parquet": "External source calibration episode 44 (matrices embedded in this package)",
+  "replacement_source_parquet_sha256": "11de1519f58c5ca7ede37b621b7de1ec768f6c791655823a574ce7ec68828f4f",
+  "intrinsic_policy": {
+    "action": "retain_target_K",
+    "require_replacement_K_exact_match": true,
+    "target_K_signature": "42fbb0caddb784d6abd56fe58baf4fdaffb75be4e8d3c42cb9ad506577fe82ac",
+    "replacement_K_signature": "42fbb0caddb784d6abd56fe58baf4fdaffb75be4e8d3c42cb9ad506577fe82ac",
+    "K_raw_f64_c_order_sha256": "dc797541aacb68810cbc556702388417f8e51280d1d2e9badc77a1c2d593a9d9"
+  },
+  "expected_intrinsic": [
+    [
+      911.7947998046875,
+      0,
+      660.689453125
+    ],
+    [
+      0,
+      911.5820922851562,
+      373.1520080566406
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "expected_original_camera_to_left_base": [
+    [
+      0.39356347918510437,
+      -0.6638085246086121,
+      0.6359764337539673,
+      0.13721638917922974
+    ],
+    [
+      -0.9188434481620789,
+      -0.305783748626709,
+      0.2494453638792038,
+      -0.28148993849754333
+    ],
+    [
+      0.028887301683425903,
+      -0.6825353503227234,
+      -0.7302814722061157,
+      0.5417765378952026
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "expected_original_right_base_to_left_base": [
+    [
+      0.9020273685455322,
+      -0.4315815269947052,
+      0.009164571762084961,
+      0.24145708978176117
+    ],
+    [
+      0.43072372674942017,
+      0.9012402296066284,
+      0.04736160859465599,
+      -0.5639533400535583
+    ],
+    [
+      -0.028699876740574837,
+      -0.038774069398641586,
+      0.9988357424736023,
+      0.025225423276424408
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "camera_to_left_base": [
+    [
+      -0.017565375193953514,
+      -0.7108759880065918,
+      0.703097939491272,
+      0.0061127794906497
+    ],
+    [
+      -0.9985923767089844,
+      -0.022726016119122505,
+      -0.047925084829330444,
+      -0.30310341715812683
+    ],
+    [
+      0.050047408789396286,
+      -0.7029500603675842,
+      -0.7094761729240417,
+      0.531348705291748
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "right_base_to_left_base": [
+    [
+      0.9999852776527405,
+      -0.0016707245958968997,
+      -0.005163081455975771,
+      0.007767347618937492
+    ],
+    [
+      0.0018211392452940345,
+      0.9995699524879456,
+      0.029266677796840668,
+      -0.6141039729118347
+    ],
+    [
+      0.005111964885145426,
+      -0.029275650158524513,
+      0.9995583295822144,
+      0.01211130153387785
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "matrix_signatures": {
+    "original": {
+      "K": "42fbb0caddb784d6abd56fe58baf4fdaffb75be4e8d3c42cb9ad506577fe82ac",
+      "E": "51ce334b01b60cddf9a7ef6ddfd4c8330c5c3cd49ba61d8ce49468a2844b2d12",
+      "B": "5c462fa582baf1b134a9e43afa1cc3f9875ca15a918af8cf1b2083465536d6ee",
+      "combined": "ac78bb0539413d3c3fc1c093533201ed51d0e16c7003327e9941b94ebabfe9a4"
+    },
+    "replacement": {
+      "K": "42fbb0caddb784d6abd56fe58baf4fdaffb75be4e8d3c42cb9ad506577fe82ac",
+      "E": "b6f29c95c77b84d90685853839ae0271434a2a236bf2392b45e1424ce1be25e8",
+      "B": "f505d690598edbd388bbd4a093287fea8d6e859779b60ca0df68d84cb4ac3383",
+      "combined": "8cdff61c87d7b4f8b02a40f923309e53068f31b02a3d3945122d29a4eb46ebc0"
+    }
+  },
+  "matrix_raw_f64_c_order_sha256": {
+    "original_E": "2b713268744b9f3c1a4fd278f4a6b9c97f9e9abc5b36c20a59e8ce3f4be24ece",
+    "original_B": "c478da474f0f0c4f5eda6bf765ff67fb7105f2bd375aaf4687842f41d2dc1d33",
+    "replacement_E": "b3d2236368baf4d59e161a91c96c60cb488a48acead179c237c63da833bc8a66",
+    "replacement_B": "b8d4865de18952a44ce32afc27240fb84ee2c6ba3448c22b3a614a41c02157e4"
+  },
+  "target_matrix_sha256": {
+    "camera_intrinsics.camera_front": "dc797541aacb68810cbc556702388417f8e51280d1d2e9badc77a1c2d593a9d9",
+    "camera_front_in_arm_left_base": "2b713268744b9f3c1a4fd278f4a6b9c97f9e9abc5b36c20a59e8ce3f4be24ece",
+    "arm_right_base_in_arm_left_base": "c478da474f0f0c4f5eda6bf765ff67fb7105f2bd375aaf4687842f41d2dc1d33"
+  },
+  "replacement_matrix_sha256": {
+    "camera_intrinsics.camera_front": "dc797541aacb68810cbc556702388417f8e51280d1d2e9badc77a1c2d593a9d9",
+    "camera_front_in_arm_left_base": "b3d2236368baf4d59e161a91c96c60cb488a48acead179c237c63da833bc8a66",
+    "arm_right_base_in_arm_left_base": "b8d4865de18952a44ce32afc27240fb84ee2c6ba3448c22b3a614a41c02157e4"
+  },
+  "evidence": {
+    "report_sha256": "fd8d8126f1d97e6420bd4109a3b153f04720750a0c0c04dba5c097da38865213",
+    "decision": "E44/B44 aligns both robot meshes; E44 with target B46 moves the right arm by about 100 pixels, so E and B must be replaced as a coupled tuple"
+  },
+  "decision": {
+    "scope": "single final episode 2829",
+    "replace_E": true,
+    "replace_B": true,
+    "replace_K": false,
+    "per_frame_switching": false,
+    "confidence": "high",
+    "reason": "E44/B44 aligns both robot meshes; E44 with target B46 moves the right arm by about 100 pixels, so E and B must be replaced as a coupled tuple"
+  },
+  "portable_release_calibration": {
+    "intrinsic": [
+      [
+        911.7947998046875,
+        0,
+        660.689453125
+      ],
+      [
+        0,
+        911.5820922851562,
+        373.1520080566406
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "right_base_to_left_base": [
+      [
+        0.9999852776527405,
+        -0.0016707245958968997,
+        -0.005163081455975771,
+        0.007767347618937492
+      ],
+      [
+        0.0018211392452940345,
+        0.9995699524879456,
+        0.029266677796840668,
+        -0.6141039729118347
+      ],
+      [
+        0.005111964885145426,
+        -0.029275650158524513,
+        0.9995583295822144,
+        0.01211130153387785
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "evidence_file": "assets/ep2829_calibration_override_evidence.json",
+    "evidence_sha256": "fd8d8126f1d97e6420bd4109a3b153f04720750a0c0c04dba5c097da38865213"
+  }
+}

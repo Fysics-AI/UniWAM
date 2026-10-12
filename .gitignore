@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+outputs/
+.cache/
+*.log
+checkpoints/
+
+third_party/
+training/runs/
+
+runs/
+.pytest_cache/

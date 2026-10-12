@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "algorithm": "ep2829-calibration-association-audit-v1",
+  "scope": {
+    "final_episode_index": 2829,
+    "source_episode_index": 46,
+    "replacement_source_episode_index": 44
+  },
+  "identity_check": {
+    "video_bytes_identical": true,
+    "state_frames": 612,
+    "video_frames": 612,
+    "source_frame_index_equals_final_frame_index": true
+  },
+  "time_alignment": {
+    "definition": "video frame f scored against state frame f+delta",
+    "searched_delta_frames": [
+      -15,
+      15
+    ],
+    "best_by_hit_rate": {
+      "delta": -1,
+      "frames": 31,
+      "median": 0.4640216982641189,
+      "p90": 0.4808909844372491,
+      "hit": 0.7798647240893914,
+      "left_median": 0.4608622363381017,
+      "right_median": 0.47419889722455977
+    },
+    "delta_zero": {
+      "delta": 0,
+      "frames": 31,
+      "median": 0.46784154576624426,
+      "p90": 0.48547998912996787,
+      "hit": 0.7776106099440149,
+      "left_median": 0.4573173665862547,
+      "right_median": 0.47468282387697597
+    },
+    "delta_minus_one": {
+      "delta": -1,
+      "frames": 31,
+      "median": 0.4640216982641189,
+      "p90": 0.4808909844372491,
+      "hit": 0.7798647240893914,
+      "left_median": 0.4608622363381017,
+      "right_median": 0.47419889722455977
+    },
+    "decision": "no material temporal offset; delta -1 is marginal and source/final indices are exact"
+  },
+  "decision": {
+    "label": "high_confidence_override",
+    "scope": "final episode 2829 only",
+    "replace_E": true,
+    "replace_B": true,
+    "replace_K": false,
+    "episode_level_fixed_calibration": true,
+    "per_frame_switching": false,
+    "reason": "candidate E44/B44 aligns both arm meshes throughout the visible interval; current E46 shifts the left arm, and replacing E without coupled B shifts the right arm by about 100 px"
+  },
+  "hybrid_candidate_scores": {
+    "current_E46_B46": {
+      "valid_sample_frames": 22,
+      "median_nearest_dark_px": 7.68538006950245,
+      "p90_nearest_dark_px": 15.593078300976192,
+      "hit_rate_5px": 0.4979988460441671,
+      "arm_aggregate": {
+        "left": {
+          "median_nearest_dark_px": 22.070353229394147,
+          "hit_rate_5px": 0.2606995906050907
+        },
+        "right": {
+          "median_nearest_dark_px": 0.4860739190409994,
+          "hit_rate_5px": 0.7116653487395399
+        }
+      },
+      "frames_with_valid_arm": {
+        "left": 21,
+        "right": 22
+      }
+    },
+    "low_E44_B44": {
+      "valid_sample_frames": 22,
+      "median_nearest_dark_px": 0.46571175647475704,
+      "p90_nearest_dark_px": 0.4815389764730731,
+      "hit_rate_5px": 0.7869931414325009,
+      "arm_aggregate": {
+        "left": {
+          "median_nearest_dark_px": 0.4534450164129987,
+          "hit_rate_5px": 0.8297213086186052
+        },
+        "right": {
+          "median_nearest_dark_px": 0.4747542767082852,
+          "hit_rate_5px": 0.7607857902168879
+        }
+      },
+      "frames_with_valid_arm": {
+        "left": 16,
+        "right": 22
+      }
+    },
+    "lowE44_targetB46": {
+      "valid_sample_frames": 41,
+      "median_nearest_dark_px": 103.19954345982924,
+      "p90_nearest_dark_px": 212.8073703343453,
+      "hit_rate_5px": 0.14553771059589987,
+      "arm_aggregate": {
+        "left": {
+          "median_nearest_dark_px": 0.4534450164129987,
+          "hit_rate_5px": 0.8297213086186052
+        },
+        "right": {
+          "median_nearest_dark_px": 103.19954345982924,
+          "hit_rate_5px": 0.013358587235924308
+        }
+      },
+      "frames_with_valid_arm": {
+        "left": 16,
+        "right": 41
+      }
+    },
+    "targetE46_lowB44": {
+      "valid_sample_frames": 21,
+      "median_nearest_dark_px": 22.28942076615172,
+      "p90_nearest_dark_px": 39.65164450274051,
+      "hit_rate_5px": 0.241934523565608,
+      "arm_aggregate": {
+        "left": {
+          "median_nearest_dark_px": 22.070353229394147,
+          "hit_rate_5px": 0.2606995906050907
+        },
+        "right": {
+          "median_nearest_dark_px": 80.5463653369669,
+          "hit_rate_5px": 0.05646723686174231
+        }
+      },
+      "frames_with_valid_arm": {
+        "left": 21,
+        "right": 4
+      }
+    }
+  }
+}

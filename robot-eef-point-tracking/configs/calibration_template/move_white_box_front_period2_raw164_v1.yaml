@@ -1,0 +1,203 @@
+calibration_id: move_white_box_front_period2_raw164_v1
+status: CAMERA_CALIBRATION_UNIT_VALIDATED
+created_date: '2026-08-15'
+dataset:
+  source_root: '[external data path omitted]'
+  source_open_mode: read-only
+  source_episode_indices:
+  - 102
+  - 103
+  - 104
+  - 105
+  - 106
+  - 107
+  - 108
+  - 109
+  - 110
+  - 111
+  - 112
+  - 113
+  - 114
+  - 115
+  - 116
+  - 117
+  - 118
+  - 119
+  - 120
+  - 121
+  - 122
+  - 123
+  - 124
+  - 125
+  - 126
+  - 127
+  - 128
+  - 129
+  - 130
+  - 131
+  - 132
+  - 133
+  - 134
+  - 135
+  - 136
+  - 137
+  - 138
+  - 139
+  - 140
+  - 141
+  - 142
+  - 143
+  - 144
+  - 145
+  - 146
+  - 147
+  - 148
+  - 149
+  - 150
+  - 151
+  - 152
+  - 153
+  - 154
+  - 155
+  - 156
+  - 157
+  - 158
+  - 159
+  - 160
+  - 161
+  - 162
+  - 163
+  - 164
+  - 165
+  - 166
+  - 167
+  - 168
+  - 169
+  - 170
+  - 171
+  - 172
+  - 173
+  - 174
+  - 175
+  - 176
+  - 177
+  - 178
+  - 179
+  - 180
+  - 181
+  - 182
+  - 183
+  - 184
+  - 185
+  - 186
+  - 187
+  - 188
+  - 189
+  - 190
+  - 191
+  - 192
+  - 193
+  - 194
+  - 195
+  - 196
+  - 197
+  - 199
+  - 200
+  - 201
+  - 202
+  - 203
+  - 204
+  - 205
+  - 206
+  - 207
+  - 208
+  - 209
+  - 210
+  - 211
+  - 212
+  - 213
+  - 214
+  - 215
+  - 216
+  - 217
+  - 218
+  - 219
+  - 220
+  - 221
+  - 222
+  - 223
+  - 224
+  - 225
+  - 226
+  - 227
+  - 228
+  source_episode_count: 126
+  camera_dataset: camera/color/front
+  image_size_wh:
+  - 424
+  - 240
+robot:
+  type: mobile_aloha
+  reference_frame: official Mobile Aloha URDF footprint
+  joint_contract: left [j1..j6, gripper] + right [j1..j6, gripper]
+  T_footprint_leftbase_translation_m:
+  - 0.23875
+  - 0.3
+  - 0.775
+  T_footprint_rightbase_translation_m:
+  - 0.23875
+  - -0.3
+  - 0.775
+  arm_mount_rotations: identity
+intrinsic:
+  source: inherited validated cup-tray estimate; raw intrinsic fields are empty
+  factory_calibrated: false
+  distortion: unknown; zero assumed by calibration
+  matrix:
+  - - 319.7062134742737
+    - 0.0
+    - 212.0
+  - - 0.0
+    - 319.7062110900879
+    - 120.0
+  - - 0.0
+    - 0.0
+    - 1.0
+extrinsic:
+  direction: footprint_to_camera
+  notation: T_footprint_camera
+  source: action-map coarse then CalibAll differentiable rendering refinement
+  matrix:
+  - - 0.06533288955688477
+    - -0.9976222515106201
+    - 0.02194318175315857
+    - -0.041764289140701294
+  - - -0.6904987096786499
+    - -0.0610731840133667
+    - -0.7207508683204651
+    - 1.1530492305755615
+  - - 0.7203772068023682
+    - 0.03193700313568115
+    - -0.6928470134735107
+    - 0.7820892333984375
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  camera_origin_in_footprint_m:
+  - 0.23550833017246475
+  - 0.0037778173706968232
+  - 1.373845865170881
+qa:
+  reference_raw_file_index: 164
+  reference_frames:
+  - 557
+  - 862
+  - 1253
+  reference_mask_iou_mean: 0.8782879521595439
+  heldout_raw_file_indices:
+  - 101
+  - 227
+  heldout_frames: 10
+  heldout_sam_candidate_minus_cup_mean_iou: 0.05070811570701202
+  mesh_j6_tcp_visual_gate: PASS

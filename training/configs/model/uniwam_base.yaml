@@ -1,0 +1,55 @@
+_target_: fastwam.runtime.create_fastwam_nav_causal_aux9
+model_id: Wan-AI/Wan2.2-TI2V-5B
+tokenizer_model_id: Wan-AI/Wan2.2-TI2V-5B
+tokenizer_max_len: 128
+load_text_encoder: false
+redirect_common_files: false
+mot_checkpoint_mixed_attn: false
+action_causal_local_window: 32
+action_dit_pretrained_path: null
+skip_dit_load_from_pretrain: false
+
+video_dit_config:
+  has_image_input: false
+  patch_size: [1, 2, 2]
+  in_dim: 48
+  hidden_dim: 3072
+  ffn_dim: 14336
+  freq_dim: 256
+  text_dim: 4096
+  out_dim: 48
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  eps: 1.0e-6
+  seperated_timestep: true
+  require_clip_embedding: false
+  require_vae_embedding: false
+  fuse_vae_embedding_in_latents: true
+  use_gradient_checkpointing: false
+  video_attention_mask_mode: first_frame_causal
+  action_conditioned: false
+  action_dim: 9
+  action_group_causal_mask_mode: group_diagonal
+
+action_dit_config:
+  action_dim: 9
+  hidden_dim: 1024
+  ffn_dim: 4096
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  text_dim: 4096
+  freq_dim: 256
+  eps: 1.0e-6
+  use_gradient_checkpointing: false
+
+video_scheduler: {train_shift: 5.0, infer_shift: 5.0, num_train_timesteps: 1000}
+action_scheduler: {train_shift: 5.0, infer_shift: 5.0, num_train_timesteps: 1000}
+loss:
+  lambda_video: 1.0
+  lambda_video_bbox: 0.0
+  lambda_action: 1.0
+  lambda_motion: 2.0
+  lambda_bbox: 1.0
+  lambda_navigable: 1.0

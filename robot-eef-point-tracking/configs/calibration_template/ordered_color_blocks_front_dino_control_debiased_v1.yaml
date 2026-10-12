@@ -1,0 +1,120 @@
+calibration_id: ordered_color_blocks_front_dino_control_debiased_v1
+status: CAMERA_CALIBRATION_UNIT_VALIDATED_HELDOUT_VISUAL
+created_date: '2026-09-01'
+calibration_method:
+  name: fixed_k_dino_pnp_known_e_control_debiased
+  initializer: color_blocks_front_period2_episode274_v1
+  fit_partition: six whole Ordered source episodes
+  heldout_partition: five disjoint whole Ordered source episodes
+  bias_control: eleven disjoint known-E Color period-2 target sources with eight reference
+    sources
+  naive_free_pnp: rejected
+evidence:
+  final_report: '[external data path omitted]'
+  ordered_dino_report: '[external data path omitted]'
+  ordered_cotracker_report: '[external data path omitted]'
+  known_e_control_dino_report: '[external data path omitted]'
+  known_e_control_cotracker_report: '[external data path omitted]'
+  raw_camera_audit: '[external data path omitted]'
+  heldout_dino_anchor_count: 14
+  heldout_cotracker_frame_count: 766
+dataset:
+  name: agx_ordered_color_blocks_rot6d_vlash_se2_h32_v2_action_current_v1
+  source_episode_range:
+  - 0
+  - 200
+  final_episode_count: 187
+  validation_sources: 11
+  train_heldout_sources:
+  - 6
+  - 5
+intrinsic:
+  source: identical raw front-camera K across all 187 Ordered episodes and Color period-2
+    reference
+  distortion:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  matrix:
+  - - 303.76654052734375
+    - 0.0
+    - 216.0852813720703
+  - - 0.0
+    - 303.7197570800781
+    - 125.72407531738281
+  - - 0.0
+    - 0.0
+    - 1.0
+extrinsic:
+  direction: footprint_to_camera
+  matrix:
+  - - -0.0015875893715705525
+    - -0.9997831029931743
+    - 0.02076599454220565
+    - -0.030025080259504157
+  - - -0.7004341196294823
+    - -0.013709281919066452
+    - -0.7135853835723764
+    - 1.1307346928875786
+  - - 0.7137152959120742
+    - -0.015678091676068207
+    - -0.7002604328551894
+    - 0.7901230997970029
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  initializer: color_blocks_front_period2_episode274_v1
+  refinement: fixed-K Ordered train-source DINO PnP minus known-E Color control PnP
+    bias
+validation:
+  dino_heldout:
+    count: 14
+    mean_px: 5.449533714631557
+    median_px: 4.858597148464698
+    p95_px: 9.423490972193772
+    max_px: 11.646457501132497
+  dino_heldout_left:
+    count: 7
+    mean_px: 5.4021184561074245
+    median_px: 4.792203694431448
+    p95_px: 10.29981909895766
+    max_px: 11.646457501132497
+  dino_heldout_right:
+    count: 7
+    mean_px: 5.49694897315569
+    median_px: 4.924990602497947
+    p95_px: 8.165279999983921
+    max_px: 8.22650899507292
+  dino_edge:
+    count: 6
+    mean_px: 5.499621316319087
+    median_px: 4.71383454519739
+    p95_px: 10.024722383172223
+    max_px: 11.12934657122241
+  cotracker_absolute_heldout:
+    count: 766
+    mean_px: 6.162012554863471
+    median_px: 5.478630991345826
+    p95_px: 11.97714039128143
+    max_px: 16.55631371590832
+  cotracker_motion_heldout:
+    count: 766
+    mean_px: 3.996287257797121
+    median_px: 2.265860062858363
+    p95_px: 12.576216308636813
+    max_px: 18.95924072351131
+  delta_from_initializer:
+    translation_mm: 17.966874392008176
+    translation_xyz_mm:
+    - -14.74252647888719
+    - -9.685021032527663
+    - 3.415677976186582
+    rotation_deg: 1.1159083694840473
+    rotation_vector_deg:
+    - -0.9028089932228148
+    - 0.622151132856382
+    - 0.2076424299753613
+  report: '[external path omitted]'

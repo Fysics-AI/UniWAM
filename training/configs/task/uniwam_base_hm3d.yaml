@@ -1,0 +1,36 @@
+# @package _global_
+# UniWAM-Base navigation training preset.
+defaults:
+  - /train
+  - _self_
+
+output_dir: ./runs/uniwam_base/${now:%Y%m%d_%H%M%S}
+batch_size: 32
+num_workers: 4
+prefetch_factor: 2
+persistent_workers: true
+dataloader_multiprocessing_context: spawn
+sampler_mode: local_window
+sampler_local_window: 640
+learning_rate: 1.0e-5
+weight_decay: 1.0e-2
+num_epochs: 100
+max_steps: 40000
+log_every: 10
+save_every: 0
+save_steps: [20000, 40000]
+save_training_state: false
+eval_every: 0
+eval_num_inference_steps: 10
+gradient_accumulation_steps: 1
+mixed_precision: bf16
+max_grad_norm: 1.0
+seed: 42
+resume: ${oc.env:UNIWAM_INIT_CHECKPOINT,null}
+wandb:
+  enabled: false
+  workspace: null
+  project: uniwam
+  name: uniwam_base
+  group: null
+  mode: offline

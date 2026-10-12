@@ -1,0 +1,92 @@
+profile_name: uniwam_camera_frame_h32_embodiment_stats_async
+project_root: ${oc.env:UNIWAM_TRAINING_ROOT}
+task: ${oc.env:UNIWAM_CLOUD_TASK,uniwam_camera_frame_six_source_manip26_embodiment_stats_200k}
+# Parent six-source checkpoint; source 4 uses the ordered-color contract.
+paired_source_index: 4
+checkpoint: null
+checkpoint_min_bytes: 12000000000
+dataset_stats: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/camera_frame_piper_agx_only_q01q99.json
+
+device: cuda:0
+mixed_precision: bf16
+action_horizon: 32
+replan_steps: 20
+num_inference_steps: 10
+compile_action_infer: true
+compile_vae_infer: true
+sigma_shift: null
+seed: 43
+rand_device: cpu
+inference_mode: manip_only
+control_hz: 30.0
+prefix_steps: 12
+min_prefix_steps: 6
+listen_host: 0.0.0.0
+listen_port: 8039
+socket_timeout_s: 120.0
+
+instruction_prefix_by_mode:
+  manip_only: "Two black Piper arms are mounted on the near edge of a mobile AgileX platform. A fixed D435 main camera above and between the arms looks forward in their reaching direction, away from the robot; two D435 wrist views are shown. Express dual-arm end-effector states and actions in this fixed camera frame."
+  nav_only: "Two black Piper arms are mounted on a mobile AgileX platform. A front D455 navigation camera looks forward in the travel direction, away from the arms; two D435 wrist views are shown, but the manipulation main view is absent. Navigation actions are relative planar motion."
+  paired: "Two black Piper arms are mounted on the near edge of a mobile AgileX platform. A fixed D435 main camera above and between the arms looks forward in their reaching direction, away from the robot; two D435 wrist views are shown. Express dual-arm end-effector states and actions in this fixed camera frame."
+
+instruction_prefix_by_robot:
+  franka: "Two white Franka arms stand across the table from a fixed D455 camera. Express end-effector states and actions in this fixed camera frame."
+
+contract:
+  name: uniwam_camera_frame_embodiment_stats_async_prefix12
+  action_horizon: 32
+  num_frames: 33
+  latent_temporal_frames: 3
+  replan_steps: 20
+  max_suffix_steps: null
+  async_prob: 0.7
+  min_prefix_steps: 6
+  max_prefix_steps: 12
+  lambda_attention: true
+  local_window: 32
+  random_prefix_attention_mask: false
+  prefix_mask_prob: 0.0
+  keep_last_k: 0
+  rope_offset: 0
+  dynamic_loss_weighting: false
+  async_enabled: true
+  manip_aux_loss_weight: 1.0
+
+nav_planner:
+  longitudinal_gain: 1.5
+  heading_gain: 2.0
+  cross_track_gain: 1.5
+  cross_track_lookahead_m: 0.08
+  smoothing_alpha: 0.45
+  forward_only: true
+  max_forward_speed_mps: 0.0
+  max_yaw_rate_radps: 0.0
+
+debug_eef: true
+debug_action_space: true
+debug_action_deltas: true
+debug_latency: false
+urdf_path: ${oc.env:UNIWAM_PIPER_URDF}
+ik_parallel_backend: process
+left_ik: {enabled: true, base_transform: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}}
+right_ik: {enabled: true, base_transform: {xyz: [0.0, 0.0, 0.0], rpy: [0.0, 0.0, 0.0]}}
+
+safety:
+  clamp_model_outputs: false
+  clamp_joint_outputs: false
+  require_successful_ik: true
+  max_eef_delta_m: 0.08
+  max_eef_delta_rad: 0.45
+  eef_delta_reference: rolling
+  clamp_gripper_m: [0.0, 0.105]
+  min_base_vx_mps: -0.12
+  max_base_vx_mps: 0.12
+  max_base_vy_mps: 0.0
+  max_base_wz_radps: 0.18
+max_joint_delta_rad: 0.35
+
+image:
+  encoding: jpeg
+  jpeg_quality: 80
+  resize_before_send: [240, 424]

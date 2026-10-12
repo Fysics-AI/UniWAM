@@ -1,0 +1,60 @@
+norm_stats_path: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/camera_frame_piper_agx_only_q01q99.json
+norm_default_mode: q01/q99
+use_stepwise_action_norm: false
+
+train:
+  _target_: uniwam.datasets.mixed_stream.MixedStreamConcatDataset
+  source_sampling_weights: [1.0]
+  uniform_sampling: false
+  datasets:
+    - _target_: uniwam.datasets.mixed_stream.BranchAnnotatedDataset
+      branches: manip
+      manip_progress_valid: false
+      dataset:
+        _target_: uniwam.datasets.lerobot.dual_expert_robot_video_dataset.DualExpertRobotVideoDataset
+        dataset_dirs: ["${oc.env:UNIWAM_CUSTOM_DATA}"]
+        window_index_path: ${oc.env:UNIWAM_CUSTOM_WINDOW_INDEX}
+        state_column: observation.state.camera_dual_arm
+        manip_action_column: action.manip.camera_dual_arm
+        action_alignment: current
+        manip_action_source: recorded_action
+        manip_action_offset: 1
+        manip_relative_frame: fixed_reference
+        shape_meta:
+          images:
+            - {key: cam_manip_high, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_left_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_right_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+          action: [{key: manip, raw_shape: 20, shape: 20}]
+          state: [{key: default, raw_shape: 20, shape: 20}]
+        available_branches: manip
+        random_fallback_on_error: false
+        episode_cache_size: 2
+        precomputed_latent_root: ${oc.env:UNIWAM_CUSTOM_LATENT_ROOT}
+        precomputed_latent_source_name: ${oc.env:UNIWAM_CUSTOM_SOURCE_NAME}
+        precomputed_latent_temporal_frames: 3
+        manip_action_dim: 26
+        robot_manip_action_dim: 20
+        proprio_dim: 20
+        drop_base_state: false
+        proprio_context_steps: 1
+        action_horizon: 32
+        num_frames: 33
+        action_video_freq_ratio: 4
+        video_size: [320, 384]
+        nav_video_size: [320, 384]
+        manip_video_size: [320, 384]
+        camera_key: null
+        val_set_proportion: 0.0
+        is_training_set: true
+        pretrained_norm_stats: ${data.norm_stats_path}
+        use_stepwise_action_norm: ${data.use_stepwise_action_norm}
+        norm_default_mode: ${data.norm_default_mode}
+        concat_multi_camera: fastwam_384x320
+        supervise_all_action_losses: true
+        append_missing_eef_xy_slots: true
+        text_embedding_cache_dir: ${oc.env:UNIWAM_TEXT_CACHE_DIR}
+        instruction_prefix: "Two black Piper arms are mounted on the near edge of a mobile AgileX platform. A fixed D435 main camera above and between the arms looks forward in their reaching direction, away from the robot; two D435 wrist views are shown. Express dual-arm end-effector states and actions in this fixed camera frame."
+        context_len: 128
+
+val: null

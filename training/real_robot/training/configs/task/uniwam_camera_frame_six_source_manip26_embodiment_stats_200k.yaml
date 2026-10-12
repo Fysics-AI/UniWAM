@@ -1,0 +1,36 @@
+# @package _global_
+defaults:
+  - override /data: uniwam_camera_frame_six_source_manip26_embodiment_stats
+  - override /model: uniwam_camera_frame_six_source_manip26
+
+output_dir: ${oc.env:UNIWAM_TRAINING_ROOT}/runs/uniwam_camera_frame_six_source_manip26_embodiment_stats_200k/${now:%Y%m%d_%H%M%S}
+batch_size: 32
+num_workers: 12
+prefetch_factor: 2
+persistent_workers: true
+collate_mode: mixed_stream
+sampler_mode: weighted_random
+sampler_local_window: 0
+sampler_min_frame_gap: 32
+learning_rate: 1.0e-5
+weight_decay: 1.0e-2
+num_epochs: 1
+max_steps: 200000
+log_every: 10
+save_every: 5000
+save_training_state: true
+eval_every: 0
+gradient_accumulation_steps: 1
+mixed_precision: bf16
+max_grad_norm: 1.0
+seed: 20260914
+resume: null
+resume_step: 0
+
+wandb:
+  enabled: false
+  workspace: ${oc.env:WANDB_ENTITY,}
+  project: UniWAM
+  name: uniwam_camera_frame_six_source_manip26_embodiment_stats_200k
+  group: uniwam_camera_frame_six_source_manip26_embodiment_stats
+  mode: online

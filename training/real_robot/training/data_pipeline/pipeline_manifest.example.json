@@ -1,0 +1,30 @@
+{
+  "source_sampling_weights": [1.0],
+  "stats": {
+    "robot": "/absolute/path/to/customer_robot_stats_q01q99.json"
+  },
+  "prompt_manifest": "/absolute/path/to/customer_prompt_manifest.jsonl",
+  "prompt_inputs": {
+    "task_prompts": "/absolute/path/to/customer_task_prompts.jsonl"
+  },
+  "index_preparation": {
+    "latent_cache_root": "/absolute/path/to/customer_vae_latent_cache",
+    "sources": {
+      "customer_task": {
+        "camera_root": "/absolute/path/to/customer_camera_frame",
+        "window_index": "/absolute/path/to/customer_h32_window_index.parquet",
+        "phase_index": null,
+        "branches": ["manip"],
+        "base_remap_root": null
+      }
+    }
+  },
+  "sources": [
+    {
+      "name": "customer_task",
+      "dataset_root": "/absolute/path/to/customer_camera_frame",
+      "window_index": "/absolute/path/to/customer_h32_window_index.parquet",
+      "eef_sidecar": null
+    }
+  ]
+}

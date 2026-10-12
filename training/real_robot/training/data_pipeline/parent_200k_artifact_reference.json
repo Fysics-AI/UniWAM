@@ -1,0 +1,89 @@
+{
+  "parent_run": "camera_frame_six_source_manip26_embodiment_stats_200k/20260914_225120",
+  "source_sampling_weights": [3, 1, 1, 1, 1, 7],
+  "stats_sha256": {
+    "franka": "aeb2314f64405cd28cab689be61fb20e95c03fd693ede96abf0a375b0efb8691",
+    "piper_agx": "94560d6d10505fdbbe5ee0de7cc63d1fa9b1de7a8468da081785579479182249"
+  },
+  "prompt_manifest": {
+    "count": 818,
+    "sha256": "3165d3dbecc1aef991d0e8c4e0fd62bea163ec96e51cfb2b1b6f4ef86058327b"
+  },
+  "sources": [
+    {
+      "name": "franka_cup_pyramid",
+      "windows": 335878,
+      "window_sha256": "d262d6f2ad4b4dd4d53f35a2d2b3f79d392e3c866477f94ce3740a0cce3b3a66",
+      "phase_rows": 0,
+      "sidecar_source": "franka_cup_pyramid_base_state_action_v1",
+      "sidecar_frames": 1372262,
+      "sidecar_files": {
+        "eef_xy_visible_normalized.npy": "065dcdb240f6df98e18c63aad2012399a465c76a0a62b4e6330c9d826c668dca",
+        "feature_mask.npy": "14a41129b610a0309a8e1ff1ac5960a945055642eab3c1d37f7a0c68b6282111"
+      }
+    },
+    {
+      "name": "agx_cup_tray",
+      "windows": 487582,
+      "window_sha256": "77323dc9b8bcba933ded53b7982757f20703ae14e7364ad533eb90bac2861b04",
+      "phase_rows": 863199,
+      "phase_sha256": "bf1ce5c0cc26e95c7c15adf2faf984994e37eadfc061d5949df09498522db3c3",
+      "sidecar_source": "agx_cup_tray_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1",
+      "sidecar_frames": 566262,
+      "sidecar_files": {
+        "eef_xy_visible_normalized.npy": "4c68799e4e5e0a42c50cc4a12e54970d743eb956ad7958a3afe659208f7f4ed6",
+        "feature_mask.npy": "930ad2519e4060f2d9d5216f6e20ee30ce7e6fafd7e7ffae6b40107d1b1fd33a"
+      }
+    },
+    {
+      "name": "agx_move_white_box",
+      "windows": 559378,
+      "window_sha256": "2dae33f2d26af7fb277014e590dda14a640472e275052ae28c56add3cd383c15",
+      "phase_rows": 910326,
+      "phase_sha256": "7da693ca2ee4a020c32510cbbf6a838a7a70ba1ea8c4bc0f739337d07bd4f855",
+      "sidecar_source": "agx_move_white_box_mobile_rot6d_vlash_se2_h48_phase_split_v2_action_current_v1",
+      "sidecar_frames": 576703,
+      "sidecar_files": {
+        "eef_xy_visible_normalized.npy": "15975910fe71e5514d4d65658dacbe936c65de202bf1ab2de24ff1b19e87b12f",
+        "feature_mask.npy": "1701efe8060eff8bbcd81b29d6bae810662a903afe9062fa46587b7009070b57"
+      }
+    },
+    {
+      "name": "agx_color_blocks",
+      "windows": 413955,
+      "window_sha256": "96b3d470f022a4144789e58ab68b3126771ab9c881d08b9c1d16e748e800f6b8",
+      "phase_rows": 412049,
+      "phase_sha256": "c5e301d312b463243c9280b9a08c0b524ba13b7c541dabfb2e17240a7acbb373",
+      "sidecar_source": "agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1",
+      "sidecar_frames": 434967,
+      "sidecar_files": {
+        "eef_xy_visible_normalized.npy": "daf99195ea7e68f04de1505c9ab582f90e22f1c7f354c95562dd21833230d898",
+        "feature_mask.npy": "32b60ac03b980383387ed334c22e9cc18979667dcc706f9fb13e15060ab51ff8"
+      }
+    },
+    {
+      "name": "agx_ordered_color_blocks",
+      "windows": 138691,
+      "window_sha256": "9d6ab771154d855a56c64d6bd8252f08591bc971dd5d214f048dd7975be346dc",
+      "phase_rows": 0,
+      "sidecar_source": "agx_ordered_color_blocks_rot6d_vlash_se2_h32_v2_action_current_v1",
+      "sidecar_frames": 144675,
+      "sidecar_files": {
+        "eef_xy_visible_normalized.npy": "e4be0a973c16a7e7b94dec039b603a5657b40e0af3c5c7eddb4f59c2eeae5d96",
+        "feature_mask.npy": "57e9e06c83ccd8dadbc76b4aa7fa051e559abce613861490dba563a786f2e873"
+      }
+    },
+    {
+      "name": "agilex7000_front30",
+      "windows": 2224157,
+      "window_sha256": "a33f51fa8d0c7985fb02b97374508d227f3ceba484ffee0e19ce8b5f71a03f41",
+      "phase_rows": 0,
+      "sidecar_source": "agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed",
+      "sidecar_frames": 10592781,
+      "sidecar_files": {
+        "eef_xy_visible_normalized.npy": "ac30c4d54e049a709af7018b2e9275bf89c6b790dbe30e09658bc34780f35652",
+        "feature_mask.npy": "77cef35d141a44597adc842ff25f754ab87ee118ff7dd0539e062a74821836d8"
+      }
+    }
+  ]
+}

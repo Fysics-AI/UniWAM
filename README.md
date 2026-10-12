@@ -145,7 +145,7 @@ python -c 'import habitat_sim'
 | **UniWAM-Base** | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/weights/base) |
 | **UniWAM-Scaled** | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/weights/scaled) |
 
-> **MAP-Bench checkpoints.** The Base and Scaled checkpoints above use a single navigation expert and one forward RGB view, because MAP-Bench evaluates navigation only. They predict base waypoints together with target-object boxes and image-plane MAP coordinates. The full mobile manipulation [architecture, training and inference code](training/ROBOT.md) is provided with a real-robot UniWAM-Base preset. Task-trained real-robot checkpoints are not included.
+> **MAP-Bench checkpoints.** The Base and Scaled checkpoints above use a single navigation expert and one forward RGB view, because MAP-Bench evaluates navigation only. They predict base waypoints together with target-object boxes and image-plane MAP coordinates. The camera-frame mobile-manipulation [training and inference code](training/real_robot/README.md) is a separate path with its own action contract. Task-trained real-robot checkpoints are not included.
 
 ```bash
 conda activate uniwam-policy
@@ -156,7 +156,7 @@ python scripts/download_assets.py --baseline pi05
 python scripts/download_assets.py --baseline groot_n17
 ```
 
-The model package includes the **VAE, UMT5-XXL encoder, tokenizer, normalization, and text features** used in evaluation. Base and Scaled share these components. For full-model training, the pretrained video backbone comes from [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B), following [FastWAM](https://github.com/yuantianyuan01/FastWAM); the [training guide](training/ROBOT.md#installation-and-initialization) covers initialization. [New instructions](docs/TEXT_FEATURES.md) use the same T5 encoder.
+The model package includes the **VAE, UMT5-XXL encoder, tokenizer, normalization, and text features** used in evaluation. Base and Scaled share these components. For camera-frame training, the pretrained video backbone comes from [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B), following [FastWAM](https://github.com/yuantianyuan01/FastWAM); the separate [installation guide](training/real_robot/docs/INSTALLATION.md) covers that environment. [New instructions](docs/TEXT_FEATURES.md) use the same T5 encoder.
 
 Download [HM3D v0.2 scenes](https://aihabitat.org/datasets/hm3d/) separately and place them under `../hm3d-v0.2/scenes_train_val`. See [setup details](docs/SETUP.md), [tested versions](environment.md), and [comparison models](docs/BASELINES.md) for the complete folder layout and additional options.
 
@@ -168,15 +168,14 @@ Download [HM3D v0.2 scenes](https://aihabitat.org/datasets/hm3d/) separately and
 
 ### Unified UniWAM training and inference
 
-The full model follows the technical report: navigation and manipulation are two independently sampled streams with separate visual inputs, action encoders, output heads, and image-plane supervision over shared video/action DiTs. The real-robot **UniWAM-Base** preset initializes from Wan2.2, uses the paper's camera-frame 20D bimanual action interface, and trains on your own demonstrations. Task-trained mobile-manipulation checkpoints are not released.
+The camera-frame path independently samples navigation and manipulation streams with separate visual inputs and action heads over shared video/action DiTs. It uses a 20D bimanual state and a 26D manipulation action; its included navigation configuration is 3D, distinct from the MAP-Bench 9D navigation checkpoint above. It trains on your own LeRobot demonstrations with external model initialization and calibration. Task-trained mobile-manipulation checkpoints are not released.
 
 ```bash
-conda activate uniwam-policy
-# Prepare demonstrations with training/ROBOT.md, then launch unified training:
-bash training/scripts/train_robot.sh 32 --data-root ../UniWAM-robot-data
+cd training/real_robot
+# Follow README.md to install dependencies, prepare data, and launch training.
 ```
 
-[Real-robot training and inference](training/ROBOT.md) documents the relative data layout, Wan/VAE/T5 initialization, configuration, and prediction interface. This unified path is the code counterpart of the architecture and training protocol described in the report.
+[Real-robot training and inference](training/real_robot/README.md) documents the data layout, camera transforms, initialization, action masks, asynchronous cloud inference, and ROS 2 execution.
 
 ### MAP-Bench navigation training
 
@@ -191,7 +190,7 @@ export UNIWAM_TEXT_CACHE="$UNIWAM_DATA_ROOT/text_embeddings"
 bash scripts/train.sh 16
 ```
 
-See [MAP-Bench training details](training/NAVIGATION.md) for the portable relative data layout and smoke test. This configuration is intentionally separate from the full unified real-robot Base preset above.
+See [MAP-Bench training details](training/NAVIGATION.md) for the portable relative data layout and smoke test. This configuration is separate from the camera-frame real-robot path above.
 
 <a id="inference"></a>
 <a id="evaluation"></a>

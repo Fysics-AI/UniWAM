@@ -1,0 +1,3 @@
+# Install a CUDA-matched PyTorch build and training/requirements-training.txt first.
+pin==4.0.0
+casadi==3.7.2

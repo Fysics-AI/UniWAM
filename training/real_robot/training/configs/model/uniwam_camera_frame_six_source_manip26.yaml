@@ -1,0 +1,86 @@
+_target_: uniwam.runtime.create_fastwam_mixed_stream
+model_id: Wan-AI/Wan2.2-TI2V-5B
+tokenizer_model_id: Wan-AI/Wan2.1-T2V-1.3B
+tokenizer_max_len: 128
+load_text_encoder: false
+proprio_dim: 20
+manip_robot_action_dim: 20
+redirect_common_files: true
+mot_checkpoint_mixed_attn: false
+compile_training_denoise: true
+compile_action_infer: true
+compile_vae_infer: true
+view_type_token_init_std: 0.02
+view_type_token_count: 4
+action_dit_pretrained_path: ${oc.env:DIFFSYNTH_MODEL_BASE_PATH}/ActionDiT_linear_interp_Wan22_alphascale_1024hdim.pt
+skip_dit_load_from_pretrain: false
+
+video_dit_config:
+  has_image_input: false
+  patch_size: [1, 2, 2]
+  in_dim: 48
+  hidden_dim: 3072
+  ffn_dim: 14336
+  freq_dim: 256
+  text_dim: 4096
+  out_dim: 48
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  eps: 1.0e-6
+  seperated_timestep: true
+  require_clip_embedding: false
+  require_vae_embedding: false
+  fuse_vae_embedding_in_latents: true
+  use_gradient_checkpointing: false
+  video_attention_mask_mode: first_frame_causal
+  action_conditioned: false
+  action_dim: 20
+  action_group_causal_mask_mode: group_diagonal
+
+action_dit_config:
+  manip_action_dim: 26
+  # Current public navigation head: (dx, dy, dtheta). The optional bbox/point
+  # suffix is documented in docs/ACTION_SLOTS.md and requires a 9D head.
+  nav_action_dim: 3
+  manip_horizon: 32
+  nav_horizon: 32
+  hidden_dim: 1024
+  ffn_dim: 4096
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  text_dim: 4096
+  freq_dim: 256
+  eps: 1.0e-6
+  use_gradient_checkpointing: false
+  type_token_init_std: 0.02
+  type_token_count: 4
+
+video_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+action_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+loss:
+  lambda_video: 1.0
+  lambda_nav_action: 1.0
+  lambda_manip_action: 1.0
+  lambda_manip_aux_action: 1.0
+async_prefix_training:
+  enabled: true
+  prob: 0.7
+  min_length: 6
+  max_length: 12
+  lambda_attention: true
+  local_window: 32
+  random_prefix_attention_mask: false
+  prefix_mask_prob: 0.0
+  keep_last_k: 0
+  rope_offset: 0
+  dynamic_loss_weighting: false
+shared_future_state_training:
+  enabled: false

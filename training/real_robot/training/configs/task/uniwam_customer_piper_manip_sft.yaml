@@ -1,0 +1,41 @@
+# @package _global_
+defaults:
+  - override /data: uniwam_customer_piper_manip
+  - override /model: uniwam_camera_frame_six_source_manip26
+
+output_dir: ${oc.env:UNIWAM_TRAINING_ROOT}/runs/customer_piper_manip_sft/${now:%Y%m%d_%H%M%S}
+batch_size: 16
+num_workers: 8
+prefetch_factor: 2
+persistent_workers: true
+collate_mode: mixed_stream
+sampler_mode: weighted_random
+sampler_local_window: 0
+sampler_min_frame_gap: 32
+learning_rate: 2.0e-6
+weight_decay: 1.0e-2
+num_epochs: 1
+max_steps: 20000
+log_every: 10
+save_every: 2000
+save_training_state: false
+eval_every: 0
+gradient_accumulation_steps: 1
+mixed_precision: bf16
+max_grad_norm: 0.1
+seed: 20261001
+resume: ${oc.env:UNIWAM_PARENT_CHECKPOINT}
+resume_step: 0
+
+model:
+  disable_manip_aux_training: true
+  loss:
+    lambda_manip_aux_action: 0.0
+
+wandb:
+  enabled: false
+  workspace: null
+  project: UniWAM
+  name: customer_piper_manip_sft
+  group: customer_piper_manip_sft
+  mode: disabled

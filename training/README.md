@@ -1,47 +1,32 @@
 # UniWAM training and inference
 
-The code is built on [FastWAM](https://github.com/yuantianyuan01/FastWAM).
-Choose the interface matching your task:
+This directory contains two separate training paths. Choose the one matching
+the checkpoint and action contract you intend to use; they are not interchangeable.
 
-| Task | Architecture and initialization | Guide |
+| Path | Action and observation contract | Start here |
 | :--- | :--- | :--- |
-| Real-robot navigation and manipulation | Full shared-backbone model, separate streams; initialize from Wan2.2 | [Train and infer](ROBOT.md) |
-| MAP-Bench navigation | Single expert and forward RGB view; initialize from Wan2.2 | [Train and evaluate](NAVIGATION.md) |
+| Camera-frame navigation and dual-arm manipulation | Independent streams, 20D dual-arm state, 26D manipulation action, 3D navigation action in the included configuration, H32 chunks and asynchronous prefix replanning | [Real-robot code and guide](real_robot/README.md) |
+| MAP-Bench navigation | One forward RGB view and a 9D navigation action with object-box and MAP-point targets | [Benchmark training and evaluation](NAVIGATION.md) |
 
-The default full-model preset corresponds to **real-robot UniWAM-Base**:
-training on task demonstrations, with the paper's architecture and optimization
-settings. The guide distinguishes paper-specified settings from configurable
-release defaults. Task-trained real-robot checkpoints are not included.
+## Camera-frame training and deployment
 
-Start from the repository root:
+The complete camera-frame implementation lives in [real_robot](real_robot/README.md).
+It includes `uniwam` model and dataset code, LeRobot data preparation, Hydra
+configs, per-embodiment normalization, text/VAE caching, training, cloud
+inference, and the ROS 2 Piper client. Follow its [installation guide](real_robot/docs/INSTALLATION.md),
+then its [fine-tuning and deployment guide](real_robot/docs/FINETUNING.md).
+The [action-slot contract](real_robot/docs/ACTION_SLOTS.md) explains auxiliary
+labels and feature masks. A compatible initialization checkpoint and robot
+calibration are external inputs; no task-trained manipulation weights are in
+this repository.
 
-```bash
-python -m pip install -r training/requirements-training.txt
-python scripts/download_assets.py --vae --text-encoder
-python training/scripts/train_robot.py --data-root ../UniWAM-robot-data --data-only
-bash training/scripts/train_robot.sh 32 --data-root ../UniWAM-robot-data
-```
+Run commands from `training/real_robot`, the root of this self-contained code
+path. Its Python modules and requirements are intentionally separate from the
+MAP-Bench environment under this directory; do not mix their two `fastwam`
+compatibility packages on one `PYTHONPATH`.
 
-## Two reproducible paths
+## MAP-Bench navigation
 
-### Unified UniWAM
-
-[ROBOT.md](ROBOT.md) implements the technical-report architecture: independent
-navigation/manipulation sampling, separate camera and action interfaces, shared
-video/action DiTs, image-plane auxiliary targets, and prefix-conditioned causal
-inference. Its default is real-robot UniWAM-Base with Wan2.2 initialization and
-your own demonstrations. We do not provide task-trained mobile-manipulation
-weights.
-
-### MAP-Bench navigation
-
-[NAVIGATION.md](NAVIGATION.md) is a separate single-stream recipe. It uses one
-forward RGB view, one navigation expert, the 35,454-trajectory training split,
-and Wan2.2 initialization with FastWAM action-backbone interpolation. MAP-Bench evaluation uses the
-15,000-trajectory held-out split and HM3D scenes; it does not instantiate the
-manipulation stream. This separation makes the public benchmark run directly
-reproducible while keeping the full unified training path available.
-
-Prepare your demonstrations using the [robot data contract](ROBOT.md#prepare-demonstrations).
-The shared Wan backbone downloads automatically on the first initialization;
-VAE, T5 and tokenizer are shared with the model package.
+[NAVIGATION.md](NAVIGATION.md) documents the existing single-stream HM3D
+benchmark, its data layout, training script, and evaluation. It does not use
+the dual-arm camera-frame data contract or the ROS 2 deployment path above.

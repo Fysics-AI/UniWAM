@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.cache/
+artifacts/*.tar.gz
+artifacts/*.sha256
+logs/
+runs/
+training/reference/
+wandb/
+.env
+*.key

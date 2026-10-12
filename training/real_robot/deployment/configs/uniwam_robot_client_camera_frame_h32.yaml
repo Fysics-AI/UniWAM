@@ -1,0 +1,112 @@
+server_host: 127.0.0.1
+server_port: 18028
+request_timeout_s: 120.0
+request_retry_interval_s: 1.0
+task_prompt: "Place each colored block into the matching colored box."
+task_prompt_topic: /pi05/task_prompt
+inference_mode: paired
+control_hz: 30.0
+chunk_low_watermark: 13
+max_queue_steps: 32
+prefix_steps: 12
+min_prefix_steps: 6
+replan_while_queue_nonempty: true
+
+camera_frame:
+  extrinsics_profile: agilex_fixed_reference
+  # Same fixed AgileX main-camera frame used by the successful camera-frame
+  # cross-embodiment deployment. Runtime cloud IK converts outputs back to the
+  # Piper base frame using these matrices.
+  camera_from_left_base:
+    - [0.008223230, -0.999737699, 0.021375489, -0.295549180]
+    - [-0.702813521, -0.020984255, -0.711064565, 0.405721460]
+    - [0.711326601, -0.009175735, -0.702801731, 0.401570620]
+    - [0.0, 0.0, 0.0, 1.0]
+  camera_from_right_base:
+    - [-0.014476873, -0.999883845, 0.004766112, 0.290187060]
+    - [-0.727851273, 0.007269748, -0.685696489, 0.398981150]
+    - [0.685582194, -0.013395762, -0.727871973, 0.410824120]
+    - [0.0, 0.0, 0.0, 1.0]
+
+adaptive_prefix:
+  enabled: true
+  margin_steps: 1
+  ewma_alpha: 0.25
+  initial_latency_s: 0.20
+
+control:
+  debug_action_deltas: true
+  manual_hold_left: false
+  manual_hold_right: false
+  dry_run: true
+  hold_when_feedback_missing: true
+  max_publish_joint_delta_rad: 0.0
+  piper_speed_percent: 100.0
+  gripper_effort: 2.0
+  gripper_min_m: 0.0
+  gripper_max_m: 0.105
+  binary_gripper: false
+  clamp_gripper_commands: true
+  gripper_binary_threshold_m: 0.060
+  left_gripper_binary_threshold_m: 0.060
+  right_gripper_binary_threshold_m: 0.060
+  gripper_closed_m: 0.0
+  gripper_open_m: 0.105
+  log_published_actions: true
+
+base:
+  enabled: true
+  dry_run: true
+  state_follows_dry_run_command: false
+  clamp_commands: false
+  min_vx_mps: -0.12
+  max_vx_mps: 0.12
+  max_vy_mps: 0.0
+  max_wz_radps: 0.18
+  max_accel_mps2: 0.0
+  max_yaw_accel_radps2: 0.0
+  vx_scale: 1.0
+  vy_scale: 1.0
+  wz_scale: 1.0
+  vx_deadband_mps: 0.0
+  vy_deadband_mps: 0.0
+  wz_deadband_radps: 0.0
+  command_timeout_s: 0.25
+  stop_on_empty_queue: true
+  zero_on_shutdown: true
+  cmd_vel_topic: /xw/cmd_vel_direct_can
+
+record:
+  enabled: true
+  output_dir: ~/uniwam_manip26_eefxy_visible_records
+  session_subdir: true
+  save_images: true
+  save_publish_images: true
+  publish_image_jpeg_quality: 90
+  image_every_n: 1
+  publish_every_n: 1
+
+ros:
+  left_joint_topic: /joint_left_states
+  right_joint_topic: /joint_right_states
+  left_feedback_topic: /puppet/joint_left
+  right_feedback_topic: /puppet/joint_right
+  cam_nav_topic: /camera_d455/color/image_raw
+  cam_manip_high_topic: /camera_f/color/image_raw
+  cam_left_wrist_topic: /camera_l/color/image_raw
+  cam_right_wrist_topic: /camera_r/color/image_raw
+
+state:
+  source: piper_pose_topics
+  eef_topic: /qingjie/eef_state
+  left_pose_topic: /puppet/end_pose_left
+  right_pose_topic: /puppet/end_pose_right
+  joint_names: [joint1, joint2, joint3, joint4, joint5, joint6, gripper]
+
+image:
+  encoding: jpeg
+  jpeg_quality: 80
+  preserve_aspect: true
+  # The trained camera source is 424x240. Resize once at the edge to reduce
+  # SSH tunnel traffic and avoid cloud-side decode of oversized frames.
+  resize_before_send: [240, 424]

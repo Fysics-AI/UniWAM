@@ -1,0 +1,226 @@
+index_root: ${oc.env:UNIWAM_TRAINING_ROOT}/reference/indices
+mobile_latent_remap_root: ${oc.env:UNIWAM_TRAINING_ROOT}/reference/latent_remap/camera_frame_mobile
+agilex7000_latent_remap_root: ${oc.env:UNIWAM_TRAINING_ROOT}/reference/latent_remap/agilex7000_front30
+norm_stats_path: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/camera_frame_six_source_manip26_q01q99.json
+franka_norm_stats_path: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/camera_frame_franka_only_q01q99.json
+piper_norm_stats_path: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/camera_frame_piper_agx_only_q01q99.json
+use_stepwise_action_norm: false
+norm_default_mode: q01/q99
+eef_xy_index_root: ${oc.env:UNIWAM_EEF_SIDECAR_ROOT}
+
+train:
+  _target_: uniwam.datasets.mixed_stream.MixedStreamConcatDataset
+  source_sampling_weights: [3.0, 1.0, 1.0, 1.0, 1.0, 7.0]
+  uniform_sampling: false
+  datasets:
+    - _target_: uniwam.datasets.mixed_stream.BranchAnnotatedDataset
+      branches: manip
+      manip_progress_valid: false
+      dataset:
+        _target_: uniwam.datasets.lerobot.dual_expert_robot_video_dataset.DualExpertRobotVideoDataset
+        dataset_dirs: ["${oc.env:UNIWAM_FRANKA_DATA}"]
+        window_index_path: ${data.index_root}/franka_cup_pyramid/window_index.parquet
+        state_column: observation.state.camera_dual_arm
+        manip_action_column: action.manip.camera_dual_arm
+        action_alignment: current
+        manip_action_source: future_state
+        manip_action_offset: 1
+        manip_relative_frame: fixed_reference
+        shape_meta:
+          images:
+            - {key: cam_manip_high, raw_shape: [3, 480, 640], shape: [3, 480, 640]}
+            - {key: cam_left_wrist, raw_shape: [3, 480, 640], shape: [3, 480, 640]}
+            - {key: cam_right_wrist, raw_shape: [3, 480, 640], shape: [3, 480, 640]}
+          action: [{key: manip, raw_shape: 20, shape: 20}]
+          state: [{key: default, raw_shape: 20, shape: 20}]
+        available_branches: manip
+        random_fallback_on_error: false
+        episode_cache_size: 2
+        precomputed_latent_root: ${oc.env:UNIWAM_FRANKA_LATENT_ROOT}
+        precomputed_latent_source_name: lerobot_camera_frame
+        precomputed_latent_temporal_frames: 3
+        manip_action_dim: 26
+        robot_manip_action_dim: 20
+        proprio_dim: 20
+        drop_base_state: false
+        proprio_context_steps: 1
+        action_horizon: 32
+        num_frames: 33
+        action_video_freq_ratio: 4
+        video_size: [320, 384]
+        manip_video_size: [320, 384]
+        camera_key: null
+        val_set_proportion: 0.0
+        is_training_set: true
+        pretrained_norm_stats: ${data.franka_norm_stats_path}
+        use_stepwise_action_norm: ${data.use_stepwise_action_norm}
+        norm_default_mode: ${data.norm_default_mode}
+        concat_multi_camera: fastwam_384x320_aspect_pad
+        supervise_all_action_losses: true
+        manip_eef_xy_index_root: ${data.eef_xy_index_root}
+        manip_eef_xy_source_name: franka_cup_pyramid_base_state_action_v1
+        manip_eef_xy_validity: geometric_in_fov
+        text_embedding_cache_dir: &text_cache ${oc.env:UNIWAM_TEXT_CACHE_DIR}
+        instruction_prefix: "Two white Franka arms stand across the table from a fixed D455 camera. Express end-effector states and actions in this fixed camera frame."
+        override_instruction: "Build a stable pyramid from six colored cups gathered from both sides: three cups on the bottom, two in the middle, and one on top."
+        context_len: 128
+
+    - _target_: uniwam.datasets.mixed_stream.PhaseRoutedDataset
+      phase_index_path: ${data.index_root}/agx_cup_tray/phase_index.parquet
+      manip_progress_valid: false
+      nav_progress_valid: false
+      dataset: &mobile
+        _target_: uniwam.datasets.lerobot.dual_expert_robot_video_dataset.DualExpertRobotVideoDataset
+        dataset_dirs: ["${oc.env:UNIWAM_CUP_TRAY_DATA}"]
+        window_index_path: ${data.index_root}/agx_cup_tray/window_index.parquet
+        precomputed_latent_root: ${oc.env:UNIWAM_MOBILE_LATENT_ROOT}
+        precomputed_latent_source_name: agx_cup_tray_mobile_rot6d_vlash_se2_h48_phase_split_v3
+        precomputed_latent_index_remap_root: ${data.mobile_latent_remap_root}
+        precomputed_latent_temporal_frames: 3
+        state_column: observation.state.camera_dual_arm
+        manip_action_column: action.manip.camera_dual_arm
+        action_alignment: current
+        manip_action_source: recorded_action
+        manip_action_offset: 1
+        manip_relative_frame: fixed_reference
+        nav_action_column: action.nav
+        nav_reference_state_column: observation.state
+        shape_meta:
+          images:
+            - {key: cam_nav, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_manip_high, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_left_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_right_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+          action:
+            - {key: nav, raw_shape: 3, shape: 3}
+            - {key: manip, raw_shape: 20, shape: 20}
+          state: [{key: default, raw_shape: 20, shape: 20}]
+        available_branches: both
+        random_fallback_on_error: false
+        episode_cache_size: 2
+        # Base navigation action is (dx, dy, dtheta). A 9D extension is
+        # 3 + bbox_xyxy + operating_point_xy; update model and dataset together.
+        nav_action_dim: 3
+        manip_action_dim: 26
+        robot_manip_action_dim: 20
+        proprio_dim: 20
+        # camera_dual_arm is already the 20D camera-frame arm state.  The
+        # original 23D observation.state is retained separately only as the
+        # navigation reference state.
+        drop_base_state: false
+        proprio_context_steps: 1
+        action_horizon: 32
+        nav_action_stride: 1
+        num_frames: 33
+        action_video_freq_ratio: 4
+        video_size: [320, 384]
+        nav_video_size: [320, 384]
+        manip_video_size: [320, 384]
+        nav_image_mode: matched_wrist_mosaic
+        camera_key: null
+        val_set_proportion: 0.0
+        is_training_set: true
+        pretrained_norm_stats: &stats ${data.piper_norm_stats_path}
+        use_stepwise_action_norm: ${data.use_stepwise_action_norm}
+        norm_default_mode: ${data.norm_default_mode}
+        concat_multi_camera: parallel_nav_manip
+        supervise_all_action_losses: true
+        manip_eef_xy_index_root: ${data.eef_xy_index_root}
+        manip_eef_xy_source_name: agx_cup_tray_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1
+        manip_eef_xy_validity: geometric_in_fov
+        instruction_prefix_by_branch:
+          manip: "Two black Piper arms are mounted on the near edge of a mobile AgileX platform. A fixed D435 main camera above and between the arms looks forward in their reaching direction, away from the robot; two D435 wrist views are shown. Express dual-arm end-effector states and actions in this fixed camera frame."
+          nav: "Two black Piper arms are mounted on a mobile AgileX platform. A front D455 navigation camera looks forward in the travel direction, away from the arms; two D435 wrist views are shown, but the manipulation main view is absent. Navigation actions are relative planar motion."
+        text_embedding_cache_dir: *text_cache
+        context_len: 128
+
+    - _target_: uniwam.datasets.mixed_stream.PhaseRoutedDataset
+      phase_index_path: ${data.index_root}/agx_move_white_box/phase_index.parquet
+      manip_progress_valid: false
+      nav_progress_valid: false
+      dataset:
+        <<: *mobile
+        dataset_dirs: ["${oc.env:UNIWAM_MOVE_WHITE_DATA}"]
+        window_index_path: ${data.index_root}/agx_move_white_box/window_index.parquet
+        precomputed_latent_source_name: agx_move_white_box_mobile_rot6d_vlash_se2_h48_phase_split_v2
+        manip_eef_xy_source_name: agx_move_white_box_mobile_rot6d_vlash_se2_h48_phase_split_v2_action_current_v1
+
+    - _target_: uniwam.datasets.mixed_stream.PhaseRoutedDataset
+      phase_index_path: ${data.index_root}/agx_color_blocks/phase_index.parquet
+      manip_progress_valid: false
+      nav_progress_valid: false
+      dataset:
+        <<: *mobile
+        dataset_dirs: ["${oc.env:UNIWAM_COLOR_DATA}"]
+        window_index_path: ${data.index_root}/agx_color_blocks/window_index.parquet
+        precomputed_latent_source_name: agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3
+        manip_eef_xy_source_name: agx_color_blocks_mobile_rot6d_vlash_se2_h48_phase_split_v3_action_current_v1
+        available_branches: manip
+        shape_meta:
+          images:
+            - {key: cam_manip_high, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_left_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_right_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+          action: [{key: manip, raw_shape: 20, shape: 20}]
+          state: [{key: default, raw_shape: 20, shape: 20}]
+        concat_multi_camera: fastwam_384x320
+
+    - _target_: uniwam.datasets.mixed_stream.BranchAnnotatedDataset
+      branches: manip
+      manip_progress_valid: false
+      dataset:
+        <<: *mobile
+        dataset_dirs: ["${oc.env:UNIWAM_ORDERED_COLOR_DATA}"]
+        window_index_path: ${data.index_root}/agx_ordered_color_blocks/window_index.parquet
+        precomputed_latent_root: ${oc.env:UNIWAM_ORDERED_LATENT_ROOT}
+        precomputed_latent_source_name: agx_ordered_color_blocks_rot6d_vlash_se2_h32_v2
+        precomputed_latent_index_remap_root: null
+        state_column: observation.state.camera_dual_arm
+        manip_action_column: action.manip.camera_dual_arm
+        available_branches: manip
+        drop_base_state: false
+        shape_meta:
+          images:
+            - {key: cam_manip_high, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_left_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+            - {key: cam_right_wrist, raw_shape: [3, 240, 424], shape: [3, 240, 424]}
+          action: [{key: manip, raw_shape: 20, shape: 20}]
+          state: [{key: default, raw_shape: 20, shape: 20}]
+        concat_multi_camera: fastwam_384x320
+        manip_eef_xy_source_name: agx_ordered_color_blocks_rot6d_vlash_se2_h32_v2_action_current_v1
+        instruction_prefix_by_branch: null
+        instruction_prefix: "Two black Piper arms are mounted on the near edge of a mobile AgileX platform. A fixed D435 main camera above and between the arms looks forward in their reaching direction, away from the robot; two D435 wrist views are shown. Express dual-arm end-effector states and actions in this fixed camera frame."
+        instruction_variants_path: ${oc.env:UNIWAM_ORDERED_PROMPT_VARIANTS}
+        simple_instruction_probability: 0.5
+
+    - _target_: uniwam.datasets.mixed_stream.BranchAnnotatedDataset
+      branches: manip
+      manip_progress_valid: false
+      dataset:
+        <<: *mobile
+        dataset_dirs: ["${oc.env:UNIWAM_7000_DATA}"]
+        window_index_path: ${data.index_root}/agilex7000_front30/window_index.parquet
+        sampling_weights_path: ${oc.env:UNIWAM_7000_DATA}/meta/window_sampling_weights_task_balanced_filtered.parquet
+        precomputed_latent_root: ${oc.env:UNIWAM_7000_LATENT_ROOT}
+        precomputed_latent_source_name: agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed
+        precomputed_latent_index_remap_root: ${data.agilex7000_latent_remap_root}
+        state_column: observation.state.camera_dual_arm
+        manip_action_column: action.manip.camera_dual_arm
+        available_branches: manip
+        drop_base_state: false
+        shape_meta:
+          images:
+            - {key: camera_front, raw_shape: [3, 720, 1280], shape: [3, 720, 1280]}
+            - {key: camera_left_wrist, raw_shape: [3, 720, 1280], shape: [3, 720, 1280]}
+            - {key: camera_right_wrist, raw_shape: [3, 720, 1280], shape: [3, 720, 1280]}
+          action: [{key: manip, raw_shape: 20, shape: 20}]
+          state: [{key: default, raw_shape: 20, shape: 20}]
+        concat_multi_camera: fastwam_384x320
+        manip_eef_xy_source_name: agilex7000_manip_short30_rot6d_rowmajor_h32_v4_prompt_reviewed
+        instruction_prefix_by_branch: null
+        instruction_prefix: "Two black Piper arms are mounted on the near edge of a mobile AgileX platform. A fixed D435 main camera above and between the arms looks forward in their reaching direction, away from the robot; two D435 wrist views are shown. Express dual-arm end-effector states and actions in this fixed camera frame."
+        instruction_variants_path: ${oc.env:UNIWAM_7000_PROMPT_VARIANTS}
+        simple_instruction_probability: 0.5
+        force_simple_episode_indices_path: ${oc.env:UNIWAM_7000_DATA}/meta/force_simple_episode_indices.jsonl
+
+val: null

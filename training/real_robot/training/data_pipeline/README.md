@@ -65,9 +65,9 @@ requirements imposed by UniWAM.
 The default manipulation output is 20 robot values plus six optional
 point-tracking values. A dataset without tracking annotations should append
 six zero placeholders with false feature masks and disable auxiliary training.
-The default navigation output is 3D. A 9D navigation extension appends a 4D
-target bbox and 2D operating point; it requires a matching sidecar, mask,
-model head, and decoder. See `docs/ACTION_SLOTS.md` for slot order and masking.
+Navigation output may be 3D or 9D. The 9D form appends a 4D target bbox and 2D
+operating point, with matching sidecar, mask, model head, and decoder. See
+`docs/ACTION_SLOTS.md` for slot order and masking.
 
 The path above is self-contained once the experiment's data,
 calibration, model weights, and caches are available.

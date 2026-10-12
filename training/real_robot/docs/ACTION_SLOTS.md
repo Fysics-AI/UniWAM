@@ -50,10 +50,7 @@ The intended extended navigation contract is 9-dimensional, written as
 The six auxiliary values use normalized camera-image coordinates. Their order,
 alignment, and coordinate frame must be recorded in the sidecar manifest. The
 included fine-tuning example keeps `nav_action_dim: 3`, while the repository
-also supports the trained 9D navigation contract. Select the matching 9D model,
-dataset, sidecar, normalization, cloud decoder, and tests together; changing
-only one config value is insufficient. Existing 3D and 9D checkpoints are
-separate contracts and cannot consume each other's action head.
+also supports the trained 9D navigation contract. 
 
 ## Extending the slots
 

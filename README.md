@@ -1,4 +1,4 @@
-<h1 align="center">Unified Mobile Manipulation via Mixed-Stream<br />World-Action Modeling and Manipulation Anchor Pose Supervision</h1>
+<h1 align="center">Unified Mobile Manipulation via<br />Mixed-Stream World-Action Modeling<br />and Manipulation Anchor Pose Supervision</h1>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2609.39388"><img src="https://img.shields.io/badge/Paper-arXiv-b31b1b?logo=arxiv&logoColor=white" alt="Paper on arXiv" /></a>

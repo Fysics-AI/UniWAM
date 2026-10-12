@@ -98,8 +98,8 @@ train:
         available_branches: both
         random_fallback_on_error: false
         episode_cache_size: 2
-        # Base navigation action is (dx, dy, dtheta). A 9D extension is
-        # 3 + bbox_xyxy + operating_point_xy; update model and dataset together.
+        # This example uses (dx, dy, dtheta). Trained 9D variants append bbox
+        # xyxy and operating-point xy; update model and dataset together.
         nav_action_dim: 3
         manip_action_dim: 26
         robot_manip_action_dim: 20

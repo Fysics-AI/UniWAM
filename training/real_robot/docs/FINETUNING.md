@@ -49,8 +49,10 @@ units, and checkpoint. Keep the same statistics for fine-tuning and deployment;
 do not substitute statistics from another embodiment or representation. The
 manipulation action head is 26D: the first 20 positions are
 dual-arm control, and positions 20-25 are six point-tracking auxiliary values.
-The current navigation head is 3D `(dx, dy, dtheta)`; an optional 9D navigation
-extension is `3 + 4 + 2`, adding target bbox `xyxy` and operating-point `xy`. A
+Navigation supports a 3D `(dx, dy, dtheta)` head and a trained 9D variant
+`3 + 4 + 2`, adding target bbox `xyxy` and operating-point `xy`. The included
+fine-tuning configuration defaults to 3D; select matching 9D model/data/sidecar
+settings when using the extended contract. A
 If point-tracking labels are unavailable, do **not** fabricate them:
 `append_missing_eef_xy_slots=true` appends six zeros with a false feature mask;
 `disable_manip_aux_training=true` excludes those slots from clean inputs,

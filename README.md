@@ -49,7 +49,7 @@ A **Manipulation Anchor Pose (MAP)** is the base position and heading from which
 
 ### End-effector trajectory supervision
 
-The technical report uses image-plane end-effector tracks as auxiliary targets for UniWAM's manipulation stream. Our [end-effector point-tracking code](robot-eef-point-tracking/README.md) generates these per-frame labels from calibrated robot poses and the main manipulation camera: geometry projects each arm's end-effector point into the image, and a DINOv2 appearance check labels visibility and occlusion. The resulting 2D tracks and quality masks are used when preparing manipulation training data. See the [standalone project](https://github.com/KeliangLiu-Lab/robot-eef-point-tracking) for its original release and documentation.
+The technical report uses image-plane end-effector tracks as auxiliary targets for UniWAM's manipulation stream. The [end-effector point-tracking pipeline](robot-eef-point-tracking/README.md) in this repository generates these per-frame labels from calibrated robot poses and the main manipulation camera: geometry projects each arm's end-effector point into the image, and a DINOv2 appearance check labels visibility and occlusion. The resulting 2D tracks and quality masks are used when preparing manipulation training data.
 
 ## Release checklist
 

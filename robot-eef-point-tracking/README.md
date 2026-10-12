@@ -6,9 +6,11 @@ point is visible. The same approach works for a single arm or multiple arms,
 including other embodiments such as Franka when their pose and camera
 calibration are provided.
 
-The repository includes a ready-to-run LeRobot adapter, a reusable visibility
-stage, preview rendering, and label validation. Datasets, videos, DINOv2 code,
-and model weights are not included.
+This UniWAM directory includes a ready-to-run LeRobot adapter, a reusable
+visibility stage, preview rendering, and label validation. Datasets, videos,
+DINOv2 code, and model weights are not included. The output supplies the
+manipulation stream's image-plane auxiliary labels; see the
+[UniWAM training guide](../training/ROBOT.md#prepare-demonstrations).
 
 ## Install
 
@@ -16,8 +18,8 @@ You need Linux, Python 3.10-3.12, a CUDA-capable GPU for DINOv2, and
 `ffmpeg`/`ffprobe` for preview videos.
 
 ```bash
-git clone https://github.com/KeliangLiu-Lab/robot-eef-point-tracking.git
-cd robot-eef-point-tracking
+git clone https://github.com/Fysics-AI/UniWAM.git
+cd UniWAM/robot-eef-point-tracking
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip

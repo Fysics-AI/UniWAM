@@ -49,10 +49,11 @@ The intended extended navigation contract is 9-dimensional, written as
 
 The six auxiliary values use normalized camera-image coordinates. Their order,
 alignment, and coordinate frame must be recorded in the sidecar manifest. The
-current public checkpoint and default dataset keep `nav_action_dim: 3`. A full
-9D extension requires the sidecar reader, dataset output shape, collator,
-ActionDiT head, normalization contract, cloud decoder, and tests to be updated
-together; changing one config value is insufficient.
+The included fine-tuning example keeps `nav_action_dim: 3`, while the repository
+also supports the trained 9D navigation contract. Select the matching 9D model,
+dataset, sidecar, normalization, cloud decoder, and tests together; changing
+only one config value is insufficient. Existing 3D and 9D checkpoints are
+separate contracts and cannot consume each other's action head.
 
 ## Extending the slots
 
@@ -71,11 +72,9 @@ To train a new slot group:
 5. Add a unit test for slot order, alignment, missing labels, and loss
    denominator accounting before training.
 
-For the 9D navigation extension, set the model and dataset target dimension to
-9, keep the raw robot navigation dimension at 3, and enable the navigation
-auxiliary sidecar. The six auxiliary slots must be appended in the order shown
-above. Existing 3D checkpoints remain 3D checkpoints and cannot consume a 9D
-head without a new training contract.
+For a 9D navigation run, set the model and dataset target dimension to 9, keep
+the raw robot navigation dimension at 3, and enable the navigation auxiliary
+sidecar. The six auxiliary slots must be appended in the order shown above.
 
 ## Masking rules
 

@@ -49,7 +49,7 @@ The intended extended navigation contract is 9-dimensional, written as
 
 The six auxiliary values use normalized camera-image coordinates. Their order,
 alignment, and coordinate frame must be recorded in the sidecar manifest. The
-The included fine-tuning example keeps `nav_action_dim: 3`, while the repository
+included fine-tuning example keeps `nav_action_dim: 3`, while the repository
 also supports the trained 9D navigation contract. Select the matching 9D model,
 dataset, sidecar, normalization, cloud decoder, and tests together; changing
 only one config value is insufficient. Existing 3D and 9D checkpoints are
@@ -72,9 +72,46 @@ To train a new slot group:
 5. Add a unit test for slot order, alignment, missing labels, and loss
    denominator accounting before training.
 
-For a 9D navigation run, set the model and dataset target dimension to 9, keep
-the raw robot navigation dimension at 3, and enable the navigation auxiliary
-sidecar. The six auxiliary slots must be appended in the order shown above.
+For the exact 9D configuration changes, follow the next section. The six
+auxiliary slots must be appended in the order shown above.
+
+### Enabling the 9D contract
+
+The data loader treats the robot navigation command and the six image labels as
+separate parts. Therefore the raw robot navigation dimension remains 3 in the
+dataset config; the model output dimension becomes 9 after the sidecar is
+attached. A concrete conversion from the included 3D recipe is:
+
+```yaml
+# training/configs/model/<your_camera_frame_model>.yaml
+action_dit_config:
+  nav_action_dim: 9
+
+# for every navigation dataset entry
+dataset:
+  nav_action_dim: 3          # raw (dx, dy, dtheta)
+  robot_nav_action_dim: 3
+  nav_aux_index_root: /abs/path/to/navigation_sidecars
+  nav_aux_source_name: your_source_name
+```
+
+The sidecar directory must contain `manifest.json`,
+`nav_aux_xyxy_op.npy` with shape `[total_frames, 6]`, and `feature_mask.npy`
+with the same shape. `manifest.json` must declare the slot order
+`bbox_x1,bbox_y1,bbox_x2,bbox_y2,op_x,op_y`, the `next_observation`
+alignment, and the `cam_nav_original_424x240` coordinate frame. The loader
+maps valid sidecar values from `[0,1]` to `[-1,1]`, concatenates them after the
+raw 3D command, and the collator produces `[T,9]` actions for the 9D ActionDiT
+head. Do not set the dataset's raw `nav_action_dim` to 9: the sidecar path
+intentionally requires raw/model robot navigation dimensions of 3.
+
+Regenerate normalization/statistics and text/VAE caches for the selected data,
+then run the data preflight before training a fresh 9D checkpoint. A 3D
+checkpoint cannot be resized after the fact. For cloud deployment, use a
+contract whose runtime model has `model.action_dit_config.nav_action_dim: 9`
+and whose checkpoint contract also expects 9D navigation; the cloud decoder
+validates this dimension. Use `paired` when the navigation stream is executed,
+or `manip_only` when only the manipulation stream is requested.
 
 ## Masking rules
 

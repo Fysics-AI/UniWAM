@@ -34,15 +34,31 @@ def cache_prompt_pairs(node, pairs: dict[Path, set[str]]) -> None:
                 raise ValueError("Dataset node is missing text_embedding_cache_dir")
             path = Path(str(cache))
             prompts = pairs.setdefault(path, set())
+            branch_prefixes = node.get("instruction_prefix_by_branch") or {}
+            prefixes = []
+            scalar_prefix = str(node.get("instruction_prefix") or "").strip()
+            if scalar_prefix:
+                prefixes.append(scalar_prefix)
+            if branch_prefixes:
+                prefixes.extend(
+                    str(value).strip()
+                    for value in branch_prefixes.values()
+                    if str(value).strip()
+                )
+            if not prefixes:
+                prefixes = [""]
+            prefixes = tuple(dict.fromkeys(prefixes))
+            override_instruction = str(node.get("override_instruction") or "").strip()
+            if override_instruction:
+                for prefix in prefixes:
+                    prompts.add(DEFAULT_PROMPT.format(task=f"{prefix} {override_instruction}".strip()))
             for dataset_dir in dirs:
                 tasks_path = Path(str(dataset_dir)) / "meta/tasks.jsonl"
                 for line in tasks_path.read_text(encoding="utf-8").splitlines():
                     if line:
                         task = str(json.loads(line)["task"])
-                        prefix = str(node.get("instruction_prefix") or "").strip()
-                        if prefix:
-                            task = f"{prefix} {task}"
-                        prompts.add(DEFAULT_PROMPT.format(task=task))
+                        for prefix in prefixes:
+                            prompts.add(DEFAULT_PROMPT.format(task=f"{prefix} {task}".strip()))
             variants_path = node.get("instruction_variants_path")
             if variants_path is not None:
                 path = Path(str(variants_path))
@@ -58,7 +74,8 @@ def cache_prompt_pairs(node, pairs: dict[Path, set[str]]) -> None:
                         task = str(record[field]).strip()
                         if not task:
                             raise ValueError(f"Empty {field} at {path}:{line_number}")
-                        prompts.add(DEFAULT_PROMPT.format(task=task))
+                        for prefix in prefixes:
+                            prompts.add(DEFAULT_PROMPT.format(task=f"{prefix} {task}".strip()))
         for _, value in node.items():
             cache_prompt_pairs(value, pairs)
     elif isinstance(node, (ListConfig, list, tuple)):

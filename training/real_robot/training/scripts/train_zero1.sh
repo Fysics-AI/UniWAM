@@ -12,7 +12,14 @@ if [[ -z "${DIFFSYNTH_MODEL_BASE_PATH:-}" ]]; then
 fi
 export DIFFSYNTH_MODEL_BASE_PATH
 export DIFFSYNTH_SKIP_DOWNLOAD="${DIFFSYNTH_SKIP_DOWNLOAD:-true}"
-export HF_HOME="${HF_HOME:-${PROJECT_ROOT}/.cache/huggingface}"
+# HuggingFace datasets builds Arrow files during the first local load.  Give
+# each host its own default cache so two nodes never initialize the same Arrow
+# artifact concurrently.  Set HF_HOME explicitly when a shared, pre-warmed
+# cache is intentional.
+if [[ -z "${HF_HOME:-}" ]]; then
+  CACHE_HOST="${HOSTNAME:-$(hostname)}"
+  export HF_HOME="${PROJECT_ROOT}/.cache/huggingface/${CACHE_HOST}"
+fi
 export HF_DATASETS_CACHE="${HF_DATASETS_CACHE:-${HF_HOME}/datasets}"
 export HF_HUB_CACHE="${HF_HUB_CACHE:-${HF_HOME}/hub}"
 unset TRANSFORMERS_CACHE
@@ -158,6 +165,20 @@ fi
 
 echo "[launch] nproc_per_node=${NPROC_PER_NODE} total_num_processes=${TOTAL_NUM_PROCESSES} num_machines=${NUM_MACHINES} machine_rank=${MACHINE_RANK} main=${MAIN_PROCESS_IP}:${MAIN_PROCESS_PORT} run_id=${RUN_ID}"
 
+HYDRA_OPTIONS=()
+HYDRA_OVERRIDES=()
+for ((i = 0; i < ${#EXTRA_ARGS[@]}; i++)); do
+  arg="${EXTRA_ARGS[$i]}"
+  if [[ "${arg}" == "--config-name" && $((i + 1)) -lt ${#EXTRA_ARGS[@]} ]]; then
+    HYDRA_OPTIONS+=("${arg}" "${EXTRA_ARGS[$((i + 1))]}")
+    i=$((i + 1))
+  elif [[ "${arg}" == --config-name=* ]]; then
+    HYDRA_OPTIONS+=("${arg}")
+  else
+    HYDRA_OVERRIDES+=("${arg}")
+  fi
+done
+
 accelerate launch \
   --config_file "${ACCELERATE_CONFIG_FILE}" \
   --num_processes "${TOTAL_NUM_PROCESSES}" \
@@ -168,9 +189,10 @@ accelerate launch \
   --same_network \
   --deepspeed_multinode_launcher standard \
   scripts/train.py \
+  "${HYDRA_OPTIONS[@]}" \
   "output_dir=./runs/${TASK_BASENAME}/${RUN_ID}" \
   "wandb.enabled=${WANDB_ENABLED}" \
   "wandb.mode=${WANDB_MODE}" \
   "wandb.project=${WANDB_PROJECT}" \
   "wandb.name=${WANDB_NAME:-${TASK_BASENAME}_${RUN_ID}}" \
-  "${EXTRA_ARGS[@]}"
+  "${HYDRA_OVERRIDES[@]}"

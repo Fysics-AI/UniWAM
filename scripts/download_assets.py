@@ -51,7 +51,7 @@ def main() -> None:
     parser.add_argument("--model", choices=("base", "scaled", "all"))
     parser.add_argument("--benchmark", action="store_true")
     parser.add_argument("--training", action="store_true", help="Download, verify, and extract the MAP-Bench training split")
-    parser.add_argument("--traces", action="store_true", help="Download, verify, and extract four trace archives")
+    parser.add_argument("--traces", action="store_true", help="Download, verify, and extract five trace archives")
     parser.add_argument("--text-encoder", action="store_true", help="Download Wan UMT5 and tokenizer for new instructions")
     parser.add_argument("--vae", action="store_true", help="Download VAE independently of model checkpoints")
     parser.add_argument("--baseline", choices=("pi05",))

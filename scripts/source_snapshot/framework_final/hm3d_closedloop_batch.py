@@ -305,7 +305,7 @@ def make_state(
         "calls": [],
         "frames": [],
         "near_zero_streak": 0,
-        # Baseline policies consume the current navigation velocity state.  The
+        # GR00T N1.7 consumes the current navigation velocity state.  The
         # simulator starts at rest; the policy adapter returns the last
         # commanded velocity for the next chunk boundary.
         "navigation_state": np.zeros(2, dtype=np.float32),

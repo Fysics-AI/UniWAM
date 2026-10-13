@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Recompute the four released methods from per-trajectory metrics."""
+"""Recompute the five released methods from per-trajectory metrics."""
 
 import argparse
 import csv
 from pathlib import Path
 from statistics import mean
 
-METHODS = ('pi05', 'fastwam', 'uniwam_base', 'uniwam_scaled')
+METHODS = ('groot_n17', 'pi05', 'fastwam', 'uniwam_base', 'uniwam_scaled')
 BINS = ('short_<1.5m', 'medium_1.5-3.5m', 'long_>=3.5m')
 
 

@@ -88,12 +88,15 @@ MAP position / heading error ↓, computed from the released evaluation traces:
 
 | Method | Short (cm / °) | Medium (cm / °) | Long (cm / °) | Overall (cm / °) |
 | :--- | ---: | ---: | ---: | ---: |
+| [GR00T N1.7](https://github.com/NVIDIA/Isaac-GR00T) | 9.48 / 5.66 | 10.81 / 5.42 | 22.04 / 7.46 | 14.11 / 6.18 |
 | [π₀.₅](https://github.com/Physical-Intelligence/openpi) | 7.98 / 3.26 | 9.85 / 3.51 | 50.84 / 5.55 | 22.89 / 4.11 |
 | [FastWAM](https://github.com/yuantianyuan01/FastWAM) | 9.24 / 3.44 | 10.96 / 3.95 | 31.10 / 6.66 | 17.10 / 4.68 |
 | UniWAM-Base | 7.71 / 2.37 | 8.85 / 3.06 | 20.97 / 4.29 | 12.51 / 3.24 |
 | **UniWAM-Scaled** | **7.48 / 1.82** | **7.86 / 2.08** | **14.24 / 3.01** | **9.86 / 2.30** |
 
-Overall is the macro-average of the three difficulty levels. We release **15,000 rollout trajectories per model** for two baselines (π₀.₅ and FastWAM) and UniWAM-Base/Scaled, totaling **60,000 trajectories**. [Recompute the results](#evaluation) from these traces or evaluate a policy in Habitat.
+Overall is the macro-average of the three difficulty levels. We release **15,000 rollout trajectories per model** for three baselines (GR00T N1.7, π₀.₅, and FastWAM) and UniWAM-Base/Scaled, totaling **75,000 trajectories**. [Recompute the results](#evaluation) from these traces or evaluate a policy in Habitat.
+
+The GR00T results and rollout traces are released for comparison; its navigation-adapted checkpoint is not included in the model package.
 
 ### Real-robot results
 

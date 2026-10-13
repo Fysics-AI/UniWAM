@@ -32,7 +32,7 @@ uniwam-workspace/
 │   ├── evaluation/scene_contexts/
 │   ├── results/trajectory_metrics.csv
 │   ├── results/summary.csv
-│   └── archives/                         # four raw-trace archives
+│   └── archives/                         # five raw-trace archives
 ├── MAP-Data/                             # optional additional HM3D subset
 └── hm3d-v0.2/scenes_train_val/            # obtain from HM3D
 ```

@@ -65,12 +65,16 @@ Reference source revision:
 git clone https://github.com/NVIDIA/Isaac-GR00T.git third_party/Isaac-GR00T
 cd third_party/Isaac-GR00T
 git checkout d2b7e75b937e3ec9aa5dbc798f08b89692c49734
+git apply ../../baselines/patches/Isaac-GR00T-local-backbone.patch
 uv sync
 cd ../..
 # WebSocket dependencies for the benchmark adapter:
 uv pip install --python third_party/Isaac-GR00T/.venv/bin/python \
   'websockets>=15' msgpack typing_extensions
 ```
+
+The patch lets this pinned upstream revision recognize the checkpoint's bundled
+`./backbone` path. It changes no model parameters.
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 third_party/Isaac-GR00T/.venv/bin/python baselines/serve_groot.py \

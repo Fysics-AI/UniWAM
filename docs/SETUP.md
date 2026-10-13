@@ -19,7 +19,7 @@ uniwam-workspace/
 │   │   ├── SHA256SUMS
 │   │   └── LICENSE
 │   ├── text_embeddings/
-│   └── baselines/{pi05,groot_n17}/
+│   └── baselines/pi05/
 ├── MAP-Bench/
 │   ├── training/                       # 35,454 training trajectories
 │   │   ├── index/
@@ -32,7 +32,7 @@ uniwam-workspace/
 │   ├── evaluation/scene_contexts/
 │   ├── results/trajectory_metrics.csv
 │   ├── results/summary.csv
-│   └── archives/                         # five raw-trace archives
+│   └── archives/                         # four raw-trace archives
 ├── MAP-Data/                             # optional additional HM3D subset
 └── hm3d-v0.2/scenes_train_val/            # obtain from HM3D
 ```

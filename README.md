@@ -66,7 +66,7 @@ The technical report uses image-plane end-effector tracks as auxiliary targets f
 - <span style="color:#2ea043;font-weight:700">✓</span> [UniWAM architecture, training and inference code](training/README.md)
 - <span style="color:#2ea043;font-weight:700">✓</span> [End-effector track label generation](robot-eef-point-tracking/README.md) for manipulation supervision
 - <span style="color:#2ea043;font-weight:700">✓</span> [MAP-Bench training and evaluation data](https://huggingface.co/datasets/Fysics-AI/MAP-Bench) and [evaluation scripts](#evaluation)
-- <span style="color:#2ea043;font-weight:700">✓</span> [Baseline comparisons and evaluation trajectories](#results)
+- <span style="color:#2ea043;font-weight:700">✓</span> [π₀.₅/FastWAM comparisons and evaluation trajectories](#results)
 - <span style="color:#2ea043;font-weight:700">✓</span> [MAP-Data: an HM3D-derived subset](#map)
 
 **Contents:** [Overview](#overview) · [Results](#results) · [Installation & downloads](#installation) · [Training & evaluation](#usage) · [Citation](#citation)
@@ -88,13 +88,12 @@ MAP position / heading error ↓, computed from the released evaluation traces:
 
 | Method | Short (cm / °) | Medium (cm / °) | Long (cm / °) | Overall (cm / °) |
 | :--- | ---: | ---: | ---: | ---: |
-| [GR00T N1.7](https://github.com/NVIDIA/Isaac-GR00T) | 9.48 / 5.66 | 10.81 / 5.42 | 22.04 / 7.46 | 14.11 / 6.18 |
 | [π₀.₅](https://github.com/Physical-Intelligence/openpi) | 7.98 / 3.26 | 9.85 / 3.51 | 50.84 / 5.55 | 22.89 / 4.11 |
 | [FastWAM](https://github.com/yuantianyuan01/FastWAM) | 9.24 / 3.44 | 10.96 / 3.95 | 31.10 / 6.66 | 17.10 / 4.68 |
 | UniWAM-Base | 7.71 / 2.37 | 8.85 / 3.06 | 20.97 / 4.29 | 12.51 / 3.24 |
 | **UniWAM-Scaled** | **7.48 / 1.82** | **7.86 / 2.08** | **14.24 / 3.01** | **9.86 / 2.30** |
 
-Overall is the macro-average of the three difficulty levels. We release **15,000 rollout trajectories per model** for three baselines (GR00T N1.7, π₀.₅, and FastWAM) and UniWAM-Base/Scaled, totaling **75,000 trajectories**. [Recompute the results](#evaluation) from these traces or evaluate a policy in Habitat.
+Overall is the macro-average of the three difficulty levels. We release **15,000 rollout trajectories per model** for two baselines (π₀.₅ and FastWAM) and UniWAM-Base/Scaled, totaling **60,000 trajectories**. [Recompute the results](#evaluation) from these traces or evaluate a policy in Habitat.
 
 ### Real-robot results
 
@@ -149,7 +148,6 @@ python -c 'import habitat_sim'
 | Model | MAP-Bench checkpoint |
 | :--- | :--- |
 | π₀.₅ · [GitHub](https://github.com/Physical-Intelligence/openpi) | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/baselines/pi05) |
-| GR00T N1.7 · [GitHub](https://github.com/NVIDIA/Isaac-GR00T) | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/baselines/groot_n17) |
 | **UniWAM-Base** | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/weights/base) |
 | **UniWAM-Scaled** | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/weights/scaled) |
 
@@ -161,7 +159,6 @@ conda activate uniwam-policy
 python scripts/download_assets.py --model all --benchmark --training --traces
 # Baseline checkpoints:
 python scripts/download_assets.py --baseline pi05
-python scripts/download_assets.py --baseline groot_n17
 ```
 
 The model package includes the **VAE, UMT5-XXL encoder, tokenizer, normalization, and text features** used in evaluation. Base and Scaled share these components. For camera-frame training, the pretrained video backbone comes from [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B), following [FastWAM](https://github.com/yuantianyuan01/FastWAM); the separate [installation guide](training/real_robot/docs/INSTALLATION.md) covers that environment. [New instructions](docs/TEXT_FEATURES.md) use the same T5 encoder.
@@ -232,7 +229,7 @@ python scripts/compute_table4.py --data-root ../MAP-Bench
 
 **Our core training and inference code is built on [FastWAM](https://github.com/yuantianyuan01/FastWAM).** We thank its authors for open-sourcing the world-action modeling codebase.
 
-We also thank the teams behind [Wan2.2](https://github.com/Wan-Video/Wan2.2), [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio), [OpenPI](https://github.com/Physical-Intelligence/openpi), [Isaac GR00T](https://github.com/NVIDIA/Isaac-GR00T), [Habitat-Sim](https://github.com/facebookresearch/habitat-sim), and [HM3D](https://aihabitat.org/datasets/hm3d/). Bundled components retain their attribution and license notices; see [third-party notices](THIRD_PARTY_NOTICES.md).
+We also thank the teams behind [Wan2.2](https://github.com/Wan-Video/Wan2.2), [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio), [OpenPI](https://github.com/Physical-Intelligence/openpi), [Habitat-Sim](https://github.com/facebookresearch/habitat-sim), and [HM3D](https://aihabitat.org/datasets/hm3d/). Bundled components retain their attribution and license notices; see [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## License
 

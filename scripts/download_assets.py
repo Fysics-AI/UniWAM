@@ -51,10 +51,10 @@ def main() -> None:
     parser.add_argument("--model", choices=("base", "scaled", "all"))
     parser.add_argument("--benchmark", action="store_true")
     parser.add_argument("--training", action="store_true", help="Download, verify, and extract the MAP-Bench training split")
-    parser.add_argument("--traces", action="store_true", help="Download, verify, and extract five trace archives")
+    parser.add_argument("--traces", action="store_true", help="Download, verify, and extract four trace archives")
     parser.add_argument("--text-encoder", action="store_true", help="Download Wan UMT5 and tokenizer for new instructions")
     parser.add_argument("--vae", action="store_true", help="Download VAE independently of model checkpoints")
-    parser.add_argument("--baseline", choices=("pi05", "groot_n17", "all"))
+    parser.add_argument("--baseline", choices=("pi05",))
     parser.add_argument("--model-repo", default="Fysics-AI/UniWAM")
     parser.add_argument("--benchmark-repo", default="Fysics-AI/MAP-Bench")
     parser.add_argument("--model-revision", default="main")
@@ -77,8 +77,7 @@ def main() -> None:
         if args.text_encoder:
             patterns += ["components/wan2.2/text_encoder.safetensors", "components/wan2.2/tokenizer/*", "components/wan2.2/README.md", "components/wan2.2/LICENSE", "components/wan2.2/SHA256SUMS"]
         if args.baseline:
-            models = ("pi05", "groot_n17") if args.baseline == "all" else (args.baseline,)
-            patterns += [f"baselines/{model}/**" for model in models]
+            patterns.append("baselines/pi05/**")
         plan.append((args.model_repo, "model", args.model_revision, args.model_root, patterns))
     if args.benchmark or args.traces or args.training:
         patterns = ["README.md", "LICENSE*", "*.json"]

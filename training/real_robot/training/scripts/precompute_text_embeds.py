@@ -69,9 +69,10 @@ def _iter_dataset_nodes(node: Any, path: str = "data"):
 
 def _collect_dataset_settings(data_cfg: DictConfig):
     dataset_dirs: list[str] = []
-    instruction_prefixes: dict[str, str] = {}
+    instruction_prefixes: dict[str, set[str]] = {}
     cache_dirs: list[Path] = []
-    instruction_variants_paths: list[Path] = []
+    instruction_variants_paths: list[tuple[Path, tuple[str, ...]]] = []
+    override_prompts: list[str] = []
     context_lens = set()
 
     for node_path, node in _iter_dataset_nodes(data_cfg, path="data"):
@@ -86,17 +87,26 @@ def _collect_dataset_settings(data_cfg: DictConfig):
                 "(this node defines `dataset_dirs`)."
             )
 
+        branch_prefixes = node.get("instruction_prefix_by_branch") or {}
+        prefixes = []
+        scalar_prefix = str(node.get("instruction_prefix") or "").strip()
+        if scalar_prefix:
+            prefixes.append(scalar_prefix)
+        if branch_prefixes:
+            prefixes.extend(str(value).strip() for value in branch_prefixes.values() if str(value).strip())
+        if not prefixes:
+            prefixes = [""]
+        prefixes = tuple(dict.fromkeys(prefixes))
         for ds in raw_dirs:
             ds_str = str(ds)
-            prefix = str(node.get("instruction_prefix") or "").strip()
-            previous_prefix = instruction_prefixes.get(ds_str)
-            if previous_prefix is not None and previous_prefix != prefix:
-                raise ValueError(
-                    f"Conflicting instruction_prefix values for dataset {ds_str!r}."
-                )
-            instruction_prefixes[ds_str] = prefix
+            instruction_prefixes.setdefault(ds_str, set()).update(prefixes)
             if ds_str not in dataset_dirs:
                 dataset_dirs.append(ds_str)
+        override_instruction = str(node.get("override_instruction") or "").strip()
+        if override_instruction:
+            for prefix in prefixes:
+                task = f"{prefix} {override_instruction}".strip()
+                override_prompts.append(DEFAULT_PROMPT.format(task=task))
 
         cache_dir_path = Path(str(cache_dir)).expanduser()
         if cache_dir_path not in cache_dirs:
@@ -105,8 +115,9 @@ def _collect_dataset_settings(data_cfg: DictConfig):
         variants_path = node.get("instruction_variants_path")
         if variants_path is not None:
             path = Path(str(variants_path)).expanduser()
-            if path not in instruction_variants_paths:
-                instruction_variants_paths.append(path)
+            item = (path, prefixes)
+            if item not in instruction_variants_paths:
+                instruction_variants_paths.append(item)
 
         context_len = node.get("context_len")
         if context_len is not None:
@@ -120,6 +131,7 @@ def _collect_dataset_settings(data_cfg: DictConfig):
         cache_dirs,
         instruction_variants_paths,
         context_lens,
+        override_prompts,
     )
 
 
@@ -133,7 +145,7 @@ def _resolve_context_len(context_lens: set[int]) -> int:
 
 
 def _read_unique_prompts(
-    dataset_dirs: list[str], instruction_prefixes: dict[str, str]
+    dataset_dirs: list[str], instruction_prefixes: dict[str, set[str]]
 ) -> list[str]:
     prompts: list[str] = []
     seen = set()
@@ -153,14 +165,14 @@ def _read_unique_prompts(
                 if "task" not in record:
                     raise KeyError(f"Missing `task` field at {tasks_path}:{line_idx}")
                 task = str(record["task"])
-                prefix = instruction_prefixes.get(ds_dir, "")
-                if prefix:
-                    task = f"{prefix} {task}"
-                prompt = DEFAULT_PROMPT.format(task=task)
-                total_task_rows += 1
-                if prompt not in seen:
-                    seen.add(prompt)
-                    prompts.append(prompt)
+                prefixes = instruction_prefixes.get(ds_dir, {""})
+                for prefix in sorted(prefixes):
+                    full_task = f"{prefix} {task}".strip()
+                    prompt = DEFAULT_PROMPT.format(task=full_task)
+                    total_task_rows += 1
+                    if prompt not in seen:
+                        seen.add(prompt)
+                        prompts.append(prompt)
 
     logger.info(
         "Loaded %d task rows from %d datasets, deduplicated to %d prompts.",
@@ -169,10 +181,10 @@ def _read_unique_prompts(
         len(prompts),
     )
     return prompts
-def _read_instruction_variant_prompts(paths: list[Path]) -> list[str]:
+def _read_instruction_variant_prompts(paths: list[tuple[Path, tuple[str, ...]]]) -> list[str]:
     prompts = []
     seen = set()
-    for path in paths:
+    for path, prefixes in paths:
         if not path.is_file():
             raise FileNotFoundError(f"Missing instruction variants: {path}")
         for line_number, line in enumerate(
@@ -185,10 +197,11 @@ def _read_instruction_variant_prompts(paths: list[Path]) -> list[str]:
                 task = str(record[field]).strip()
                 if not task:
                     raise ValueError(f"Empty {field} at {path}:{line_number}")
-                prompt = DEFAULT_PROMPT.format(task=task)
-                if prompt not in seen:
-                    seen.add(prompt)
-                    prompts.append(prompt)
+                for prefix in prefixes:
+                    prompt = DEFAULT_PROMPT.format(task=f"{prefix} {task}".strip())
+                    if prompt not in seen:
+                        seen.add(prompt)
+                        prompts.append(prompt)
     return prompts
 
 
@@ -235,7 +248,7 @@ def main(cfg: DictConfig):
     if cfg.data is None:
         raise ValueError("`cfg.data` is required.")
 
-    dataset_dirs, instruction_prefixes, cache_dirs, instruction_variants_paths, context_lens = (
+    dataset_dirs, instruction_prefixes, cache_dirs, instruction_variants_paths, context_lens, override_prompts = (
         _collect_dataset_settings(cfg.data)
     )
     if not cache_dirs:
@@ -252,6 +265,10 @@ def main(cfg: DictConfig):
         prompts = _read_unique_prompts(dataset_dirs, instruction_prefixes)
         seen = set(prompts)
         for prompt in _read_instruction_variant_prompts(instruction_variants_paths):
+            if prompt not in seen:
+                seen.add(prompt)
+                prompts.append(prompt)
+        for prompt in override_prompts:
             if prompt not in seen:
                 seen.add(prompt)
                 prompts.append(prompt)

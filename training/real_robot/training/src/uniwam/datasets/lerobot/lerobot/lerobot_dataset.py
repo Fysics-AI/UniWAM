@@ -27,13 +27,14 @@ import PIL.Image
 import torch
 import torch.utils
 import pyarrow.parquet as pq
-from datasets import concatenate_datasets, load_dataset
+from datasets import concatenate_datasets
 from huggingface_hub import HfApi, snapshot_download
 from huggingface_hub.constants import REPOCARD_NAME
 from huggingface_hub.errors import RevisionNotFoundError
 
 # adapte to own path
 from ..constants import HF_LEROBOT_HOME
+from .parquet_cache import load_parquet_dataset
 from .datasets.compute_stats import aggregate_stats, compute_episode_stats
 from .datasets.utils import (
     DEFAULT_FEATURES,
@@ -618,10 +619,10 @@ class LeRobotDataset(torch.utils.data.Dataset):
         """hf_dataset contains all the observations, states, actions, rewards, etc."""
         if self.episodes is None:
             path = str(self.root / "data")
-            hf_dataset = load_dataset("parquet", data_dir=path, split="train")
+            hf_dataset = load_parquet_dataset(data_dir=path)
         else:
             files = [str(self.root / self.meta.get_data_file_path(ep_idx)) for ep_idx in self.episodes]
-            hf_dataset = load_dataset("parquet", data_files=files, split="train")
+            hf_dataset = load_parquet_dataset(data_files=files)
 
         # TODO(aliberts): hf_dataset.set_format("torch")
         hf_dataset.set_transform(hf_transform_to_torch)

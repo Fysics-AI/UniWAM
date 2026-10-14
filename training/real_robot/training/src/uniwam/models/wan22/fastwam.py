@@ -6,6 +6,7 @@ import torch.nn.functional as F
 from PIL import Image
 
 from uniwam.utils.logging_config import get_logger
+from uniwam.utils.inference_compile import compile_inference
 
 from .action_dit import ActionDiT
 from .helpers.loader import load_wan22_ti2v_5b_components
@@ -263,10 +264,10 @@ class FastWAM(torch.nn.Module):
         if tiled:
             raise NotImplementedError("Compiled batched VAE encoding does not support tiling.")
         if not hasattr(self, "_vae_encode_compiled"):
-            self._vae_encode_compiled = torch.compile(
+            self._vae_encode_compiled = compile_inference(
                 self.vae.model.encode,
-                backend="cudagraphs",
-                fullgraph=True,
+                device=self.device,
+                vae=True,
             )
         return self._vae_encode_compiled(
             video_tensor.to(self.device),

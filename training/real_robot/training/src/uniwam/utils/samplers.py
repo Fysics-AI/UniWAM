@@ -238,6 +238,14 @@ class ResumableEpochSampler(Sampler[int]):
             if not total_nav or len(parts) < 2:
                 return
             target = [total_nav // len(parts) + int(i < total_nav % len(parts)) for i in range(len(parts))]
+            # A partial final rank batch may be smaller than the equal-share
+            # target. Cap that target and redistribute only the excess.
+            capacities = [len(part) for _, part in parts]
+            target = [min(count, capacity) for count, capacity in zip(target, capacities)]
+            for _ in range(total_nav - sum(target)):
+                available = (i for i, capacity in enumerate(capacities) if target[i] < capacity)
+                receiver = min(available, key=lambda i: target[i])
+                target[receiver] += 1
             while True:
                 receiver = min(range(len(counts)), key=lambda i: counts[i] - target[i])
                 donor = max(range(len(counts)), key=lambda i: counts[i] - target[i])

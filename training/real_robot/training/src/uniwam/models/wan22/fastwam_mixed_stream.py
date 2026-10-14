@@ -9,6 +9,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from uniwam.utils.logging_config import get_logger
+from uniwam.utils.inference_compile import compile_inference
 
 from .fastwam_partitioned import FastWAMPartitioned
 from .helpers.loader import load_wan22_ti2v_5b_components
@@ -1770,10 +1771,9 @@ class FastWAMMixedStream(FastWAMPartitioned):
             if not isinstance(video_cache, tuple) or len(video_cache) != 2:
                 raise TypeError("Compiled inference requires tensor-form (K, V) video cache.")
             if not hasattr(self, "_action_with_video_cache_compiled"):
-                self._action_with_video_cache_compiled = torch.compile(
+                self._action_with_video_cache_compiled = compile_inference(
                     self.mot.forward_action_with_video_cache_tensor,
-                    mode="reduce-overhead",
-                    fullgraph=True,
+                    device=self.device,
                 )
             torch.compiler.cudagraph_mark_step_begin()
             tokens = self._action_with_video_cache_compiled(
@@ -1922,10 +1922,9 @@ class FastWAMMixedStream(FastWAMPartitioned):
         video_mask = self._video_mask_with_type(video_pre)
         if use_compiled_action:
             if not hasattr(self, "_prefill_video_cache_compiled"):
-                self._prefill_video_cache_compiled = torch.compile(
+                self._prefill_video_cache_compiled = compile_inference(
                     self.mot.prefill_video_cache_tensor,
-                    mode="reduce-overhead",
-                    fullgraph=True,
+                    device=self.device,
                 )
             torch.compiler.cudagraph_mark_step_begin()
             video_cache_k, video_cache_v = self._prefill_video_cache_compiled(

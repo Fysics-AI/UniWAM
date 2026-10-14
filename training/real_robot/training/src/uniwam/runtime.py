@@ -687,7 +687,15 @@ def run_training(cfg: DictConfig):
     )
     try:
         trainer.train()
-    finally:
+    except BaseException:
+        # A failed rank must return its original error to the launcher without
+        # entering collectives that healthy ranks may never reach.
+        try:
+            trainer.close(failed=True)
+        except BaseException:
+            logger.exception("Cleanup failed while handling a training error.")
+        raise
+    else:
         trainer.close()
 
 def run_inference(cfg: DictConfig):

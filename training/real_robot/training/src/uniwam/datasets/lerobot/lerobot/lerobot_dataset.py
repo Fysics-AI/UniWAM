@@ -506,12 +506,6 @@ class LeRobotDataset(torch.utils.data.Dataset):
 
         self.episode_data_index = get_episode_data_index(self.meta.episodes, self.episodes)
 
-        # Check timestamps
-        timestamps = _stack_dataset_column(self.hf_dataset["timestamp"]).numpy()
-        episode_indices = _stack_dataset_column(self.hf_dataset["episode_index"]).numpy()
-        ep_data_index_np = {k: t.numpy() for k, t in self.episode_data_index.items()}
-        # check_timestamps_sync(timestamps, episode_indices, ep_data_index_np, self.fps, self.tolerance_s)
-
         # Setup delta_indices
         if self.delta_timestamps is not None:
             # check_delta_timestamps(self.delta_timestamps, self.fps, self.tolerance_s)

@@ -660,15 +660,30 @@ class Wan22Trainer:
         self.wandb_run.finish()
         self.wandb_run = None
 
-    def close(self):
-        self._finish_wandb()
+    def close(self, *, failed: bool = False):
+        try:
+            self._finish_wandb()
+        except Exception:
+            if not failed:
+                raise
+            logger.exception("Failed to finish experiment tracking during error cleanup.")
         loader = getattr(self, "train_loader", None)
         iterator = getattr(loader, "_iterator", None)
         if iterator is not None:
             shutdown_workers = getattr(iterator, "_shutdown_workers", None)
-            if callable(shutdown_workers):
-                shutdown_workers()
-            loader._iterator = None
+            try:
+                if callable(shutdown_workers):
+                    shutdown_workers()
+            except Exception:
+                if not failed:
+                    raise
+                logger.exception("Failed to shut down data workers during error cleanup.")
+            finally:
+                loader._iterator = None
+        if failed:
+            # end_training also destroys the distributed process group. Leave
+            # failed-group teardown to the launcher instead of blocking here.
+            return
         self.accelerator.wait_for_everyone()
         self.accelerator.end_training()
 
@@ -1409,16 +1424,6 @@ class Wan22Trainer:
                                 eval_payload["eval/action_l1"] = float(metrics["action_l1"])
                             self._wandb_log(eval_payload)
 
-                    if self.save_every > 0 and self.global_step % self.save_every == 0:
-                        ckpt_info = self.save_checkpoint()
-                        if self.accelerator.is_main_process:
-                            logger.info(
-                                "[ckpt] step=%d weights=%s state=%s",
-                                self.global_step,
-                                ckpt_info["weights_path"],
-                                ckpt_info["state_path"],
-                            )
-
                     if self.global_step >= self.max_steps:
                         ckpt_info = self.save_checkpoint()
                         if self.accelerator.is_main_process:
@@ -1429,6 +1434,16 @@ class Wan22Trainer:
                                 ckpt_info["state_path"],
                             )
                         return
+
+                    if self.save_every > 0 and self.global_step % self.save_every == 0:
+                        ckpt_info = self.save_checkpoint()
+                        if self.accelerator.is_main_process:
+                            logger.info(
+                                "[ckpt] step=%d weights=%s state=%s",
+                                self.global_step,
+                                ckpt_info["weights_path"],
+                                ckpt_info["state_path"],
+                            )
 
                     if self.global_step >= loop_stop_step:
                         self.accelerator.wait_for_everyone()

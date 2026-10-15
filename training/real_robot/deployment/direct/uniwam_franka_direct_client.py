@@ -30,7 +30,6 @@ from openpi_robot_client import (
     DEFAULT_LEFT_ROBOT_HOST,
     DEFAULT_LEFT_ROBOT_PORT,
     DEFAULT_CAMERA_NAMES,
-    DEFAULT_CAMERA_SERIALS,
     ArmCommandState,
     ArmTarget,
     FrankaArm,
@@ -432,7 +431,8 @@ def main() -> None:
     parser.add_argument(
         "--camera-serials",
         nargs=3,
-        default=("425122300063", "408322073690", "408322073870"),
+        required=True,
+        help="RealSense serials in --camera-names order: external, left_wrist, right_wrist by default.",
     )
     parser.add_argument("--camera-names", nargs=3, default=("external", "left_wrist", "right_wrist"))
     parser.add_argument("--camera-width", type=int, default=640)

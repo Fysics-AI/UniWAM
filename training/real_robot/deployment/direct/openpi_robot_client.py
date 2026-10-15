@@ -44,12 +44,12 @@ import torch
 from scipy.spatial.transform import Rotation
 
 
-OPENPI_CLIENT_SRC = "/home/pnp/openpi-main/packages/openpi-client/src"
+OPENPI_CLIENT_SRC = ""
 DEFAULT_POLICY_HOST = "127.0.0.1"
 DEFAULT_POLICY_PORT = 8000
 DEFAULT_PROMPT = "Hold the pink cup by its sides and place it inside the blue cup."
 DEFAULT_CAMERA_NAMES = ("left_wrist", "external")
-DEFAULT_CAMERA_SERIALS = ("408322073690", "425122300063")
+DEFAULT_CAMERA_SERIALS = None
 DEFAULT_LEFT_ROBOT_HOST = "192.168.1.100"
 DEFAULT_LEFT_ROBOT_PORT = 50052
 DEFAULT_LEFT_GRIPPER_PORT = 50054
@@ -647,7 +647,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--policy-host", default=DEFAULT_POLICY_HOST)
     parser.add_argument("--policy-port", type=int, default=DEFAULT_POLICY_PORT)
     parser.add_argument("--policy-api-key", default=None)
-    parser.add_argument("--openpi-client-src", default=OPENPI_CLIENT_SRC)
+    parser.add_argument(
+        "--openpi-client-src",
+        default=OPENPI_CLIENT_SRC,
+        help="Optional OpenPI client source directory; otherwise use the installed openpi_client package.",
+    )
     parser.add_argument("--prompt", "--task", dest="prompt", default=DEFAULT_PROMPT)
     parser.add_argument("--resize-images", dest="resize_images", action="store_true", default=True)
     parser.add_argument("--no-resize-images", dest="resize_images", action="store_false")
@@ -673,7 +677,12 @@ def parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument("--camera-names", nargs=2, default=DEFAULT_CAMERA_NAMES)
-    parser.add_argument("--camera-serials", nargs=2, default=DEFAULT_CAMERA_SERIALS)
+    parser.add_argument(
+        "--camera-serials",
+        nargs=2,
+        default=DEFAULT_CAMERA_SERIALS,
+        help="RealSense serials in --camera-names order; required unless --image-files is used.",
+    )
     parser.add_argument("--external-camera-name", default="external")
     parser.add_argument("--left-wrist-camera-name", default="left_wrist")
     parser.add_argument("--camera-width", type=int, default=640)
@@ -719,7 +728,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--print-every", type=int, default=1)
     parser.add_argument("--log-jsonl", default=None)
     parser.add_argument("--predict-csv", default=None)
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.camera_serials is None and args.image_files is None:
+        parser.error("provide --camera-serials in --camera-names order, or use --image-files")
+    return args
 
 
 def main() -> None:

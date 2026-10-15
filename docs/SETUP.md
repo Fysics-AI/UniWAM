@@ -30,7 +30,7 @@ uniwam-workspace/
 │   │   └── episodes/
 │   ├── evaluation/benchmark_15k.json
 │   ├── evaluation/scene_contexts/
-│   ├── results/trajectory_metrics.csv
+│   ├── evaluation/trajectory_ids.csv
 │   ├── results/summary.csv
 │   └── archives/                         # five raw-trace archives
 ├── MAP-Data/                             # optional additional HM3D subset

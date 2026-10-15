@@ -6,8 +6,9 @@ forward-facing RGB view and a navigation instruction. UniWAM uses only its
 navigation expert for this protocol; manipulation is not evaluated here.
 
 Short / Medium / Long are defined by reference path length at 1.5 m and 3.5 m.
-Position and heading errors are evaluated at the final base pose. The overall
-error is the equal-weight mean of the three level means. Position success uses
+Position error compares the final camera position with the target operating
+camera position; heading error compares the final and target base headings. The
+overall error is the equal-weight mean of the three level means. Position success uses
 0.50 m and heading success uses 15°. A policy action chunk has 32 actions.
 A chunk is near zero when at least 80% of actions have translation ≤ 0.05 m
 and heading ≤ 0.05 rad, including the final action. Three consecutive near-zero
@@ -20,10 +21,12 @@ folder for each method. The policy server and evaluator must have matching
 ports. Policy servers started by `launch_uniwam.py` record logs and process IDs
 under `outputs/policies/`.
 
-The release provides per-trajectory metrics and raw traces for five methods,
-15,000 traces per method. Paths in `results/trajectory_metrics.csv` are relative
-to MAP-Bench. The CSV records each uncompressed trace's SHA256. `--traces` on the
-download helper extracts the five archives after verifying archive checksums.
+The release provides raw traces for five methods, 15,000 traces per method.
+`evaluation/trajectory_ids.csv` lists the evaluation IDs and distance levels;
+`results/summary.csv` contains the published aggregate values. Run
+`scripts/compute_table4.py` to recompute these values directly from the five
+trace archives. `--traces` on the download helper extracts the archives after
+verifying archive checksums.
 
 Refer to the [policy interface](../POLICY_INTERFACE.md) for adapters and
 [data interface](../DATA_INTERFACE.md) for benchmark fields. Scene context files

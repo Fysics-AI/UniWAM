@@ -9,4 +9,4 @@
 - **Wan2.2 VAE / T5:** bundled under their Apache-2.0 terms, with upstream attribution and hashes. The safetensors files match the components used for evaluation.
 
 Code licensing does not authorize redistribution of restricted scene assets.
-The MAP-Data release will include its own data card and terms when prepared.
+The public [MAP-Data subset](https://huggingface.co/datasets/Fysics-AI/MAP-Data) contains 100,052 trajectories (507.52 hours); its HM3D-derived data terms and attribution requirements are provided in the [data card](https://huggingface.co/datasets/Fysics-AI/MAP-Data) and [LICENSE](https://huggingface.co/datasets/Fysics-AI/MAP-Data/blob/main/LICENSE).

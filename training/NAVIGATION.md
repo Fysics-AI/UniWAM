@@ -11,17 +11,21 @@ python scripts/download_assets.py --vae --training
 ```
 
 This preset covers the navigation expert used with MAP-Bench. For the full mobile manipulation architecture and real-robot Base configuration,
-see the [robot training guide](ROBOT.md).
+see the [robot training guide](real_robot/README.md).
 
 ## Scope of this preset
 
 This preset reproduces the MAP-Bench navigation setting: a single navigation
 expert, one forward RGB camera, and 9D outputs consisting of base waypoints,
 target-object boxes, and image-plane MAP coordinates. It uses the 35,454-example
-training split and is evaluated on 15,000 held-out trajectories with HM3D scenes.
+training split and is evaluated on 15,000 evaluation trajectories with HM3D scenes.
 The full unified UniWAM architecture is documented separately in
-[ROBOT.md](ROBOT.md); it has both streams and is initialized from Wan2.2 for
+[real_robot/README.md](real_robot/README.md); it has both streams and is initialized from Wan2.2 for
 real-robot demonstrations.
+
+The navigation preset samples five video frames and uses causal action attention.
+Committed-prefix execution belongs to the full unified path; it is not used by
+the released MAP-Bench navigation checkpoints.
 
 ## Contents
 

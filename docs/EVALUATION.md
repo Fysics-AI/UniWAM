@@ -28,6 +28,12 @@ The release provides raw traces for five methods, 15,000 traces per method.
 trace archives. `--traces` on the download helper extracts the archives after
 verifying archive checksums.
 
+Each target has five task paraphrases. Training samples one reproducibly from
+this pool; the evaluation JSON fixes a task string per episode. Archived rollouts
+retain the instruction used for that run. GR00T's archived rollouts use another
+draw from the same target instruction pool. Use the archived `task` when
+replaying those rollouts.
+
 Refer to the [policy interface](../POLICY_INTERFACE.md) for adapters and
 [data interface](../DATA_INTERFACE.md) for benchmark fields. Scene context files
 are per-context assets, so their file count is not a count of distinct HM3D scenes.

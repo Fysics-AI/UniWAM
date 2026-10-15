@@ -3,3 +3,4 @@ opencv-python
 msgpack
 typing-extensions
 websockets>=15
+zstandard

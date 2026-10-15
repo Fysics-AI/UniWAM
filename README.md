@@ -48,7 +48,7 @@ Navigation and manipulation have separate camera inputs, action encoders, output
 
 <h3><img src="assets/logos/map.png" width="205" align="absmiddle" alt="MAP" /></h3>
 
-A **Manipulation Anchor Pose (MAP)** is the base position and heading from which a robot can begin manipulation. We build **MAP-Data** with automated scene annotation and trajectory construction, then use **MAP-Bench** to evaluate instruction-conditioned navigation to these poses in HM3D. The benchmark contains **35,454 training trajectories** (7,184,098 RGB frames at 15 Hz) and **15,000 evaluation trajectories** across three distance levels; the full MAP-Data collection contains **over 1.5 million trajectories and 7,500 hours**, while this release provides a compact subset generated from HM3D scenes. MAP-Bench uses one forward RGB view and one navigation expert because it evaluates navigation only. The public [MAP-Data](https://huggingface.co/datasets/Fysics-AI/MAP-Data), [MAP-Bench](https://huggingface.co/datasets/Fysics-AI/MAP-Bench), released traces, and evaluation scripts support direct reproduction.
+A **Manipulation Anchor Pose (MAP)** is the base position and heading from which a robot can begin manipulation. We build **MAP-Data** with automated scene annotation and trajectory construction, then use **MAP-Bench** to evaluate instruction-conditioned navigation to these poses in HM3D. The benchmark contains **35,454 training trajectories** (7,184,098 RGB frames at 15 Hz) and **15,000 evaluation trajectories** across three distance levels; the full MAP-Data collection contains **over 1.5 million trajectories and 7,500 hours**, while the public HM3D-derived [subset](#map-data) contains **100,052 trajectories (507.52 hours)** with no target instances shared with MAP-Bench. MAP-Bench uses one forward RGB view and one navigation expert because it evaluates navigation only. The public [MAP-Data](https://huggingface.co/datasets/Fysics-AI/MAP-Data), [MAP-Bench](https://huggingface.co/datasets/Fysics-AI/MAP-Bench), released traces, and evaluation scripts support direct reproduction.
 
 <p align="center">
   <img src="assets/figures/map-data.png" width="100%" alt="MAP supervision, automated trajectory construction, and MAP-Bench evaluation" />
@@ -66,10 +66,10 @@ The technical report uses image-plane end-effector tracks as auxiliary targets f
 - <span style="color:#2ea043;font-weight:700">✓</span> [UniWAM architecture, training and inference code](training/README.md)
 - <span style="color:#2ea043;font-weight:700">✓</span> [End-effector track label generation](robot-eef-point-tracking/README.md) for manipulation supervision
 - <span style="color:#2ea043;font-weight:700">✓</span> [MAP-Bench training and evaluation data](https://huggingface.co/datasets/Fysics-AI/MAP-Bench) and [evaluation scripts](#evaluation)
-- <span style="color:#2ea043;font-weight:700">✓</span> [π₀.₅/FastWAM comparisons and evaluation trajectories](#results)
-- <span style="color:#2ea043;font-weight:700">✓</span> [MAP-Data: an HM3D-derived subset](#map)
+- <span style="color:#2ea043;font-weight:700">✓</span> [Baseline comparisons and evaluation trajectories](#results)
+- <span style="color:#2ea043;font-weight:700">✓</span> [MAP-Data: navigation and VLM grounding](#map-data)
 
-**Contents:** [Overview](#overview) · [Results](#results) · [Installation & downloads](#installation) · [Training & evaluation](#usage) · [Citation](#citation)
+**Contents:** [Overview](#overview) · [Results](#results) · [MAP-Data](#map-data) · [Installation & downloads](#installation) · [Training & evaluation](#usage) · [Citation](#citation)
 
 ## Results
 
@@ -107,6 +107,29 @@ The real-robot experiments cover 24 tasks across four embodiments. The figure sh
   <br /><em>Real-robot executions spanning navigation, mobile manipulation, and dexterous manipulation.</em>
 </p>
 
+
+## MAP-Data
+
+The public [MAP-Data subset](https://huggingface.co/datasets/Fysics-AI/MAP-Data) pairs forward RGB videos with five task paraphrases per target, natural-language MAP descriptions, navigation commands, target boxes, and projected MAP points. It supports navigation training and vision-language learning from the same frame-aligned annotations.
+
+| Trajectories | RGB frames | Hours at 15 Hz | Target instances |
+| ---: | ---: | ---: | ---: |
+| **100,052** | **27,405,889** | **507.52** | **820** |
+
+The release contains **10 ZIP shards (70.96 GB)** with **566 × 320 RGB video at 15 Hz**. Target instances present in MAP-Bench are excluded. Files contain anonymous episode IDs and image-plane annotations; scene identifiers, world poses, camera calibration, and geometric route records are not included.
+
+### Beyond navigation: VLM grounding and spatial reasoning
+
+- **VLM object grounding:** pair a task instruction and RGB frame with the target bounding box to train referring-expression localization.
+- **Navigable-point grounding:** use the projected MAP point and its natural-language location description to learn where the robot should approach and stop before interaction.
+- **Spatial and temporal reasoning:** use frame-aligned boxes and MAP points along a moving-camera trajectory to construct supervision for instruction-conditioned spatial reasoning and consistency across changing viewpoints.
+
+<p align="center">
+  <a href="assets/figures/spatial-grounding.png"><img src="assets/figures/spatial-grounding.png" width="100%" alt="Oven, nightstand, and trash-can trajectories, each with three successive camera observations showing aligned target boxes and projected MAP points" /></a>
+  <br /><em>Three targets and three observations per trajectory illustrate object and approach-point grounding as the viewpoint changes. The local orthographic views are visualizations; the released annotations are in image pixels.</em>
+</p>
+
+See the [Hugging Face data card](https://huggingface.co/datasets/Fysics-AI/MAP-Data#download) for the file schema, download commands, and checksums. Use [MAP-Bench](https://huggingface.co/datasets/Fysics-AI/MAP-Bench) for closed-loop navigation evaluation.
 
 <a id="installation"></a>
 
@@ -205,7 +228,7 @@ See [MAP-Bench training details](training/NAVIGATION.md) for the portable relati
 
 ### MAP-Bench evaluation
 
-MAP-Bench evaluation uses **15,000 held-out trajectories** and HM3D scenes downloaded separately from [Habitat](https://aihabitat.org/datasets/hm3d/). The Base and Scaled checkpoints in the model package are the navigation checkpoints used for this evaluation.
+MAP-Bench provides **15,000 evaluation episodes**. Closed-loop evaluation uses HM3D scenes downloaded separately from [Habitat](https://aihabitat.org/datasets/hm3d/). The Base and Scaled checkpoints in the model package are the navigation checkpoints used for this evaluation.
 
 ```bash
 # Terminal 1: policy/model environment

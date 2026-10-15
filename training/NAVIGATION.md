@@ -23,9 +23,18 @@ The full unified UniWAM architecture is documented separately in
 [real_robot/README.md](real_robot/README.md); it has both streams and is initialized from Wan2.2 for
 real-robot demonstrations.
 
-The navigation preset samples five video frames and uses causal action attention.
-Committed-prefix execution belongs to the full unified path; it is not used by
-the released MAP-Bench navigation checkpoints.
+MAP-Bench evaluates navigation only. Its released checkpoints use one navigation
+expert, one forward RGB view, and synchronous closed-loop execution. Training
+samples five frames at offsets `[0, 8, 16, 24, 32]` on a `480 × 256` canvas.
+The navigation model retains causal action attention and both bbox and image-plane
+MAP supervision. Unavailable auxiliary coordinates use the `-0.1` missing-label
+convention in this navigation implementation.
+
+The full mobile manipulation architecture uses the nine-frame, multi-view
+`384 × 320` layout described in the report. Its clean committed-prefix mechanism
+supports asynchronous robot execution. These features are not used by the released
+MAP-Bench navigation checkpoints; the MAP-Bench ablations evaluate pose targets,
+causal attention, and the two auxiliary targets.
 
 ## Contents
 

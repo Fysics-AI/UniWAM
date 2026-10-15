@@ -207,7 +207,7 @@ class CustomerPiperTest(unittest.TestCase):
             self.assertTrue(runtime.data.train.datasets[0].dataset.append_missing_eef_xy_slots)
             self.assertTrue(runtime.model.disable_manip_aux_training)
             self.assertEqual(float(runtime.model.loss.lambda_manip_aux_action), 0.0)
-            cfg = OmegaConf.load(ROOT / "deployment/configs/uniwam_cloud_parent_async.yaml")
+            cfg = OmegaConf.load(ROOT / "deployment/configs/uniwam_cloud_customer_async.yaml")
             cfg.checkpoint_min_bytes = 0
             checkpoint = self.root / "run/checkpoints/weights/step_000001.pt"
             checkpoint.parent.mkdir(parents=True)
@@ -221,52 +221,12 @@ class CustomerPiperTest(unittest.TestCase):
                 validate_checkpoint_contract(cfg, runtime, checkpoint, contract)
             cfg.instruction_prefix_by_mode.manip_only = runtime.data.train.datasets[0].dataset.instruction_prefix
             cfg.dataset_stats = str(self.root / "wrong_stats.json")
-            payload = json.loads((TRAINING / "data_indices/camera_frame_piper_agx_only_q01q99.json").read_text())
+            payload = json.loads((TRAINING / "data_indices/piper_manip26_q01q99.json").read_text())
             payload["state"]["default"]["global_q99"][0] += 0.1
             Path(cfg.dataset_stats).write_text(json.dumps(payload))
             with self.assertRaisesRegex(ValueError, "dataset_stats"):
                 validate_checkpoint_contract(cfg, runtime, checkpoint, contract)
 
-    def test_six_source_cloud_contracts_still_match(self) -> None:
-        environment = {
-            "UNIWAM_TRAINING_ROOT": str(TRAINING),
-            "UNIWAM_EEF_SIDECAR_ROOT": str(self.root / "sidecars"),
-            "UNIWAM_FRANKA_DATA": str(self.root / "franka"),
-            "UNIWAM_CUP_TRAY_DATA": str(self.root / "cup"),
-            "UNIWAM_MOVE_WHITE_DATA": str(self.root / "white"),
-            "UNIWAM_COLOR_DATA": str(self.root / "color"),
-            "UNIWAM_ORDERED_COLOR_DATA": str(self.root / "ordered"),
-            "UNIWAM_7000_DATA": str(self.root / "7000"),
-            "UNIWAM_FRANKA_LATENT_ROOT": str(self.root / "franka_latents"),
-            "UNIWAM_MOBILE_LATENT_ROOT": str(self.root / "mobile_latents"),
-            "UNIWAM_ORDERED_LATENT_ROOT": str(self.root / "ordered_latents"),
-            "UNIWAM_7000_LATENT_ROOT": str(self.root / "7000_latents"),
-            "UNIWAM_TEXT_CACHE_DIR": str(self.root / "text"),
-            "UNIWAM_ORDERED_PROMPT_VARIANTS": str(self.root / "ordered_prompts.jsonl"),
-            "UNIWAM_7000_PROMPT_VARIANTS": str(self.root / "7000_prompts.jsonl"),
-            "DIFFSYNTH_MODEL_BASE_PATH": str(self.root / "weights"),
-        }
-        with patch.dict(os.environ, environment):
-            runtime = load_runtime_cfg(
-                TRAINING, "uniwam_camera_frame_six_source_manip26_embodiment_stats_200k"
-            )
-            checkpoint = self.root / "parent/checkpoints/weights/step_200000.pt"
-            checkpoint.parent.mkdir(parents=True)
-            checkpoint.write_bytes(b"fixture")
-            OmegaConf.save(runtime, self.root / "parent/config.yaml", resolve=True)
-            for name in (
-                "uniwam_source1_paired.yaml",
-                "uniwam_source3_color_manip_only.yaml",
-                "uniwam_source4_ordered_color_manip_only.yaml",
-            ):
-                with self.subTest(config=name):
-                    cfg = OmegaConf.load(ROOT / "deployment/configs" / name)
-                    cfg.checkpoint_min_bytes = 0
-                    contract = AsyncPrefixContract.from_deploy_cfg(cfg)
-                    self.assertEqual(
-                        validate_checkpoint_contract(cfg, runtime, checkpoint, contract),
-                        self.root / "parent/config.yaml",
-                    )
 
 
 if __name__ == "__main__":

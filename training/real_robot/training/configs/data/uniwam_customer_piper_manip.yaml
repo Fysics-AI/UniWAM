@@ -1,4 +1,4 @@
-norm_stats_path: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/camera_frame_piper_agx_only_q01q99.json
+norm_stats_path: ${oc.env:UNIWAM_TRAINING_ROOT}/data_indices/piper_manip26_q01q99.json
 norm_default_mode: q01/q99
 use_stepwise_action_norm: false
 

@@ -7,7 +7,7 @@ set -euo pipefail
 : "${DIFFSYNTH_MODEL_BASE_PATH:?Set DIFFSYNTH_MODEL_BASE_PATH to model weights}"
 
 DEPLOY_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-CONFIG="${CONFIG:-${DEPLOY_ROOT}/configs/uniwam_cloud_parent_async.yaml}"
+CONFIG="${CONFIG:-${DEPLOY_ROOT}/configs/uniwam_cloud_customer_async.yaml}"
 export PYTHONPATH="${UNIWAM_TRAINING_ROOT}/src:${UNIWAM_TRAINING_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
 export DIFFSYNTH_SKIP_DOWNLOAD="${DIFFSYNTH_SKIP_DOWNLOAD:-true}"
 

@@ -136,12 +136,6 @@ def _check_equal(mismatches: list[str], name: str, actual: Any, expected: Any) -
         mismatches.append(f"{name}: got={actual!r}, expected={expected!r}")
 
 
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(8 * 1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _stats_contract(path: Path) -> dict[str, Any]:
@@ -150,28 +144,13 @@ def _stats_contract(path: Path) -> dict[str, Any]:
 
 
 def _expected_stats_contract(train_path: Path, project_root: Path) -> dict[str, Any]:
-    if train_path.is_file():
-        return _stats_contract(train_path)
-    known = {
-        "camera_frame_franka_only_q01q99.json": "franka",
-        "camera_frame_piper_agx_only_q01q99.json": "piper_agx",
-    }
-    group = known.get(train_path.name)
-    if group is None:
+    """Read the checkpoint's normalization file supplied by the user."""
+    if not train_path.is_file():
         raise FileNotFoundError(
-            f"Checkpoint stats are unavailable and are not the known parent artifact: {train_path}"
+            f"Checkpoint normalization is missing: {train_path}. "
+            "Provide the normalization file used for training."
         )
-    name = train_path.name
-    reference = project_root / "data_pipeline/parent_200k_artifact_reference.json"
-    if not reference.is_file():
-        raise FileNotFoundError(f"Parent stats reference is missing: {reference}")
-    candidate = project_root / "data_indices" / name
-    if not candidate.is_file():
-        raise FileNotFoundError(f"Parent stats replacement is missing: {candidate}")
-    expected_hash = str(json.loads(reference.read_text())["stats_sha256"][group])
-    if _sha256(candidate) != expected_hash:
-        raise ValueError(f"Parent stats replacement differs from the reference: {candidate}")
-    return _stats_contract(candidate)
+    return _stats_contract(train_path)
 
 
 def _optional_int(value: Any) -> int | None:
@@ -396,7 +375,7 @@ def validate_checkpoint_contract(
             "robot_nav_action_dim": EXPECTED_ROBOT_NAV_ACTION_DIM,
         })
     else:
-        # The source's camera contract, not its position in a six-source list,
+        # The source's camera contract, rather than its list position,
         # determines the inference mosaic for customer single-source SFTs.
         train_concat = str(train_data.get("concat_multi_camera", ""))
         if train_concat not in {"fastwam_384x320", EXPECTED_CONCAT_MODE}:

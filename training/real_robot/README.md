@@ -192,7 +192,9 @@ bash scripts/train_zero1.sh 8 task=uniwam_customer_piper_manip_sft \
   max_steps=50000 batch_size=8 save_every=5000
 ```
 
-The supplied task config is a single-source Piper-compatible example. For a
+The supplied task config is a single-source Piper-compatible fine-tuning example.
+It is an adaptation template; the model architecture, data preparation, and
+training/deployment interfaces can be configured for other task datasets. For a
 different embodiment or action representation, adapt the data and deployment
 contracts together before training.
 

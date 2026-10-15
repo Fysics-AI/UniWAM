@@ -38,7 +38,7 @@ def main() -> None:
     instruction = full_instruction(config, args.task_prompt, args.robot_type)
     prompt = "A video recorded from a robot's point of view executing the following instruction: " + instruction
     training_root = Path(str(config.project_root))
-    encoder = training_root / "data_pipeline/encode_six_source_prompt_cache.py"
+    encoder = training_root / "data_pipeline/encode_prompt_cache.py"
     if not encoder.is_file():
         raise FileNotFoundError(encoder)
     with tempfile.TemporaryDirectory(prefix="uniwam_prompt_") as temporary:

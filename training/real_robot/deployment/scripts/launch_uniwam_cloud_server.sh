@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-CONFIG="${CONFIG:-${ROOT}/configs/uniwam_cloud_parent_async.yaml}"
+CONFIG="${CONFIG:-${ROOT}/configs/uniwam_cloud_customer_async.yaml}"
 PROJECT_ROOT="${UNIWAM_TRAINING_ROOT:?Set UNIWAM_TRAINING_ROOT to the release training directory}"
-RUN_ROOT="${PROJECT_ROOT}/runs/uniwam_camera_frame_six_source_manip26_embodiment_stats_200k"
-if [[ -z "${CHECKPOINT:-}" ]]; then
-  CHECKPOINT="$(find "${RUN_ROOT}" -mindepth 4 -maxdepth 4 -type f -path '*/checkpoints/weights/step_*.pt' -size +12000000000c -printf '%T@ %p\n' 2>/dev/null | sort -nr | awk 'NR==1 {sub(/^[^ ]+ /, ""); print}')"
-fi
+: "${CHECKPOINT:?Set CHECKPOINT to the checkpoint matching your task configuration}"
 [[ -n "${CHECKPOINT:-}" && -f "${CHECKPOINT}" ]] || { echo "Set CHECKPOINT to a complete manip26 checkpoint." >&2; exit 2; }
 [[ -f "${CONFIG}" ]] || { echo "Missing config: ${CONFIG}" >&2; exit 2; }
 if [[ -n "${CONDA_SH:-}" && -f "$CONDA_SH" ]]; then

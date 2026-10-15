@@ -177,7 +177,7 @@ python -c 'import habitat_sim'
 | **UniWAM-Base** | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/weights/base) |
 | **UniWAM-Scaled** | [🤗 Checkpoint](https://huggingface.co/Fysics-AI/UniWAM/tree/main/weights/scaled) |
 
-> **MAP-Bench checkpoints.** The Base and Scaled checkpoints above use a single navigation expert and one forward RGB view, because MAP-Bench evaluates navigation only. They predict base waypoints together with target-object boxes and image-plane MAP coordinates. The camera-frame mobile-manipulation [training and inference code](training/real_robot/README.md) is a separate path with its own action contract. Task-trained real-robot checkpoints are not included.
+> **MAP-Bench checkpoints.** The Base and Scaled checkpoints above use a single navigation expert and one forward RGB view, because MAP-Bench evaluates navigation only. They predict base waypoints together with target-object boxes and image-plane MAP coordinates. MAP-Bench uses synchronous closed-loop execution, with five sampled training frames and no asynchronous committed prefix; see the [navigation configuration](training/NAVIGATION.md#scope-of-this-preset). The camera-frame mobile-manipulation [training and inference code](training/real_robot/README.md) is a separate path with its own action contract. Task-trained real-robot checkpoints are not included.
 
 ```bash
 conda activate uniwam-policy

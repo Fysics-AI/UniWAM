@@ -1,4 +1,4 @@
-"""Small end-to-end fixture for the six-source index preparation entrypoint."""
+"""Small end-to-end fixture for the multi-dataset index preparation entrypoint."""
 
 from __future__ import annotations
 

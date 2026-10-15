@@ -1,7 +1,7 @@
 # @package _global_
 defaults:
   - override /data: uniwam_customer_piper_manip
-  - override /model: uniwam_camera_frame_six_source_manip26
+  - override /model: uniwam_camera_frame_manip26
 
 output_dir: ${oc.env:UNIWAM_TRAINING_ROOT}/runs/customer_piper_manip_sft/${now:%Y%m%d_%H%M%S}
 batch_size: 16

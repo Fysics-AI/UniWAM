@@ -27,7 +27,7 @@ from uniwam.vision import (
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TASK = "uniwam_camera_frame_six_source_manip26_embodiment_stats_200k"
+DEFAULT_TASK = "uniwam_customer_piper_manip_sft"
 VAE_PATH = Path(os.environ.get("DIFFSYNTH_MODEL_BASE_PATH", "/path/to/model-checkpoints")) / (
     "DiffSynth-Studio/Wan-Series-Converted-Safetensors/Wan2.2_VAE.safetensors"
 )

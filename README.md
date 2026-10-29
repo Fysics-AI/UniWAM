@@ -96,8 +96,6 @@ MAP position / heading error ↓, computed from the released evaluation traces:
 
 Overall is the macro-average of the three difficulty levels. We release **15,000 rollout trajectories per model** for three baselines (GR00T N1.7, π₀.₅, and FastWAM) and UniWAM-Base/Scaled, totaling **75,000 trajectories**. [Recompute the results](#evaluation) from these traces or evaluate a policy in Habitat.
 
-All five trace archives cover the same 15,000 target/observation/variant episodes. In the released traces, each `task` field is aligned to the corresponding canonical instruction in [`benchmark_15k.json`](https://huggingface.co/datasets/Fysics-AI/MAP-Bench/blob/main/evaluation/benchmark_15k.json). For GR00T, this text field was normalized for release; its recorded observations, actions, outcomes, and scores are unchanged. The public `task` value is the benchmark-aligned instruction label, not a verbatim log of the original model input.
-
 The GR00T results and rollout traces are released for comparison; its navigation-adapted checkpoint is not included in the model package.
 
 ### Real-robot results
